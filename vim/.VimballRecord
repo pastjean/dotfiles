@@ -1,0 +1,1 @@
+rdoc-1.1.2.vba: call delete('C:\Users\orphe\vimfiles/ftdetect/rdoc.vim')|call delete('C:\Users\orphe\vimfiles/snippets/rdoc.snippets')|call delete('C:\Users\orphe\vimfiles/syntax/rdoc.vim')
