@@ -1,0 +1,4 @@
+. ~/.zsh/aliases
+
+alias reload='. ~/.profile'
+
