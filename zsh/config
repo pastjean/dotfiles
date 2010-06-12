@@ -1,18 +1,13 @@
-
-fpath=(~/.zsh/functions $fpath)
-
-export EDITOR='vim'
-
 autoload -U colors
 colors
 
+# Autoload functions
+fpath=($ZSH/functions $fpath)
+autoload -U $ZSH/functions/*(:t)
 
-autoload -U ~/.zsh/functions/*(:t)
-
+# Load libraries (which are group of functions)
 for config_file ($ZSH/lib/*.zsh) source $config_file  
-
-# PROMPT for left prompt
-# RPROMPT for right prompt
+export EDITOR='vim'
 
 # this permits prompt to be reevaluated each time it is displayed
 function precmd {
@@ -26,15 +21,10 @@ HISTFILE=~/.zsh_history
 HISTSIZE=500
 SAVEHIST=500
 
-setopt NO_BG_NICE
-setopt NO_HUP
+setopt autocd
+setopt auto_menu
+
 setopt NO_LIST_BEEP
-setopt LOCAL_OPTIONS
-setopt LOCAL_TRAPS
-setopt PROMPT_SUBST
-setopt CORRECT
-setopt COMPLETE_INWORD
-setopt IGNORE_EOF
 
 setopt HIST_VERIFY
 setopt SHARE_HISTORY
@@ -44,8 +34,6 @@ setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 
-setopt autocd
-setopt auto_menu
 
 bindkey ';3D' backward-word
 bindkey ';3C' forward-word
