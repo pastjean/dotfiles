@@ -6,16 +6,20 @@ export EDITOR='vim'
 autoload -U colors
 colors
 
+
 autoload -U ~/.zsh/functions/*(:t)
+
+for config_file ($ZSH/lib/*.zsh) source $config_file  
 
 # PROMPT for left prompt
 # RPROMPT for right prompt
 
 # this permits prompt to be reevaluated each time it is displayed
 function precmd {
-	RPROMPT=$'%{\e[1;33m%}$(git_info_for_prompt)%{\e[0m%}'
+#	RPROMPT=$'%{\e[1;33m%}$(git_info_for_prompt)%{\e[0m%}'
+  RPROMPT=$'%{\e[38;5;208m%}$(git_info_for_prompt)%{$reset_color%}'
 }
-PROMPT=$'%{\e[0;32m%}$USERNAME:%{\e[0;36m%}${PWD/#$HOME/~}%{\e[0;31m%}$%{\e[0m%}'
+PROMPT=$'%{\e[38;5;199m%}$USERNAME:%{\e[1;32m%}${PWD/#$HOME/~}%{\e[0;31m%}$%{\e[0m%}'
 
 
 HISTFILE=~/.zsh_history
@@ -46,3 +50,4 @@ bindkey ';3D' backward-word
 bindkey ';3C' forward-word
 bindkey ';5D' beginning-of-line
 bindkey ';5C' end-of-line
+
