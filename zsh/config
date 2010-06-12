@@ -1,6 +1,3 @@
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
 
 fpath=(~/.zsh/functions $fpath)
 
@@ -18,7 +15,7 @@ autoload -U ~/.zsh/functions/*(:t)
 function precmd {
 	RPROMPT=$'%{\e[1;33m%}$(git_info_for_prompt)%{\e[0m%}'
 }
-PROMPT=$'%{\e[0;32m%}$USERNAME:%{\e[0;36m%}%3~%{\e[0;31m%}$%{\e[0m%}'
+PROMPT=$'%{\e[0;32m%}$USERNAME:%{\e[0;36m%}${PWD/#$HOME/~}%{\e[0;31m%}$%{\e[0m%}'
 
 
 HISTFILE=~/.zsh_history
