@@ -1,5 +1,5 @@
 ZSH=$HOME/.zsh
-. $ZSH/config
-. $ZSH/aliases
-. $ZSH/completion
+. $ZSH/config.zsh
+. $ZSH/aliases.zsh
+. $ZSH/completion.zsh
 
