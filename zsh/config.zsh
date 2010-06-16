@@ -1,5 +1,8 @@
 export EDITOR='vim'
 
+autoload -U compinit
+compinit
+
 autoload -U colors
 colors
 
@@ -15,7 +18,7 @@ function precmd {
 #	RPROMPT=$'%{\e[1;33m%}$(git_info_for_prompt)%{\e[0m%}'
   RPROMPT=$'%{\e[38;5;208m%}$(scm_prompt_info)%{$reset_color%}'
 }
-PROMPT=$'%{\e[38;5;199m%}$USERNAME:%{\e[1;32m%}${PWD/#$HOME/~}%{\e[0;31m%}$%{\e[0m%}'
+PROMPT=$'\e[38;5;199m$USERNAME:\e[1;32m${PWD/#$HOME/~}\e[0;31m$\e[0m'
 
 # Enable auto-execution of functions.
 typeset -ga preexec_functions
@@ -44,9 +47,7 @@ setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 
-
 bindkey ';3D' backward-word
 bindkey ';3C' forward-word
 bindkey ';5D' beginning-of-line
 bindkey ';5C' end-of-line
-
