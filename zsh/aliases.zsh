@@ -2,8 +2,8 @@
 alias ..='cd ..'
 
 #ls
-alias ls='ls -F --color=auto'
-alias la='ls -A'
+alias ls='ls -Fh --color=auto'
+alias la='ls -Ah'
 alias ll='ls -lAh'
 
 #color-output
