@@ -20,14 +20,14 @@ filetype plugin indent on
 
 " => Navigation <============================
 set backspace=indent,eol,start
-set whichwrap=h,l,<,>,[,] " makes line changing when going left or right instead of blocking
+set whichwrap=h,l,<,>,[,] " makes line changing when going left or right instead of blocking at the beginning/end of a line
 
 "set mouse=a
 
 
 " => Cursor Movement <============================
-" Make cursor move by visual lines instead of file lines (when wrapping)
 
+" Make cursor move by visual lines instead of file lines (when wrapping)
 map <up> gk
 map k gk
 imap <up> <C-o>gk
@@ -39,12 +39,12 @@ map E ge
 
 " => Affichage <============================
 
-color ir_black
+colorscheme railscasts
 set ruler
 set number
 set cmdheight=2
 set laststatus=2
-set statusline=Branch:\ %{GitBranch()}\ %F%m%r%h\ %w\ Line:\ %l/%L:%c
+set statusline=%F%m%r%h\ %w\ Line:\ %l/%L:%c\ (git)[%{GitBranch()}
 set listchars=tab:»\ ,eol:¬
 
 set showmatch
@@ -52,7 +52,6 @@ set showmode
 set showcmd
 
 set showtabline=1
-
 set cursorline " Cursor highlight
 
 
@@ -83,12 +82,6 @@ set shiftwidth=2
 set softtabstop=2
 
 
-" => FileType  <============================
-
-autocmd FileType erubis set filetype=html
-autocmd FileType nag set filetype=html
-
-
 " => Mappings <============================
 
 let mapleader = ","
@@ -104,6 +97,7 @@ nmap <D-]> >>
 vmap <D-[> <gv
 vmap <D-]> >gv
 
+" => Shortcut keys
 inoremap <C-CR> <C-O>o
 imap jj <Esc>
 imap hh =>
