@@ -6,3 +6,5 @@ source ~/.bash/aliases
 if [ -f "$HOME/.bashrc" ]; then
   . "$HOME/.bashrc"
 fi
+
+source ~/.profile
