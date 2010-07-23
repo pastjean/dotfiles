@@ -13,11 +13,26 @@ autoload -U ~/.zsh/functions/*(:t)
 # Load libraries (which are group of functions)
 for config_file (~/.zsh/lib/*.zsh) source $config_file  
 
-# this permits prompt to be reevaluated each time it is displayed
-function precmd {
+  # this permits prompt to be reevaluated each time it is displayed
+  function precmd {
   RPROMPT=$'%{\e[38;5;208m%}$(scm_prompt_info)%{$reset_color%}'
 }
 PROMPT=$'%{\e[38;5;199m%}$USERNAME:%{\e[1;32m%}${PWD/#$HOME/~}%{\e[0;31m%}$%{\e[0m%}'
+
+if [ -x /usr/lib/command-not-found -o -x /usr/share/command-not-found ]; then
+  command_not_found_handler () {
+    if [ -x /usr/lib/command-not-found ]; then
+      /usr/bin/python /usr/lib/command-not-found -- $1;
+      return $?
+    elif [ -x /usr/share/command-not-found ]; then
+      /usr/bin/python /usr/lib/command-not-found -- $1;
+      return $?
+    else
+      return 127
+    fi
+
+  }
+fi
 
 # Enable auto-execution of functions.
 typeset -ga preexec_functions
@@ -28,6 +43,9 @@ typeset -ga chpwd_functions
 preexec_functions+='preexec_git_update_vars'
 precmd_functions+='precmd_git_update_vars'
 chpwd_functions+='chpwd_git_update_vars'
+
+# Clear screen on console exit
+trap clear 0
 
 HISTFILE=~/.zsh_history
 HISTSIZE=500
