@@ -1,3 +1,3 @@
 " RDoc
-autocmd BufNewFile,BufRead *.{rd,rdoc} set filetype=rdoc
+au BufRead,BufNewFile *.rdoc set filetype=rdoc
 
