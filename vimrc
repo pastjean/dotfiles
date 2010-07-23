@@ -38,8 +38,13 @@ map E ge
 
 
 " => Affichage <============================
+if $COLORTERM == 'gnome-terminal' 
+  set term=gnome-256color 
+  colorscheme railscasts 
+else 
+  colorscheme blue
+endif 
 
-colorscheme railscasts
 set ruler
 set number
 set cmdheight=2
