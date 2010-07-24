@@ -80,27 +80,7 @@ nmap <C-S> :w<CR>
 " => Good old copy paste
 nmap <S-Insert> "+gP
 imap <S-Insert> <C-o><S-Insert>
-vmap <S-C-Insert> "+y
-
-" => Auto Close Pairs
-inoremap ( ()<Left>
-inoremap [ []<Left>
-inoremap { {}<Left>
-autocmd Syntax html,vim inoremap < <lt>><Left>
-
-function! ClosePair(char)
-	if getline('.')[col('.') - 1] == a:char
-		return "\<Right>"
-	else
-		return a:char
-	endif
-endf
-
-inoremap ) <c-r>=ClosePair(')')<CR>
-inoremap ] <c-r>=ClosePair(']')<CR>
-inoremap } <c-r>=ClosePair('}')<CR>
-
-inoremap <expr> <BS> DeleteEmptyPairs()
+vnoremap <C-C> "+y
 
 " => Visual Wrap Text
 vnoremap (  <ESC>`>a)<ESC>`<i(<ESC>
@@ -108,10 +88,8 @@ vnoremap )  <ESC>`>a)<ESC>`<i(<ESC>
 vnoremap {  <ESC>`>a}<ESC>`<i{<ESC>
 vnoremap }  <ESC>`>a}<ESC>`<i{<ESC>
 "dont know how to do it otherwise , it conflicts with my ctrl+c
-vnoremap   <ESC>`>a"<ESC>`<i"<ESC>
+vnoremap "  <ESC>`>a"<ESC>`<i"<ESC>
 vnoremap '  <ESC>`>a'<ESC>`<i'<ESC>
 vnoremap `  <ESC>`>a`<ESC>`<i`<ESC>
 vnoremap [  <ESC>`>a]<ESC>`<i[<ESC>
 vnoremap ]  <ESC>`>a]<ESC>`<i[<ESC>
-
-
