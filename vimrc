@@ -56,28 +56,62 @@ map <leader><Enter> o<ESC>
 map <leader><S-Enter> O<ESC>
 nmap <leader>n :set number! <CR>
 nmap <leader>l :set list!<CR>
+nmap <leader>v :edit $MYVIMRC<CR>
 
 " => Indenting commands
 nmap <D-]> >>
 nmap <D-[> <<
 " nmap <Tab> >>
 " nmap <S-Tab> <<
-vmap <D-]> >gv
-vmap <D-[> <gv
+vmap <M-]> >gv
+vmap <M-[> <gv
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 
 " => Shortcut keys
 inoremap <C-CR> <C-O>o
 imap jj <Esc>
+vmap jj <Esc> 
 imap hh =>
 imap aa @
-imap <C-s> <C-o>:w<CR>
-nmap <C-s> :w<CR>
+imap <C-S> <C-o>:w<CR>
+nmap <C-S> :w<CR>
 
 " => Good old copy paste
 nmap <S-Insert> "+gP
-imap <S-Insert> <ESC><C-V>i
-vmap <C-C> "+y
+imap <S-Insert> <C-o><S-Insert>
+vmap <S-C-Insert> "+y
 
-nmap <leader>v :edit $MYVIMRC<CR>
+" => Auto Close Pairs
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap { {}<Left>
+autocmd Syntax html,vim inoremap < <lt>><Left>
+
+function! ClosePair(char)
+	if getline('.')[col('.') - 1] == a:char
+		return "\<Right>"
+	else
+		return a:char
+	endif
+endf
+
+inoremap ) <c-r>=ClosePair(')')<CR>
+inoremap ] <c-r>=ClosePair(']')<CR>
+inoremap } <c-r>=ClosePair('}')<CR>
+
+inoremap <expr> <BS> DeleteEmptyPairs()
+
+" => Visual Wrap Text
+vnoremap (  <ESC>`>a)<ESC>`<i(<ESC>
+vnoremap )  <ESC>`>a)<ESC>`<i(<ESC>
+vnoremap {  <ESC>`>a}<ESC>`<i{<ESC>
+vnoremap }  <ESC>`>a}<ESC>`<i{<ESC>
+"dont know how to do it otherwise , it conflicts with my ctrl+c
+vnoremap   <ESC>`>a"<ESC>`<i"<ESC>
+vnoremap '  <ESC>`>a'<ESC>`<i'<ESC>
+vnoremap `  <ESC>`>a`<ESC>`<i`<ESC>
+vnoremap [  <ESC>`>a]<ESC>`<i[<ESC>
+vnoremap ]  <ESC>`>a]<ESC>`<i[<ESC>
+
+
