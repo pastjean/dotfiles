@@ -1,5 +1,5 @@
-﻿" Orphe's vimrc
-" feel free to use
+﻿" pastjean's vimrc
+" feel free to use, modify, destroy, attack ...
 " pierrealexandre.stjean@gmail.com
 
 set nocompatible "power to vim
@@ -57,25 +57,22 @@ map <leader><S-Enter> O<ESC>
 nmap <leader>n :set number! <CR>
 nmap <leader>l :set list!<CR>
 nmap <leader>v :edit $MYVIMRC<CR>
-
-" => Indenting commands
-nmap <D-]> >>
-nmap <D-[> <<
-" nmap <Tab> >>
-" nmap <S-Tab> <<
-vmap <M-]> >gv
-vmap <M-[> <gv
-vmap <Tab> >gv
-vmap <S-Tab> <gv
+nmap <C-H> :bp<CR>
+nmap <C-L> :bn<CR>
+imap <C-H> <ESC><C-H>
+imap <C-L> <ESC><C-L>
 
 " => Shortcut keys
 inoremap <C-CR> <C-O>o
-imap jj <Esc>
-vmap jj <Esc> 
 imap hh =>
 imap aa @
-imap <C-S> <C-o>:w<CR>
+imap <C-S> <ESC>:w<CR>
 nmap <C-S> :w<CR>
+
+" => Indenting commands
+vmap <Tab> >gv
+vmap <S-Tab> <gv
+imap <S-Tab> <C-o><<
 
 " => Good old copy paste
 nmap <S-Insert> "+gP
