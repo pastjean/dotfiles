@@ -6,3 +6,6 @@ if [ -x $BASH_VERSION ] ; then
 fi
 
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+export GOROOT=$HOME/go
+export GOARCH=amd64
+export GOOS=linux
