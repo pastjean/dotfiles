@@ -30,6 +30,8 @@ set autoindent smartindent cindent "indenting
 set nobackup
 set noswapfile
 
+set pastetoggle=<F2> "disables vim from formatting paste
+
 " => Navigation <============================
 set backspace=indent,eol,start " line change on backspace
 set whichwrap=h,l,<,>,[,] " line change when going left or right
@@ -59,10 +61,15 @@ set cursorline " Cursor highlight
 " => Searching <============================
 
 set ignorecase incsearch hlsearch
+"clears search
+nmap <silent> ,/ :nohlsearch<CR>
+
 
 " => Mappings <============================
 
 let mapleader = ","
+
+nnoremap ; :
 
 nmap <leader>n :set number! <CR>
 nmap <leader>l :set list!<CR>
@@ -70,6 +77,8 @@ nmap <C-H> :bp<CR>
 nmap <C-L> :bn<CR>
 imap <C-H> <ESC><C-H>
 imap <C-L> <ESC><C-L>
+
+nmap <silent> <Leader>b :LustyJuggler<CR>
 
 "fast edit vimrc
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
