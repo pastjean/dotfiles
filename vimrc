@@ -1,23 +1,34 @@
-﻿" pastjean's vimrc
+" pastjean's vimrc
 " feel free to use, modify, destroy, attack ...
 " pierrealexandre.stjean@gmail.com
 
 set nocompatible "power to vim
 
+" => Before <============================
+
+"pathogen 
+"includes plugins from ~/.vim/bundles
+call pathogen#helptags()
+call pathogen#runtime_append_all_bundles()
+
+
 " => General <============================
 
+set hidden
 set autoread
-set history=400
+set history=1000
+set undolevels=1000
+
+set title
 set noerrorbells
 
 set ff=unix fenc=utf-8 enc=utf-8 "file format & encodings
 
-filetype on
-filetype plugin indent on
-syntax on
-
-set autoindent smartindent cindent "indenting
 set ts=2 sw=2 sts=2 "tabs
+set autoindent smartindent cindent "indenting
+
+set nobackup
+set noswapfile
 
 " => Navigation <============================
 set backspace=indent,eol,start " line change on backspace
@@ -31,20 +42,21 @@ map <down> j
 map j gj
 imap <down> <C-o>gj
 
+
 " => Display <============================
 colorscheme blackboard
+set listchars=tab:»\ ,eol:¬
 
 set ruler
 set number
-set cmdheight=2
+set cmdheight=1
 set laststatus=2
 set statusline=%F%m%r%h\ %w\ Line:\ %l/%L:%c
-set listchars=tab:»\ ,eol:¬
 
 set showmatch showmode showcmd
 set cursorline " Cursor highlight
 
-" => Search <============================
+" => Searching <============================
 
 set ignorecase incsearch hlsearch
 
@@ -52,21 +64,22 @@ set ignorecase incsearch hlsearch
 
 let mapleader = ","
 
-map <leader><Enter> o<ESC>
-map <leader><S-Enter> O<ESC>
 nmap <leader>n :set number! <CR>
 nmap <leader>l :set list!<CR>
-nmap <leader>v :edit $MYVIMRC<CR>
 nmap <C-H> :bp<CR>
 nmap <C-L> :bn<CR>
 imap <C-H> <ESC><C-H>
 imap <C-L> <ESC><C-L>
 
+"fast edit vimrc
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
 " => Shortcut keys
 inoremap <C-CR> <C-O>o
 imap hh =>
 imap aa @
-imap <C-S> <ESC>:w<CR>
+imap <C-S> <C-O>:w<CR>
 nmap <C-S> :w<CR>
 
 " => Indenting commands
@@ -74,10 +87,7 @@ vmap <Tab> >gv
 vmap <S-Tab> <gv
 imap <S-Tab> <C-o><<
 
-" => Good old copy paste
-nmap <S-Insert> "+gP
-imap <S-Insert> <C-o><S-Insert>
-vnoremap <C-C> "+y
+vnoremap <C-C> "+y "Copy paste copy 
 
 " => Visual Wrap Text
 vnoremap (  <ESC>`>a)<ESC>`<i(<ESC>
