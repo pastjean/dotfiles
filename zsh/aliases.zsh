@@ -2,9 +2,9 @@
 alias ..='cd ..'
 
 #ls
-alias ls='ls -FGh --color=always'
-alias la='ls -Ah --color=always'
-alias ll='ls -lAh --color=always'
+alias ls='ls -FGh'
+alias la='ls -Ah'
+alias ll='ls -lAh'
 
 #color-output
 if [ -x /usr/bin/dircolors ]; then
