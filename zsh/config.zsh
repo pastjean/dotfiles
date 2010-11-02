@@ -61,6 +61,7 @@ setopt SHARE_HISTORY
 setopt EXTENDED_HISTORY
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
+# no duplicates or commands that starts by space
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 
