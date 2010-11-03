@@ -1,10 +1,17 @@
 #cd
 alias ..='cd ..'
+alias cd..='cd ..'
 
 #ls
 alias ls='ls -FGh'
 alias la='ls -Ah'
 alias ll='ls -lAh'
+
+if [ "$(uname)" = 'Linux' ]; then
+  alias ls='ls -FGh --color=auto'
+  alias la='ls -Ah --color=auto'
+  alias ll='ls -lAh --color=auto'
+fi
 
 #color-output
 if [ -x /usr/bin/dircolors ]; then
