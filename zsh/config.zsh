@@ -15,7 +15,7 @@ for config_file (~/.zsh/lib/*.zsh) source $config_file
 
   # this permits prompt to be reevaluated each time it is displayed
   function precmd {
-  RPROMPT=$'%{\e[38;5;208m%}$(scm_prompt_info)%{$reset_color%}'
+  RPROMPT=$'%{\e[33m%}$(scm_prompt_info)%{$reset_color%}'
 }
 PROMPT=$'%{\e[38;5;199m%}$USERNAME:%{\e[1;32m%}${PWD/#$HOME/~}%{\e[0;31m%}$%{\e[0m%}'
 

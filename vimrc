@@ -46,7 +46,7 @@ imap <down> <C-o>gj
 
 
 " => Display <============================
-colorscheme blackboard
+colorscheme molokai
 set listchars=tab:»\ ,eol:¬
 
 set ruler
@@ -61,9 +61,6 @@ set cursorline " Cursor highlight
 " => Searching <============================
 
 set ignorecase incsearch hlsearch
-"clears search
-nmap <silent> ,/ :nohlsearch<CR>
-
 
 " => Mappings <============================
 
@@ -79,13 +76,15 @@ imap <C-H> <ESC><C-H>
 imap <C-L> <ESC><C-L>
 
 nmap <silent> <Leader>b :LustyJuggler<CR>
+noremap <leader>j :CommandT<cr>
+map <leader>u :TMiniBufExplorer<cr>
+nmap <silent> <leader>n :nohlsearch<CR>  "clears search
 
-"fast edit vimrc
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+" Python filter
+nmap gp :.!python<CR>
+vmap gp :!python<CR>
 
 " => Shortcut keys
-inoremap <C-CR> <C-O>o
 imap hh =>
 imap aa @
 imap <C-S> <C-O>:w<CR>
@@ -103,9 +102,9 @@ vnoremap (  <ESC>`>a)<ESC>`<i(<ESC>
 vnoremap )  <ESC>`>a)<ESC>`<i(<ESC>
 vnoremap {  <ESC>`>a}<ESC>`<i{<ESC>
 vnoremap }  <ESC>`>a}<ESC>`<i{<ESC>
-"dont know how to do it otherwise , it conflicts with my ctrl+c
 vnoremap "  <ESC>`>a"<ESC>`<i"<ESC>
 vnoremap '  <ESC>`>a'<ESC>`<i'<ESC>
 vnoremap `  <ESC>`>a`<ESC>`<i`<ESC>
 vnoremap [  <ESC>`>a]<ESC>`<i[<ESC>
 vnoremap ]  <ESC>`>a]<ESC>`<i[<ESC>
+
