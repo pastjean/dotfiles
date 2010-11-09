@@ -1,0 +1,26 @@
+[user]
+	name = Pierre-Alexandre St-Jean
+	email = pa@stjean.me
+[github]
+	user = pastjean
+[color]
+	ui = auto
+[diff]
+	renamelimit = 0
+[alias]
+	tree = log --graph --pretty=format:\"%h - %ad - %s\" --date=relative
+        help = help -w
+	aa = add --all
+	amend = commit --amend
+	co = checkout
+	ci = commit
+	di = diff
+	dc = diff --cached
+	st = status
+	
+[pack]
+	threads = 0
+[help]
+	format = web
+[web]
+	browser = firefox

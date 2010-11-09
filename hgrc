@@ -1,0 +1,59 @@
+[ui]
+username = Pierre-Alexandre St-Jean <pa@stjean.me>
+editor = vim
+
+[default]
+outgoing = --graph
+incoming = --graph
+diff = -p
+rebase = --keepbranches
+addremove = --similarity 100
+
+[diff]
+git = True
+unified = 5
+
+[alias]
+untrack = rm -Af
+
+[pager]
+pager=LESS='FSRX' less
+ignore=version, help, update, push, pull, merge, fetch, convert, clone, record, crecord, grep, status, add, addremove, revert, commit, init
+
+[extensions]
+bookmarks =
+churn =
+color =
+graphlog = 
+hggit =
+pager =
+rebase =
+mq =
+progress =
+schemes =
+
+[schemes]
+# gh = git://github.com
+# bbs = ssh://hg@bitbucket.org
+
+[color]
+status.modified = cyan
+status.added = green
+status.removed = red
+status.deleted = yellow bold underline
+status.unknown = magenta bold underline
+status.ignored = black bold
+diff.diffline = none
+diff.extended = cyan
+diff.file_a = red
+diff.file_b = green
+diff.hunk = yellow bold
+diff.deleted = red
+diff.inserted = green
+diff.changed = white
+diff.trailingwhitespace = white_background
+
+[bookmarks]
+tack.current = True
+
+
