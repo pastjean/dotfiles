@@ -1,5 +1,5 @@
 " pastjean's vimrc
-" feel free to use, modify, destroy, attack ...
+" feel free to use, modify, destroy, attack , steal...
 " pierrealexandre.stjean@gmail.com
 
 set nocompatible "power to vim
