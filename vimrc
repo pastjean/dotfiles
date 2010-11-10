@@ -69,6 +69,14 @@ let mapleader = ","
 " Trick that makes ; be a : so you dont have to hit shift
 nnoremap ; : 
 
+" => Shortcut keys
+imap hh =>
+imap aa @
+imap <C-S> <C-O>:w<CR>
+nmap <C-S> :w<CR>
+vnoremap <C-C> "+y "Clipboard copy 
+nmap <silent> <leader>m :nohlsearch<CR>
+
 nmap <leader>n :set number! <CR>
 nmap <leader>l :set list!<CR>
 nmap <C-H> :bp<CR>
@@ -79,24 +87,15 @@ imap <C-L> <ESC><C-L>
 nmap <silent> <Leader>b :LustyJuggler<CR>
 noremap <leader>j :CommandT<cr>
 map <leader>u :TMiniBufExplorer<cr>
-nmap <silent> <leader>m :nohlsearch<CR>
 
 " => Python filter
 nmap gp :.!python<CR>
 vmap gp :!python<CR>
 
-" => Shortcut keys
-imap hh =>
-imap aa @
-imap <C-S> <C-O>:w<CR>
-nmap <C-S> :w<CR>
-vnoremap <C-C> "+y "Clipboard copy 
-
 " => Indenting commands
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 imap <S-Tab> <C-o><<
-
 
 " => Visual Wrap Text
 vnoremap (  <ESC>`>a)<ESC>`<i(<ESC>
