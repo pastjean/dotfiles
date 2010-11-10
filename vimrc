@@ -25,10 +25,10 @@ set noerrorbells
 set ff=unix fenc=utf-8 enc=utf-8 "file format & encodings
 
 set ts=2 sw=2 sts=2 "tabs
+set expandtab "spaces no tabs
 set autoindent smartindent cindent "indenting
 
-set nobackup
-set noswapfile
+set nobackup noswapfile
 
 set pastetoggle=<F2> "disables vim from formatting paste
 
@@ -47,6 +47,7 @@ imap <down> <C-o>gj
 
 " => Display <============================
 colorscheme molokai
+
 set listchars=tab:»\ ,eol:¬
 
 set ruler
@@ -65,8 +66,8 @@ set ignorecase incsearch hlsearch
 " => Mappings <============================
 
 let mapleader = ","
-
-nnoremap ; :
+" Trick that makes ; be a : so you dont have to hit shift
+nnoremap ; : 
 
 nmap <leader>n :set number! <CR>
 nmap <leader>l :set list!<CR>
@@ -78,9 +79,9 @@ imap <C-L> <ESC><C-L>
 nmap <silent> <Leader>b :LustyJuggler<CR>
 noremap <leader>j :CommandT<cr>
 map <leader>u :TMiniBufExplorer<cr>
-nmap <silent> <leader>n :nohlsearch<CR>  "clears search
+nmap <silent> <leader>m :nohlsearch<CR>
 
-" Python filter
+" => Python filter
 nmap gp :.!python<CR>
 vmap gp :!python<CR>
 
@@ -89,13 +90,13 @@ imap hh =>
 imap aa @
 imap <C-S> <C-O>:w<CR>
 nmap <C-S> :w<CR>
+vnoremap <C-C> "+y "Clipboard copy 
 
 " => Indenting commands
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 imap <S-Tab> <C-o><<
 
-vnoremap <C-C> "+y "Copy paste copy 
 
 " => Visual Wrap Text
 vnoremap (  <ESC>`>a)<ESC>`<i(<ESC>
