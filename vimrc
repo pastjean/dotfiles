@@ -24,6 +24,10 @@ set noerrorbells
 
 set ff=unix fenc=utf-8 enc=utf-8 "file format & encodings
 
+filetype on
+filetype plugin indent on
+syntax on
+
 set ts=2 sw=2 sts=2 "tabs
 set expandtab "spaces no tabs
 set autoindent smartindent cindent "indenting
@@ -75,15 +79,15 @@ imap aa @
 imap <C-S> <C-O>:w<CR>
 nmap <C-S> :w<CR>
 vnoremap <C-C> "+y "Clipboard copy 
-nmap <silent> <leader>m :nohlsearch<CR>
 
-nmap <leader>n :set number! <CR>
-nmap <leader>l :set list!<CR>
 nmap <C-H> :bp<CR>
 nmap <C-L> :bn<CR>
 imap <C-H> <ESC><C-H>
 imap <C-L> <ESC><C-L>
 
+nmap <leader>l :set list!<CR>
+nmap <leader>m :nohlsearch<CR>
+nmap <leader>n :set number! <CR>
 nmap <silent> <Leader>b :LustyJuggler<CR>
 noremap <leader>j :CommandT<cr>
 map <leader>u :TMiniBufExplorer<cr>
