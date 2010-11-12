@@ -76,7 +76,7 @@ nnoremap ; :
 " => Shortcut keys
 imap hh =>
 imap aa @
-imap <C-S> <C-O>:w<CR>
+imap <C-S> <ESC>:w<CR>
 nmap <C-S> :w<CR>
 vnoremap <C-C> "+y "Clipboard copy 
 
