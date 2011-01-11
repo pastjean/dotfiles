@@ -12,11 +12,20 @@ do
   fi
 done
 
-#for jvmlang in $GROOVY_HOME $SCALA_HOME
-#do
-#  if [ -d $jvmlang ] ; then
-#    PATH="$jvmlang/bin:$PATH"
-#  fi
-#done
-#
-#export PATH=$PATH  
+export ANDROID_SDK_HOME=~/local/android-sdk
+ANDROID_SDK_BIN=$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools
+if [ -d $ANDROID_SDK_HOME ] ; then
+  PATH="$ANDROID_SDK_BIN:$PATH"
+fi
+
+export SCALA_HOME=~/local/scala
+export JRUBY_HOME=~/local/jruby
+
+for i in $SCALA_HOME $JRUBY_HOME
+do
+  if [ -d $i ] ; then
+    PATH="$i/bin:$PATH"
+  fi
+done
+
+export PATH=$PATH  

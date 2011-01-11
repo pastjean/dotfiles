@@ -1,6 +1,6 @@
 runtime! ftdetect/*.vim
 
-au BufNewFile,BufRead *.mustache   set filetype=mustache
-au BufRead,BufNewFile *.rdoc       set filetype=rdoc
 au BufRead,BufNewFile *.scala      set filetype=scala
 au BufRead,BufNewFile *.zsh        set filetype=zsh
+au BufRead,BufNewFile *.gnuplot    set filetype=gnuplot
+au BufRead,BufNewFile *.mustache   set filetype=mustache
