@@ -54,6 +54,4 @@ diff.changed = white
 diff.trailingwhitespace = white_background
 
 [bookmarks]
-tack.current = True
-
-
+tack.current = True # bookmarks will not move , only the current one
