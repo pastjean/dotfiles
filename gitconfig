@@ -17,10 +17,8 @@
 	di = diff
 	dc = diff --cached
 	st = status
-	
+
 [pack]
 	threads = 0
 [help]
 	format = web
-[web]
-	browser = firefox

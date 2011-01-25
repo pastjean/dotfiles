@@ -1,6 +1,5 @@
 [ui]
 username = Pierre-Alexandre St-Jean <pa@stjean.me>
-editor = vim
 
 [default]
 outgoing = --graph
@@ -21,20 +20,14 @@ pager=LESS='FSRX' less
 ignore=version, help, update, push, pull, merge, fetch, convert, clone, record, crecord, grep, status, add, addremove, revert, commit, init
 
 [extensions]
-bookmarks =
+bookmarks = 
 churn =
-color =
-graphlog = 
-hggit =
-pager =
-rebase =
+color = 
+graphlog =
+pager = 
 mq =
 progress =
 schemes =
-
-[schemes]
-# gh = git://github.com
-# bbs = ssh://hg@bitbucket.org
 
 [color]
 status.modified = cyan
