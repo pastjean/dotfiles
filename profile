@@ -12,10 +12,9 @@ do
   fi
 done
 
-export ANDROID_SDK_HOME=~/local/android-sdk
-ANDROID_SDK_BIN=$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools
+export ANDROID_SDK_HOME=$HOMR/.android-sdk
 if [ -d $ANDROID_SDK_HOME ] ; then
-  PATH="$ANDROID_SDK_BIN:$PATH"
+  PATH="$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$PATH"
 fi
 
 export SCALA_HOME=~/local/scala
@@ -27,5 +26,7 @@ do
     PATH="$i/bin:$PATH"
   fi
 done
+
+PATH=/home/pastjean/.cljr/bin:$PATH
 
 export PATH=$PATH  

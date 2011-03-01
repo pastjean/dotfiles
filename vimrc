@@ -41,12 +41,12 @@ set backspace=indent,eol,start " line change on backspace
 set whichwrap=h,l,<,>,[,] " line change when going left or right
 
 " Make cursor move by visual lines instead of file lines (when wrapping)
+noremap k gk
+noremap j gj
 map <up> k
-map k gk
-imap <up> <C-o>gk
 map <down> j
-map j gj
-imap <down> <C-o>gj
+imap <up> <C-o>k
+imap <down> <C-o>j
 
 
 " => Display <============================
@@ -71,15 +71,19 @@ set ignorecase incsearch hlsearch
 
 let mapleader = ","
 " Trick that makes ; be a : so you dont have to hit shift
-nnoremap ; : 
+nnoremap ; :
+
+" => Copy Paste
+nnoremap <S-C-C> "+gp
+inoremap <S-C-C> <ESC>"+gpi
+vnoremap <C-C> "+y 
 
 " => Shortcut keys
-imap hh =>
-imap aa @
-imap <C-S> <ESC>:w<CR>
-nmap <C-S> :w<CR>
-vnoremap <C-C> "+y "Clipboard copy 
-
+inoremap hh =>
+inoremap aa @
+nnoremap <C-S> :w<CR>
+imap <C-S> <C-O><C-S>
+  
 nmap <C-H> :bp<CR>
 nmap <C-L> :bn<CR>
 imap <C-H> <ESC><C-H>
@@ -91,15 +95,18 @@ nmap <leader>n :set number! <CR>
 nmap <silent> <Leader>b :LustyJuggler<CR>
 noremap <leader>j :CommandT<cr>
 map <leader>u :TMiniBufExplorer<cr>
+nnoremap <F5> :GundoToggle<CR>
 
-" => Python filter
+" => Python/Ruby filter
+" Permits to execute and replace inline
 nmap gp :.!python<CR>
 vmap gp :!python<CR>
+nmap gr :.!ruby<CR>
+vmap gr :!ruby<CR>
 
 " => Indenting commands
 vmap <Tab> >gv
 vmap <S-Tab> <gv
-imap <S-Tab> <C-o><<
 
 " => Visual Wrap Text
 vnoremap (  <ESC>`>a)<ESC>`<i(<ESC>
@@ -111,4 +118,3 @@ vnoremap '  <ESC>`>a'<ESC>`<i'<ESC>
 vnoremap `  <ESC>`>a`<ESC>`<i`<ESC>
 vnoremap [  <ESC>`>a]<ESC>`<i[<ESC>
 vnoremap ]  <ESC>`>a]<ESC>`<i[<ESC>
-
