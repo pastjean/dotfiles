@@ -5,11 +5,15 @@
 	user = pastjean
 [color]
 	ui = auto
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
 [diff]
 	renamelimit = 0
 [alias]
 	tree = log --graph --pretty=format:\"%h - %ad - %s\" --date=relative
-        help = help -w
+  help = help -w
 	aa = add --all
 	amend = commit --amend
 	co = checkout
