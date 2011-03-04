@@ -74,8 +74,7 @@ let mapleader = ","
 nnoremap ; :
 
 " => Copy Paste
-nnoremap <S-C-C> "+gp
-inoremap <S-C-C> <ESC>"+gpi
+"nnoremap <S-C-C> "+gp
 vnoremap <C-C> "+y 
 
 " => Shortcut keys
