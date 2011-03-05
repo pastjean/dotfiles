@@ -57,6 +57,7 @@ task :pull do
 end
 
 task :default => [:link]
+task :all => [:link,:hg,:node]
 
 def git (repo, where="")
  system "git clone #{repo} #{where}"
