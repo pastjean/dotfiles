@@ -1,0 +1,41 @@
+require 'rubygems'
+require 'rake'
+
+
+# Create standard dirs
+["~/src","~/bin","~/lib","~/local"].each do |dir|
+  directory File.expand_path(dir)
+end
+
+task :link_vimrc do
+  %w[ vimrc gvimrc vim ].each do |file|
+    dest = File.expand_path("~/#{file}")
+    unless File.exist?(dest)
+      ln_s File.expand_path("")
+    end
+  end
+end
+
+task :homebrew => File.expand_path("~/local/") do
+  if RUBY_PLATFORM ~= /darwin/
+    Dir.chdir(File.expand_path("~/local")
+    system "curl -LsSf https://github.com/mxcl/homebrew/tarball/master | /usr/bin/tar xvz -C. --strip 1"
+  else
+    puts "Not installing homebrew cause not on MAC"
+  end
+end
+
+task :clean { system "git clean -dfx" }
+task :pull { system "git pull" }
+
+task :default => []
+task :upgrade => [:clean, :pull, :default]
+
+
+def git(repo,where)
+  sh "git clone #{repo} #{where.to_s}"
+end
+
+def hg(repo,where)
+  sh "hg clone #{repo} #{where.to_s}"
+end

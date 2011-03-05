@@ -1,4 +1,0 @@
-. ~/.zsh/aliases.zsh
-
-alias reloadBash='. ~/.bash_profile'
-
