@@ -9,6 +9,29 @@ puts File.expand_path("../",__FILE__)
   directory(h(dir))
 end
 
+desc("Install mercurial from repository")
+task :hg => h("lib") do
+  hg('http://selenic.com/repo/hg#stable',h("lib/hg/hg-stable")) do
+    system "make local"
+  end
+end
+
+desc("Install nodejs + npm")
+task :node => [h("src"),h("lib")] do
+  where = h("lib/node")
+  git('http://github.com/joyent/node.git',h("src/node")) do
+    system "./configure --prefix=#{h("lib/node")}"
+    system "make install"
+    ENV["PATH"]="#{h("lib/node/bin")}:#{ENV["PATH"]}"
+    system "curl http://npmjs.org/install.sh | sh"
+  end
+end
+
+desc("Install rvm")
+task :rvm do
+  system "bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )"
+end
+
 desc "link dotfiles into home"
 task :link do
   FileList['*'].exclude("Rakefile","README.md","bootstrap.sh").each do |file|
@@ -37,7 +60,17 @@ task :default => [:link]
 
 def git (repo, where="")
  system "git clone #{repo} #{where}"
+ if block_given?
+   cd where do
+     yield
+   end
+ end
 end
 def hg (repo, where="")
  system "hg clone #{repo} #{where}"
+ if block_given?
+   cd where do
+     yield
+   end
+ end
 end
