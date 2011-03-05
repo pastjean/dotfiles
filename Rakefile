@@ -4,8 +4,7 @@ desc "install the dot files into user's home directory"
 task :install do
   replace_all = false
   Dir['*'].each do |file|
-    next if %w[Rakefile README.md bin lib src].include? file
-    next if file == "bootstrap.sh"
+    next if %w[Rakefile README.md bootstrap.sh bin lib src].include? file
 
     if File.exist?(File.join(ENV['HOME'], ".#{file}"))
       if File.identical? file, File.join(ENV['HOME'], ".#{file}")
@@ -30,6 +29,27 @@ task :install do
       link_file(file)
     end
   end
+end
+
+namespace :dotfiles do
+  task :zsh do
+    cd "zsh"
+    %w[zsh zshrc]
+  end
+  task :vim do
+    cd "vim"
+  end
+  task :others => [:zsh,:vim] do
+  end
+end
+
+%w[src bin lib local]
+
+def git (repo, where="")
+ system "git clone #{repo} #{where}"
+end
+def hg (repo, where="")
+ system "hg clone #{repo} #{where}"
 end
 
 def replace_file(file)
