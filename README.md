@@ -12,9 +12,11 @@ Based on : http://github.com/ryanb/dotfiles
 
 Installation
 -------------
+    curl https://github.com/pastjean/dotfiles/raw/master/bootstrap.sh -o - | sh
 
-    git clone git://github.com/pastjean/dotfiles ~/.dotfiles 
-    cd ~/.dotfiles
-    rake install
+Or manually:
+    git clone git://github.com/pastjean/dotfiles 
+    cd dotfiles
+    rake
 
 
