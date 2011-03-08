@@ -27,6 +27,7 @@ do
   fi
 done
 
-PATH=/home/pastjean/.cljr/bin:$PATH
+HG_HOME=$HOME/lib/hg/hg-stable
+PATH=$HOME/.cljr/bin:$HG_HOME:$PATH
 
 export PATH=$PATH  

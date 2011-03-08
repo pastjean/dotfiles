@@ -3,7 +3,7 @@
 " pierrealexandre.stjean@gmail.com
 
 set nocompatible "power to vim
-
+set shellslash
 " => Before <============================
 
 "pathogen 
@@ -31,6 +31,7 @@ syntax on
 set ts=2 sw=2 sts=2 "tabs
 set expandtab "spaces no tabs
 set autoindent smartindent cindent "indenting
+set viewoptions=folds,cursor,unix
 
 set nobackup noswapfile
 
@@ -65,7 +66,7 @@ set cursorline " Cursor highlight
 
 " => Searching <============================
 
-set ignorecase incsearch hlsearch
+set ignorecase infercase incsearch hlsearch
 
 " => Mappings <============================
 
