@@ -1,4 +1,4 @@
-mkdir ~/src
+mkdir -p ~/src
 
 cd ~/src
 git clone git@github.com:pastjean/dotfiles.git
