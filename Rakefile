@@ -1,49 +1,40 @@
 require 'rake'
-def h(name)
-  File.expand_path("~/#{name}")
-end
 
-puts File.expand_path("../",__FILE__)
-
-%w[bin lib src local].each do |dir|
-  directory(h(dir))
-end
-
-desc("Install mercurial from repository")
-task :hg => h("lib") do
-  hg('http://selenic.com/repo/hg#stable',h("lib/hg/hg-stable")) do
-    system "make local"
-  end
-end
-
-desc("Install nodejs + npm")
-task :node => [h("src"),h("lib")] do
-  where = h("lib/node")
-  git('http://github.com/joyent/node.git',h("src/node")) do
-    system "./configure --prefix=#{h("lib/node")}"
-    system "make install"
-    ENV["PATH"]="#{h("lib/node/bin")}:#{ENV["PATH"]}"
-    system "curl http://npmjs.org/install.sh | sh"
-  end
-end
-
-desc("Install rvm")
-task :rvm do
-  system "bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )"
+def h(filename)
+  "#{ENV["HOME"]}/#{filename}"
 end
 
 desc "link dotfiles into home"
 task :link do
+  skip_all = false
+  overwrite_all = false
+  backup_all = false
+
   FileList['*'].exclude("Rakefile","README.md","bootstrap.sh").each do |file|
-    dest = h(".#{file}")
-    if File.exist? dest
-      if File.identical? file, dest
-        puts "identical #{dest}"
+    overwrite = false
+    backup = false
+
+    target = h ".#{file}"
+
+    if File.exist?(target)  || File.symlink?(target)
+      if File.identical? file, target
+        puts "identical #{target}"
         next
       end
-      mv dest, "#{dest}.old"
+      unless skip_all || overwrite_all || backup_all
+        puts "File already exists: #{target}, what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all"
+        case STDIN.gets.chomp
+        when 'o' then overwrite = true
+        when 'b' then backup = true
+        when 'O' then overwrite_all = true
+        when 'B' then backup_all = true
+        when 'S' then skip_all = true
+        end
+      end
+      mv target "#{target}.bkp" if backup || backup_all
+      FileUtils.rm_rf(target) if overwrite || overwrite_all
     end
-    ln_s File.join(Dir.pwd,file), dest
+    ln_s File.join(Dir.pwd,file), target
   end
 end
 
@@ -57,18 +48,3 @@ task :pull do
 end
 
 task :default => [:link]
-task :all => [:link,:hg,:node]
-
-def dcvs( command,&blk)
-  system "#{command}"
-
-  cd where do
-    blk.yield
-  end
-end
-def git (repo, where="",&blk)
- dcvs "git clone #{repo} #{where}", &blk
-end
-def hg (repo, where="",&blk)
- system "hg clone #{repo} #{where}", &blk
-end
