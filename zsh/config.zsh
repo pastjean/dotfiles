@@ -65,6 +65,8 @@ setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 
+bindkey ';2D' backward-word
+bindkey ';2C' forward-word
 bindkey ';3D' backward-word
 bindkey ';3C' forward-word
 bindkey ';5D' beginning-of-line
