@@ -59,19 +59,16 @@ end
 task :default => [:link]
 task :all => [:link,:hg,:node]
 
-def git (repo, where="")
- system "git clone #{repo} #{where}"
- if block_given?
-   cd where do
-     yield
-   end
- end
+def dcvs( command,&blk)
+  system "#{command}"
+
+  cd where do
+    blk.yield
+  end
 end
-def hg (repo, where="")
- system "hg clone #{repo} #{where}"
- if block_given?
-   cd where do
-     yield
-   end
- end
+def git (repo, where="",&blk)
+ dcvs "git clone #{repo} #{where}", &blk
+end
+def hg (repo, where="",&blk)
+ system "hg clone #{repo} #{where}", &blk
 end
