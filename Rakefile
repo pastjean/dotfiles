@@ -6,9 +6,9 @@ end
 
 desc "link dotfiles into home"
 task :link do
-  skip_all = false
-  overwrite_all = false
-  backup_all = false
+  opts_all = {:skip=>false,
+    :overwrite=>false,
+    :backup=>false}
 
   FileList['*'].exclude("Rakefile","README.md","bootstrap.sh").each do |file|
     overwrite = false
@@ -21,18 +21,18 @@ task :link do
         puts "identical #{target}"
         next
       end
-      unless skip_all || overwrite_all || backup_all
+      unless opts_all.has_value?(true)
         puts "File already exists: #{target}, what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all"
         case STDIN.gets.chomp
         when 'o' then overwrite = true
         when 'b' then backup = true
-        when 'O' then overwrite_all = true
-        when 'B' then backup_all = true
-        when 'S' then skip_all = true
+        when 'O' then opts_all[:overwrite] = true
+        when 'B' then opts_all[:backup] = true
+        when 'S' then opts_all[:skip] = true
         end
       end
-      mv target "#{target}.bkp" if backup || backup_all
-      FileUtils.rm_rf(target) if overwrite || overwrite_all
+      mv target "#{target}.bkp" if backup || opts_all[:backup]
+      FileUtils.rm_rf(target) if overwrite || opts_all[:overwrite]
     end
     ln_s File.join(Dir.pwd,file), target
   end
