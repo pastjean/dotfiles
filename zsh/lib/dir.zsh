@@ -1,8 +1,8 @@
 function c {
-  cd ~/Documents/projets/$1;  
+  cd $PROJECTS/$1;  
 }
 function _c {
-  _files -W ~/Documents/projets -/
+  _files -W  $PROJECTS -/
 }
 
 function h {
