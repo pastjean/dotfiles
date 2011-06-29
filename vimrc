@@ -2,31 +2,31 @@
 " feel free to use, modify, destroy, attack , steal...
 " pierrealexandre.stjean@gmail.com
 
-set nocompatible "power to vim
-set shellslash
-" => Before <============================
-
-"pathogen 
-"includes plugins from ~/.vim/bundles
-call pathogen#helptags()
+" => Preamble <============================
+filetype off
 call pathogen#runtime_append_all_bundles()
+filetype plugin indent on
+set nocompatible "power to vim
 
+set shellslash
 
 " => General <============================
 
-set hidden
+set ff=unix fenc=utf-8 enc=utf-8 "file format & encodings
+set modelines=0
+set scrolloff=1
 set autoread
 set history=1000
 set undolevels=1000
+set undoreload=10000
+set hidden
+set wildmenu
+set wildmode=list:longest
 
 set title
 set noerrorbells
 
-set ff=unix fenc=utf-8 enc=utf-8 "file format & encodings
 
-filetype on
-filetype plugin indent on
-syntax on
 
 set ts=2 sw=2 sts=2 "tabs
 set expandtab "spaces no tabs
@@ -51,9 +51,10 @@ imap <down> <C-o>j
 
 
 " => Display <============================
+syntax on
 colorscheme molokai
 
-set listchars=tab:»\ ,eol:¬
+set listchars=tab:▸\ ,eol:¬
 
 set ruler
 set number
@@ -66,7 +67,10 @@ set cursorline " Cursor highlight
 
 " => Searching <============================
 
-set ignorecase infercase incsearch hlsearch
+set ignorecase smartcase incsearch hlsearch
+set gdefault
+nnoremap / /\v
+vnoremap / /\v
 
 " => Mappings <============================
 
@@ -117,3 +121,7 @@ vnoremap '  <ESC>`>a'<ESC>`<i'<ESC>
 vnoremap `  <ESC>`>a`<ESC>`<i`<ESC>
 vnoremap [  <ESC>`>a]<ESC>`<i[<ESC>
 vnoremap ]  <ESC>`>a]<ESC>`<i[<ESC>
+
+" Heresy
+inoremap <c-a> <esc>I
+inoremap <c-e> <esc>A
