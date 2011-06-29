@@ -30,4 +30,7 @@ done
 HG_HOME=$HOME/lib/hg/hg-stable
 PATH=$HOME/.cljr/bin:$HG_HOME:$PATH
 
+GO_HOME=/home/pastjean/local/src/go/bin
+PATH=$GO_HOME:$PATH
+
 export PATH=$PATH  
