@@ -1,3 +1,6 @@
 [submodule "vim/bundle/gundo"]
 	path = vim/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
+[submodule "vim/bundle/html5"]
+	path = vim/bundle/html5
+	url = http://github.com/othree/html5.vim.git
