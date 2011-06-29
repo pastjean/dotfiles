@@ -7,3 +7,9 @@
 [submodule "vim/bundle/makdown"]
 	path = vim/bundle/makdown
 	url = http://github.com/tpope/vim-markdown.git
+[submodule "vim/bundle/nerdcommenter"]
+	path = vim/bundle/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
