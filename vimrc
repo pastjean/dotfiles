@@ -79,11 +79,10 @@ nnoremap ; :
 vnoremap <C-C> "+y 
 
 " => Shortcut keys
-inoremap hh =>
-inoremap aa @
 nnoremap <C-S> :w<CR>
 imap <C-S> <C-O><C-S>
-  
+
+" Switch Buffers
 nmap <C-H> :bp<CR>
 nmap <C-L> :bn<CR>
 imap <C-H> <ESC><C-H>
