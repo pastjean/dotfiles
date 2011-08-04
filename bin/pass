@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+require 'digest/sha1'
+
+pass = ARGV[0]
+sha1 = Digest::SHA1.hexdigest(pass)
+base64 = Digest::SHA1.base64digest(pass)
+
+puts "SHA1:        " + sha1
+puts "SHA1-Half:   " + sha1[0..19]
+puts "Base64:      " + base64
+puts "Base64-Half: " + base64[0..13]
