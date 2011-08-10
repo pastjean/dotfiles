@@ -1,3 +1,5 @@
+
+
 mkdir -p ~/projets
 
 # Install RVM and source it and make 1.9.2 default
@@ -11,6 +13,8 @@ rake
 
 ## Copy file
 ## init vim
-## init ruby
+## init RVM
+##  curl -s https://rvm.beginrescueend.com/install/rvm -o rvm-installer ; chmod +x rvm-installer ; ./rvm-installer --version latest
+
 ## init nodejs
 
