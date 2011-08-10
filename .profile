@@ -12,25 +12,9 @@ do
   fi
 done
 
-export ANDROID_SDK_HOME=$HOMR/.android-sdk
-if [ -d $ANDROID_SDK_HOME ] ; then
-  PATH="$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$PATH"
+# Enabling a file for local configuration (which is not versionned)
+if [ -f "$HOME/.profile.local" ]; then
+  . "$HOME/.profile.local"
 fi
-
-export SCALA_HOME=~/local/scala
-export JRUBY_HOME=~/local/jruby
-
-for i in $SCALA_HOME $JRUBY_HOME
-do
-  if [ -d $i ] ; then
-    PATH="$i/bin:$PATH"
-  fi
-done
-
-HG_HOME=$HOME/lib/hg/hg-stable
-PATH=$HOME/.cljr/bin:$HG_HOME:$PATH
-
-GO_HOME=/home/pastjean/local/src/go/bin
-PATH=$GO_HOME:$PATH
 
 export PATH=$PATH  

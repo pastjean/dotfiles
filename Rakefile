@@ -14,7 +14,7 @@ task :link do
     overwrite = false
     backup = false
 
-    target = h ".#{file}"
+    target = h "#{file}"
 
     if File.exist?(target)  || File.symlink?(target)
       if File.identical? file, target
@@ -48,3 +48,4 @@ task :pull do
 end
 
 task :default => [:link]
+
