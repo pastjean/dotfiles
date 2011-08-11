@@ -10,7 +10,18 @@ task :link do
     :overwrite=>false,
     :backup=>false}
 
-  FileList['*'].exclude("bin","Rakefile","README.md","bootstrap.sh","bootstrap.ruby.sh","bootstrap.clojure.sh","bootstrap.node.sh").each do |file|
+excludeFiles = ["Rakefile",
+                "README.md",
+                ".gitignore",
+                ".git",
+                "bootstrap.sh",
+                "bootstrap.ruby.sh",
+                "bootstrap.clojure.sh",
+                "bootstrap.node.sh",
+                "bin"          
+               ]
+
+  (FileList['.*','*'].exclude(*excludeFiles) {|f| f=='.' || f=='..'}).each do |file|
     overwrite = false
     backup = false
     skip = false
