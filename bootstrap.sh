@@ -1,20 +1,26 @@
 
-
+mkdir -p ~/bin
 mkdir -p ~/projets
 
 # Install RVM and source it and make 1.9.2 default
 
 cd ~/projets
-git clone https://pastjean@github.com/pastjean/dotfiles.git
-git submodule init
-git submodule update
-cd dotfiles
-rake
+if [[ -a dotfiles ]] then
+  echo "dotfile already exists ... not cloning"
+else
+  git clone https://pastjean@github.com/pastjean/dotfiles.git dotfiles  
+fi;
+if [[! -d dotfiles ]] then
+  echo "dotfiles is not a dir ... what are you doing"
+  exit 1
+fi;
 
-## Copy file
-## init vim
+## Link files
+for file in `ls -A | egrep -v "\.git/|\.gitignore|bootstrap|README.md|Rakefile";ls -A bin/*`
+do
+  ln -S .bak -ibs `pwd`/$file ~/$file
+done
+
 ## init RVM
-##  curl -s https://rvm.beginrescueend.com/install/rvm -o rvm-installer ; chmod +x rvm-installer ; ./rvm-installer --version latest
-
-## init nodejs
+bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
 
