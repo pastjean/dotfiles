@@ -10,9 +10,10 @@ task :link do
     :overwrite=>false,
     :backup=>false}
 
-  FileList['*'].exclude("Rakefile","README.md","bootstrap.sh").each do |file|
+  FileList['*'].exclude("bin","Rakefile","README.md","bootstrap.sh","bootstrap.ruby.sh","bootstrap.clojure.sh","bootstrap.node.sh").each do |file|
     overwrite = false
     backup = false
+    skip = false
 
     target = h "#{file}"
 
@@ -26,11 +27,13 @@ task :link do
         case STDIN.gets.chomp
         when 'o' then overwrite = true
         when 'b' then backup = true
+        when 's' then skip = true
         when 'O' then opts_all[:overwrite] = true
         when 'B' then opts_all[:backup] = true
         when 'S' then opts_all[:skip] = true
         end
       end
+      next if skip || opts_all[:skip]
       mv target "#{target}.bkp" if backup || opts_all[:backup]
       FileUtils.rm_rf(target) if overwrite || opts_all[:overwrite]
     end
