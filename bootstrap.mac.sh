@@ -4,4 +4,5 @@
 curl https://github.com/mxcl/homebrew/tarball/master | tar -xvf
 
 brew install wget
-
+brew install git
+brew install macvim
