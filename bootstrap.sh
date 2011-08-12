@@ -26,7 +26,7 @@ do
     echo "identical $file"
   else
     echo "link $file to ~/$file"
-#   ln -S .bak -ibs `pwd`/$file ~/$file
+    ln -S .bak -ibs `pwd`/$file ~/$file
  fi;
 done
 
