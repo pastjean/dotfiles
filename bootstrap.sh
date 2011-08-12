@@ -19,14 +19,14 @@ fi;
 cd dotfiles
 
 ## Link files
-for file in `ls -A | egrep -v "\.git/|\.gitignore|bootstrap|README.md|Rakefile";ls -A bin/*`
+for file in $(ls -A | egrep -v "\.git/|\.gitignore|bootstrap|README.md|Rakefile";ls -A bin/*)
 do
- if find -L ~ -maxdepth 2 -xtype l -samefile $file -print
+ if [[ $(find -L ~ -maxdepth 1 -xtype l -samefile $file -print) != "" ]]
  then
     echo "identical $file"
   else
     echo "link $file to ~/$file"
-#  ln -S .bak -ibs `pwd`/$file ~/$file
+#   ln -S .bak -ibs `pwd`/$file ~/$file
  fi;
 done
 
