@@ -12,7 +12,7 @@ Based on : http://github.com/ryanb/dotfiles
 
 Installation
 -------------
-    curl https://github.com/pastjean/dotfiles/raw/master/bootstrap.sh -o - | sh
+    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.sh -o - | sh
 
 Or manually:
     git clone git://github.com/pastjean/dotfiles 
