@@ -12,7 +12,7 @@ Based on : http://github.com/ryanb/dotfiles
 
 Installation
 -------------
-    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.sh -o - | sh
+    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.sh -o - | bash
 
 Or manually:
     git clone git://github.com/pastjean/dotfiles 
@@ -20,3 +20,18 @@ Or manually:
     rake
 
 
+For Mac
+--------
+    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.mac.sh -o - | bash
+
+For Ruby
+--------
+    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.ruby.sh -o - | bash
+
+For Node.js
+--------
+    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.node.sh -o - | bash
+
+For Clojure
+--------
+    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.clojure.sh -o - | bash
