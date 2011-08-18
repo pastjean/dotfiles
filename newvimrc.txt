@@ -1,0 +1,76 @@
+" pastjean's vimrc
+" Author : Pierre-Alexandre St-Jean <pierrealexandre.stjean@gmail.com>
+" Source : https://github.com/pastjean/dotfiles/tree/master/vim
+"
+" feel free to use, modify, destroy, attack , steal...
+
+" => Preamble <================================================================ {
+filetype off
+call pathogen#runtime_append_all_bundles()
+filetype plugin indent on
+set nocompatible "power to vim
+" }
+" => Basic options <=========================================================== {
+
+" }
+" => Navigation <============================================================== {
+" }
+" => Searching and movement =================================================== {
+
+" Heresy
+inoremap <c-a> <esc>I
+inoremap <c-e> <esc>A
+" }
+" => Folding <================================================================= {
+" }
+" => Filetype specific <======================================================= {
+" }
+" => Quick editing <=========================================================== {
+" }
+" => Display <================================================================= {
+" }
+
+" => Mappings <================================================================ {
+" }
+" => Plugin/Filters <========================================================== {
+" Permits to execute and replace inline
+nmap gp :.!python<CR>
+vmap gp :!python<CR>
+nmap gr :.!ruby<CR>
+vmap gr :!ruby<CR>
+" }
+
+" Preamble -------------------------------------------------------------------- {{{
+" Basic options --------------------------------------------------------------- {{{
+" Useful abbreviations -------------------------------------------------------- {{{
+" Searching and movement ------------------------------------------------------ {{{
+" Folding --------------------------------------------------------------------- {{{
+" Various filetype-specific stuff --------------------------------------------- {{{
+" Quick editing --------------------------------------------------------------- {{{
+" Convenience mappings -------------------------------------------------------- {{{
+" Plugin settings ------------------------------------------------------------- {{{
+" Text objects ---------------------------------------------------------------- {{{
+" Quickreturn ----------------------------------------------------------------- {{{
+inoremap <c-cr> <esc>A<cr>
+
+" => In GUI - MacVim or GVIM <================================================= {
+if has('gui_running')
+  set guifont=Menlo:h12
+  set guifont=Mensch:h12 " make it beautiful
+
+  " Remove unusefull scrollbars
+  set guioptions-=l
+  set guioptions-=L
+  set guioptions-=r
+  set guioptions-=R
+  
+  " vertical splits with a better line
+  set fillchars+=vert:¦
+
+  set guioptions-=T  " no toolbar
+
+  " Different cursors for different modes.
+  set guicursor=n-c:block-Cursor-blinkon0
+  set guicursor+=v:block-vCursor-blinkon0
+endif
+" }
