@@ -1,0 +1,523 @@
+" Basic options --------------------------------------------------------------- {{{
+
+set encoding=utf-8
+set modelines=0
+set scrolloff=3
+set autoindent
+set showmode
+set showcmd
+set hidden
+set wildmenu
+set wildmode=list:longest
+set visualbell
+set cursorline
+set ttyfast
+set ruler
+set backspace=indent,eol,start
+set nonumber
+set norelativenumber
+set laststatus=2
+set history=1000
+set undofile
+set undoreload=10000
+set cpoptions+=J
+set list
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+set shell=/bin/bash
+set lazyredraw
+set wildignore+=*.pyc,.hg,.git
+set matchtime=3
+set showbreak=↪
+set splitbelow
+set splitright
+set fillchars=diff:\ 
+set ttimeout
+set notimeout
+set nottimeout
+
+" Make Vim able to edit crontab files again.
+set backupskip=/tmp/*,/private/tmp/*" 
+
+" Resize splits when the window is resized
+au VimResized * exe "normal! \<c-w>="
+
+" Tabs, spaces, wrapping {{{
+
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set wrap
+set textwidth=85
+set formatoptions=qrn1
+set colorcolumn=+1
+
+" }}}
+" Status line {{{
+
+set statusline=%F%m%r%h%w
+set statusline+=\ %#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+set statusline+=%=(%{&ff}/%Y)
+set statusline+=\ (line\ %l\/%L,\ col\ %c)
+
+" }}}
+" Backups {{{
+
+set undodir=~/.vim/tmp/undo//     " undo files
+set backupdir=~/.vim/tmp/backup// " backups
+set directory=~/.vim/tmp/swap//   " swap files
+set backup                        " enable backups
+
+" }}}
+" Leader {{{
+
+let mapleader = ","
+let maplocalleader = "\\"
+
+" }}}
+" Color scheme {{{
+
+syntax on
+set background=dark
+colorscheme molokai
+
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+" }}}
+
+" }}}
+" Useful abbreviations -------------------------------------------------------- {{{
+
+iabbrev gh/ http://github.com/
+iabbrev sl@ steve@stevelosh.com
+
+" }}}
+" Searching and movement ------------------------------------------------------ {{{
+
+" Use sane regexes.
+nnoremap / /\v
+vnoremap / /\v
+
+set ignorecase
+set smartcase
+
+set incsearch
+set showmatch
+set hlsearch
+
+set gdefault
+
+set virtualedit+=block
+
+map <leader><space> :noh<cr>
+
+runtime macros/matchit.vim
+map <tab> %
+
+nnoremap Y y$
+nnoremap D d$
+
+" Make horizontal scrolling less horrible.
+set sidescroll=1
+set sidescrolloff=10
+
+" Keep search matches in the middle of the window.
+nnoremap * *zzzv
+nnoremap # #zzzv
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Same when jumping around
+nnoremap g; g;zz
+nnoremap g, g,zz
+
+" L is easier to type, and I never use the default behavior.
+noremap L $
+
+" Heresy
+inoremap <c-a> <esc>I
+inoremap <c-e> <esc>A
+
+" Open a Quickfix window for the last search
+nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+
+" Fix linewise visual selection of various text objects
+nnoremap VV V
+nnoremap Vit vitVkoj
+nnoremap Vat vatV
+nnoremap Vab vabV
+nnoremap VaB vaBV
+
+" Error navigation {{{
+"
+"             Location List     QuickFix Window
+"            (e.g. Syntastic)     (e.g. Ack)
+"            ----------------------------------
+" Next      |     M-k               M-Down     |
+" Previous  |     M-l                M-Up      |
+"            ----------------------------------
+"
+nnoremap ˚ :lnext<cr>zvzz
+nnoremap ¬ :lprevious<cr>zvzz
+inoremap ˚ <esc>:lnext<cr>zvzz
+inoremap ¬ <esc>:lprevious<cr>zvzz
+nnoremap <m-Down> :cnext<cr>zvzz
+nnoremap <m-Up> :cprevious<cr>zvzz
+" }}}
+
+" Directional Keys {{{
+
+" It's 2011.
+noremap j gj
+noremap k gk
+
+" Easy buffer navigation
+noremap <C-h>  <C-w>h
+noremap <C-j>  <C-w>j
+noremap <C-k>  <C-w>k
+noremap <C-l>  <C-w>l
+noremap <leader>g <C-w>v
+
+" }}}
+
+" }}}
+" Folding --------------------------------------------------------------------- {{{
+
+set foldlevelstart=0
+
+" Space to toggle folds.
+nnoremap <Space> za
+vnoremap <Space> za
+
+" Make zO recursively open whatever top level fold we're in, no matter where the
+" cursor happens to be.
+nnoremap zO zCzO
+
+function! MyFoldText() " {{{
+    let line = getline(v:foldstart)
+
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+    let onetab = strpart('          ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+endfunction " }}}
+set foldtext=MyFoldText()
+
+" }}}
+" Destroy infuriating keys ---------------------------------------------------- {{{
+
+" Fuck you, help key.
+set fuoptions=maxvert,maxhorz
+noremap  <F1> :set invfullscreen<CR>
+inoremap <F1> <ESC>:set invfullscreen<CR>a
+
+" Fuck you too, manual key.
+nnoremap K <nop>
+
+" Stop it, hash key.
+inoremap # X<BS>#
+
+" }}}
+" Various filetype-specific stuff --------------------------------------------- {{{
+
+" C {{{
+
+au FileType c setlocal foldmethod=syntax
+
+" }}}
+" Clojure {{{
+
+au FileType clojure call TurnOnClojureFolding()
+au FileType clojure compiler clojure
+au FileType clojure setlocal report=100000
+
+let g:slimv_leader = '\'
+let g:slimv_keybindings = 2
+
+" Fix the eval mapping.
+au FileType clojure nmap <buffer> \ee \ed
+
+" Indent top-level form.
+au FileType clojure nmap <buffer> <localleader>= v((((((((((((=%
+
+" Use a swank command that works, and doesn't require new app windows.
+au FileType clojure let g:slimv_swank_cmd='!dtach -n /tmp/dvtm-swank.sock -r winch lein swank'
+
+au BufNewFile,BufRead Slimv.REPL.clj setlocal winfixwidth
+au BufNewFile,BufRead Slimv.REPL.clj setlocal nowrap
+au BufNewFile,BufRead Slimv.REPL.clj normal! zR
+
+" }}}
+" Confluence {{{
+
+au BufRead,BufNewFile *.confluencewiki setlocal filetype=confluencewiki
+
+" Wiki pages should be soft-wrapped.
+au FileType confluencewiki setlocal wrap linebreak nolist
+
+" }}}
+" Cram {{{
+
+au BufNewFile,BufRead *.t set filetype=cram
+
+let cram_fold=1
+autocmd Syntax cram setlocal foldlevel=1
+
+" }}}
+" CSS and LessCSS {{{
+
+au BufNewFile,BufRead *.less setlocal filetype=less
+
+au BufNewFile,BufRead *.css  setlocal foldmethod=marker
+au BufNewFile,BufRead *.less setlocal foldmethod=marker
+
+au BufNewFile,BufRead *.css  setlocal foldmarker={,}
+au BufNewFile,BufRead *.less setlocal foldmarker={,}
+
+" Use cc to change lines without borking the indentation.
+au BufNewFile,BufRead *.css  nnoremap <buffer> cc ddko
+au BufNewFile,BufRead *.less nnoremap <buffer> cc ddko
+
+" Use <leader>S to sort properties.  Turns this:
+"
+"     p {
+"         width: 200px;
+"         height: 100px;
+"         background: red;
+"
+"         ...
+"     }
+"
+" into this:
+
+"     p {
+"         background: red;
+"         height: 100px;
+"         width: 200px;
+"
+"         ...
+"     }
+"
+au BufNewFile,BufRead *.css  nnoremap <buffer> <localleader>S ?{<CR>jV/\v^\s*\}?$<CR>k:sort<CR>:noh<CR>
+au BufNewFile,BufRead *.less nnoremap <buffer> <localleader>S ?{<CR>jV/\v^\s*\}?$<CR>k:sort<CR>:noh<CR>
+
+" Make {<cr> insert a pair of brackets in such a way that the cursor is correctly
+" positioned inside of them AND the following code doesn't get unfolded.
+au BufNewFile,BufRead *.css  inoremap <buffer> {<cr> {}<left><cr>.<cr><esc>kA<bs><space><space><space><space>
+au BufNewFile,BufRead *.less inoremap <buffer> {<cr> {}<left><cr>.<cr><esc>kA<bs><space><space><space><space>
+
+" }}}
+" Django {{{
+
+au BufNewFile,BufRead urls.py      setlocal nowrap
+au BufNewFile,BufRead urls.py      normal! zR
+au BufNewFile,BufRead dashboard.py normal! zR
+
+au BufNewFile,BufRead admin.py     setlocal filetype=python.django
+au BufNewFile,BufRead urls.py      setlocal filetype=python.django
+au BufNewFile,BufRead models.py    setlocal filetype=python.django
+au BufNewFile,BufRead views.py     setlocal filetype=python.django
+au BufNewFile,BufRead settings.py  setlocal filetype=python.django
+au BufNewFile,BufRead settings.py  setlocal foldmethod=marker
+au BufNewFile,BufRead forms.py     setlocal filetype=python.django
+au BufNewFile,BufRead common_settings.py  setlocal filetype=python.django
+au BufNewFile,BufRead common_settings.py  setlocal foldmethod=marker
+
+" }}}
+" Firefox {{{
+
+au BufRead,BufNewFile ~/Library/Caches/*.html setlocal buftype=nofile
+
+" }}}
+" Fish {{{
+
+au BufNewFile,BufRead *.fish setlocal filetype=fish
+
+" }}}
+" Help {{{
+
+au FileType help wincmd L
+
+" }}}
+" HTML and HTMLDjango {{{
+
+au BufNewFile,BufRead *.html setlocal filetype=htmldjango
+au FileType html,jinja,htmldjango setlocal foldmethod=manual
+
+" Use <localleader>f to fold the current tag.
+au FileType html,jinja,htmldjango nnoremap <buffer> <localleader>f Vatzf
+
+" Use Shift-Return to turn this:
+"     <tag>|</tag>
+"
+" into this:
+"     <tag>
+"         |
+"     </tag>
+au FileType html,jinja,htmldjango nnoremap <buffer> <s-cr> vit<esc>a<cr><esc>vito<esc>i<cr><esc>
+
+" Django tags
+au FileType jinja,htmldjango inoremap <buffer> <c-t> {%<space><space>%}<left><left><left>
+
+" Django variables
+au FileType jinja,htmldjango inoremap <buffer> <c-f> {{<space><space>}}<left><left><left>
+
+" }}}
+" Javascript {{{
+
+au FileType javascript setlocal foldmethod=marker
+au FileType javascript setlocal foldmarker={,}
+
+" }}}
+" Lisp {{{
+
+au FileType lisp call TurnOnLispFolding()
+
+" }}}
+" Markdown {{{
+
+au BufNewFile,BufRead *.m*down setlocal filetype=markdown
+
+" Use <localleader>1/2/3 to add headings.
+au Filetype markdown nnoremap <buffer> <localleader>1 yypVr=
+au Filetype markdown nnoremap <buffer> <localleader>2 yypVr-
+au Filetype markdown nnoremap <buffer> <localleader>3 I### <ESC>
+
+" }}}
+" Nginx {{{
+
+au BufRead,BufNewFile /etc/nginx/conf/*                      set ft=nginx
+au BufRead,BufNewFile /etc/nginx/sites-available/*           set ft=nginx
+au BufRead,BufNewFile /usr/local/etc/nginx/sites-available/* set ft=nginx
+au BufRead,BufNewFile vhost.nginx                            set ft=nginx
+
+" }}}
+" Pentadactyl {{{
+
+au BufNewFile,BufRead .pentadactylrc set filetype=pentadactyl
+
+" }}}
+" Puppet {{{
+
+au Filetype puppet setlocal foldmethod=marker
+au Filetype puppet setlocal foldmarker={,}
+
+" }}}
+" Python {{{
+
+au Filetype python noremap  <localleader>rr :RopeRename<CR>
+au Filetype python vnoremap <localleader>rm :RopeExtractMethod<CR>
+au Filetype python noremap  <localleader>ri :RopeOrganizeImports<CR>
+au FileType python setlocal omnifunc=pythoncomplete#Complete
+
+" }}}
+" ReStructuredText {{{
+
+au Filetype rst nnoremap <buffer> <localleader>1 yypVr=
+au Filetype rst nnoremap <buffer> <localleader>2 yypVr-
+au Filetype rst nnoremap <buffer> <localleader>3 yypVr~
+au Filetype rst nnoremap <buffer> <localleader>4 yypVr`
+
+" }}}
+" Ruby {{{
+
+au Filetype ruby setlocal foldmethod=syntax
+
+" }}}
+" Vagrant {{{
+
+au BufRead,BufNewFile Vagrantfile set ft=ruby
+
+" }}}
+" Vim {{{
+
+au FileType vim setlocal foldmethod=marker
+au FileType help setlocal textwidth=78
+
+" }}}
+
+" }}}
+" Quick editing --------------------------------------------------------------- {{{
+
+nnoremap <leader>ev <C-w>s<C-w>j<C-w>L:e $MYVIMRC<cr>
+nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/snippets/<cr>
+nnoremap <leader>eo <C-w>s<C-w>j<C-w>L:e ~/Dropbox/Org<cr>4j
+nnoremap <leader>eh <C-w>s<C-w>j<C-w>L:e ~/.hgrc<cr>
+nnoremap <leader>em <C-w>s<C-w>j<C-w>L:e ~/.mutt/muttrc<cr>
+nnoremap <leader>ez <C-w>s<C-w>j<C-w>L:e ~/lib/dotfiles/zsh<cr>4j
+nnoremap <leader>ek <C-w>s<C-w>j<C-w>L:e ~/lib/dotfiles/keymando/keymandorc.rb<cr>
+
+" }}}
+" Convenience mappings -------------------------------------------------------- {{{
+
+" Substitute
+nnoremap <leader>s :%s//<left>
+
+" Cmdheight switching
+nnoremap <leader>1 :set cmdheight=1<cr>
+nnoremap <leader>2 :set cmdheight=2<cr>
+
+" Better Completion
+set completeopt=longest,menuone,preview
+
+" Rainbows!
+nmap <leader>R :RainbowParenthesesToggle<CR>
+
+" Sudo to write
+cmap w!! w !sudo tee % >/dev/null
+
+" Tags
+nnoremap <leader>T :!ctags -R -f ./tags .<cr>
+
+" Toggle paste
+set pastetoggle=<F8>
+
+" Replaste
+nnoremap <D-p> "_ddPV`]
+
+" }}}
+" Plugin settings ------------------------------------------------------------- {{{
+
+" Ack {{{
+
+map <leader>a :Ack! 
+
+" }}}
+
+" Command-T {{{
+
+let g:CommandTMaxHeight = 20
+
+" }}}
+
+" Gundo {{{
+
+nnoremap <F5> :GundoToggle<CR>
+let g:gundo_debug = 1
+let g:gundo_preview_bottom = 1
+
+" }}}
+
+" NERD Tree {{{
+
+noremap  <F2> :NERDTreeToggle<cr>
+inoremap <F2> <esc>:NERDTreeToggle<cr>
+
+au Filetype nerdtree setlocal nolist
+
+let NERDTreeHighlightCursorline=1
+let NERDTreeIgnore=['.vim$', '\~$', '.*\.pyc$', 'pip-log\.txt$', 'whoosh_index', 'xapian_index', '.*.pid', 'monitor.py', '.*-fixtures-.*.json', '.*\.o$', 'db.db']
+
+" }}}
+
+" }}}
