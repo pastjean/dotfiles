@@ -1,0 +1,74 @@
+
+
+" => General <============================
+
+
+set autoread
+set history=1000
+set undolevels=1000
+set undoreload=10000
+set hidden
+set wildmenu
+set wildmode=list:longest
+
+set title
+set noerrorbells
+
+
+set autoindent smartindent cindent "indenting
+set viewoptions=folds,cursor,unix
+
+set nobackup noswapfile
+
+set pastetoggle=<F2> "disables vim from formatting paste
+
+" => Navigation <============================
+set backspace=indent,eol,start " line change on backspace
+set whichwrap=h,l,<,>,[,] " line change when going left or right
+
+nnoremap Y y$
+nnoremap D d$
+
+" Make horizontal scrolling less horrible.
+set sidescroll=1
+set sidescrolloff=10
+
+" => Display <============================
+
+set showmatch showmode showcmd
+
+set splitbelow
+set splitright
+
+
+" => Mappings <============================
+
+" Switch Buffers
+nmap <C-H> :bp<CR>
+nmap <C-L> :bn<CR>
+imap <C-H> <ESC><C-H>
+imap <C-L> <ESC><C-L>
+
+nnoremap <leader>s :%s//<left>
+
+nmap <leader>l :set list!<CR>
+nmap <leader>n :set number! <CR>
+nmap <silent> <Leader>b :LustyJuggler<CR>
+noremap <leader>j :CommandT<cr>
+map <leader>u :TMiniBufExplorer<cr>
+nnoremap <F5> :GundoToggle<CR>
+
+" => Indenting commands
+vmap <Tab> >gv
+vmap <S-Tab> <gv
+
+" => Visual Wrap Text
+vnoremap (  <ESC>`>a)<ESC>`<i(<ESC>
+vnoremap )  <ESC>`>a)<ESC>`<i(<ESC>
+vnoremap {  <ESC>`>a}<ESC>`<i{<ESC>
+vnoremap }  <ESC>`>a}<ESC>`<i{<ESC>
+vnoremap "  <ESC>`>a"<ESC>`<i"<ESC>
+vnoremap '  <ESC>`>a'<ESC>`<i'<ESC>
+vnoremap `  <ESC>`>a`<ESC>`<i`<ESC>
+vnoremap [  <ESC>`>a]<ESC>`<i[<ESC>
+vnoremap ]  <ESC>`>a]<ESC>`<i[<ESC>

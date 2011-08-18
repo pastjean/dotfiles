@@ -5,6 +5,7 @@
 " feel free to use, modify, destroy, attack , steal...
 
 " => Preamble <================================================================ {
+
 filetype off
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
@@ -12,10 +13,56 @@ set nocompatible "power to vim
 " }
 " => Basic options <=========================================================== {
 
+set encoding=utf-8
+set fileformat=unix
+set modelines=0
+set scrolloff=3
+
+" Tabs, spaces, wrapping {
+set ts=2 sw=2 sts=2 "tabs
+set expandtab "spaces no tabs
+" }
+
+" Display {
+syntax on
+set background=dark
+colorscheme molokai
+set cursorline " Cursor highlight
+set listchars=tab:?\ ,eol:¬
+
+set ruler
+set number
+set cmdheight=1
+set laststatus=2
+set statusline=%F%m%r%h\ %w\ Line:\ %l/%L:%c
+
+au VimResized * exe "normal! \<cw>="
+" }
+
 " }
 " => Navigation <============================================================== {
+
+" Directional Keys
+" Make cursor move by visual lines instead of file lines (when wrapping)
+noremap k gk
+noremap j gj
+map <up> k
+map <down> j
+imap <up> <C-o>k
+imap <down> <C-o>j
 " }
 " => Searching and movement =================================================== {
+nnoremap / /\v
+vnoremap / /\v
+
+set ignorecase 
+set smartcase 
+set incsearch 
+set hlsearch
+set gdefault
+set virtualedit+=block
+
+map <leader><space> :noh<cr>
 
 " Heresy
 inoremap <c-a> <esc>I
@@ -24,6 +71,21 @@ inoremap <c-e> <esc>A
 " => Folding <================================================================= {
 " }
 " => Filetype specific <======================================================= {
+" FileType specific Stuff
+" C
+au FileType c setlocal foldmethod=syntax
+" Html
+au FileType html setlocal foldmethod=manual
+" Javascript
+au FileType javascript setlocal foldmethod=marker
+au FileType javascript setlocal foldmarker={,}
+" Ruby
+au FileType ruby setlocal foldmethod=syntax
+" Vagrant
+au BufRead,BufNewFile Vagrantfile set ft=ruby
+" Vim
+au FileType vim setlocal foldmethod=marker
+au FileType help setlocal textwidth=78
 " }
 " => Quick editing <=========================================================== {
 " }
@@ -31,6 +93,15 @@ inoremap <c-e> <esc>A
 " }
 
 " => Mappings <================================================================ {
+let mapleader = ","
+" Trick that makes ; be a : so you dont have to hit shift
+nnoremap ; :
+
+" => Shortcut keys
+nnoremap <C-S> :w<CR>
+imap <C-S> <C-O><C-S>
+
+inoremap <c-cr> <esc>A<cr>
 " }
 " => Plugin/Filters <========================================================== {
 " Permits to execute and replace inline
@@ -50,8 +121,6 @@ vmap gr :!ruby<CR>
 " Convenience mappings -------------------------------------------------------- {{{
 " Plugin settings ------------------------------------------------------------- {{{
 " Text objects ---------------------------------------------------------------- {{{
-" Quickreturn ----------------------------------------------------------------- {{{
-inoremap <c-cr> <esc>A<cr>
 
 " => In GUI - MacVim or GVIM <================================================= {
 if has('gui_running')

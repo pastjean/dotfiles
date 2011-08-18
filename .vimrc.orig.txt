@@ -1,8 +1,5 @@
 " Basic options --------------------------------------------------------------- {{{
 
-set encoding=utf-8
-set modelines=0
-set scrolloff=3
 set autoindent
 set showmode
 set showcmd
@@ -83,9 +80,6 @@ syntax on
 set background=dark
 colorscheme molokai
 
-" Highlight VCS conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
 " }}}
 
 " }}}
@@ -150,23 +144,6 @@ nnoremap Vit vitVkoj
 nnoremap Vat vatV
 nnoremap Vab vabV
 nnoremap VaB vaBV
-
-" Error navigation {{{
-"
-"             Location List     QuickFix Window
-"            (e.g. Syntastic)     (e.g. Ack)
-"            ----------------------------------
-" Next      |     M-k               M-Down     |
-" Previous  |     M-l                M-Up      |
-"            ----------------------------------
-"
-nnoremap ˚ :lnext<cr>zvzz
-nnoremap ¬ :lprevious<cr>zvzz
-inoremap ˚ <esc>:lnext<cr>zvzz
-inoremap ¬ <esc>:lprevious<cr>zvzz
-nnoremap <m-Down> :cnext<cr>zvzz
-nnoremap <m-Up> :cprevious<cr>zvzz
-" }}}
 
 " Directional Keys {{{
 
