@@ -18,6 +18,7 @@ excludeFiles = ["Rakefile",
                 "bootstrap.ruby.sh",
                 "bootstrap.clojure.sh",
                 "bootstrap.node.sh",
+                "bootstrap.mac.sh",
                 "bin"          
                ]
 
