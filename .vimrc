@@ -59,9 +59,9 @@ set showcmd
 " }
 " Backups {
 
-set undodir=~/.vim/tmp/undo//     " undo files
-set backupdir=~/.vim/tmp/backup// " backups
-set directory=~/.vim/tmp/swap//   " swap files
+set undodir=~/.vim/tmp/undo/     " undo files
+set backupdir=~/.vim/tmp/backup/ " backups
+set directory=~/.vim/tmp/swap/   " swap files
 set backup                        " enable backups
 
 " }
