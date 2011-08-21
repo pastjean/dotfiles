@@ -57,14 +57,6 @@ set showcmd
 "au VimResized * exe "normal! \<cw>="
 
 " }
-" Backups {
-
-set undodir=~/.vim/tmp/undo/     " undo files
-set backupdir=~/.vim/tmp/backup/ " backups
-set directory=~/.vim/tmp/swap/   " swap files
-set backup                        " enable backups
-
-" }
 
 " }
 " => Navigation <============================================================== {
@@ -127,8 +119,6 @@ au FileType vim setlocal foldmethod=marker
 au FileType help setlocal textwidth=78
 " }
 " => Quick editing <=========================================================== {
-" }
-" => Display <================================================================= {
 " }
 " => Useful abbreviations <==================================================== {
 " }
