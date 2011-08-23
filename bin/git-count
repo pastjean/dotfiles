@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if test "" = "--all"; then
+  git shortlog -n  | grep "):" | sed 's|:||'
+  echo
+fi
+
+echo total      133
