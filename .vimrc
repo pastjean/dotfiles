@@ -26,9 +26,9 @@ set smartindent
 set cindent
 set viewoptions=folds,cursor,unix
 set history=1000
-set undofile
-set undoreload=10000
-set undolevels=1000
+"set undofile
+"set undoreload=10000
+"set undolevels=1000
 set noswapfile
 set wildmenu
 set wildmode=list:longest

@@ -11,5 +11,12 @@ export PATH=~/$DIR/bin:$PATH
 brew install wget
 brew install git
 # brew install macvim
+# closure-compiler
+# android-sdk
+# android-ndk
+# clojure
+# clojure-contrib
+# ctags
+# rlwrap
 
 echo "add $DIR/bin to your path"
