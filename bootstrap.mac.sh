@@ -1,10 +1,15 @@
 #!/bin/sh
 
-# install homebrew in /usr/local
-/usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"
-# there is alternative
-curl https://github.com/mxcl/homebrew/tarball/master | tar -xvf
+DIR=$HOME/.homebrew
+mkdir -p $DIR
+curl -L https://github.com/mxcl/homebrew/tarball/master | tar xvz --strip 1 -C $DIR
+
+
+export PATH=~/$DIR/bin:$PATH
+
 
 brew install wget
 brew install git
-brew install macvim
+# brew install macvim
+
+echo "add $DIR/bin to your path"
