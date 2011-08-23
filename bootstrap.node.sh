@@ -1,3 +1,5 @@
+#!/bin/sh
+
 mkdir ~/local
 mkdir ~/node-latest-install
 cd ~/node-latest-install
