@@ -118,14 +118,11 @@ au BufRead,BufNewFile Vagrantfile set ft=ruby
 au FileType vim setlocal foldmethod=marker
 au FileType help setlocal textwidth=78
 " }
-" => Quick editing <=========================================================== {
-" }
-" => Useful abbreviations <==================================================== {
-" }
 " => Mappings <================================================================ {
 let mapleader = ","
-" Trick that makes ; be a : so you dont have to hit shift
-nnoremap ; :
+" Trick that makes ; be a : so you dont have to hit shift for every stupid
+" command
+noremap ; :
 
 " => Shortcut keys
 nnoremap <C-S> :w<CR>
@@ -146,12 +143,15 @@ imap <C-L> <ESC><C-L>
 
 nnoremap <leader>s :%s//<left>
 
-nmap <leader>l :set list!<CR>
-nmap <leader>n :set number! <CR>
-nmap <silent> <Leader>b :LustyJuggler<CR>
+nnoremap <leader>l :set list!<CR>
+nnoremap <leader>n :set number! <CR>
+nnoremap <silent> <Leader>b :LustyJuggler<CR>
 noremap <leader>j :CommandT<cr>
-map <leader>u :TMiniBufExplorer<cr>
-nnoremap <F5> :GundoToggle<CR>
+noremap <leader>y :TMiniBufExplorer<cr>
+nnoremap <leader>u :GundoToggle<CR>
+nnoremap <leader>t :NERDTreeToggle<cr>
+nnoremap <leader>r :call rainbow#Toggle()<cr>k
+let g:EasyMotion_leader_key = '<Leader>m'
 
 " => Visual Wrap Text
 vnoremap (  <ESC>`>a)<ESC>`<i(<ESC>
