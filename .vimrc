@@ -24,7 +24,7 @@ set splitright
 set autoindent 
 set smartindent 
 set cindent
-set viewoptions=folds,cursor,unix
+set viewoptions=cursor,unix
 set history=1000
 "set undofile
 "set undoreload=10000
