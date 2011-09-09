@@ -15,6 +15,6 @@ sha1 = Digest::SHA1.hexdigest(pass)
 sha256 = Digest::SHA256.hexdigest(pass)
 
 puts "SHA1:        " + sha1
-puts "SHA1-Half:   " + sha1[0..19]
+puts "SHA1-Half:   " + sha1[0..sha1.length/2-1]
 puts "SHA256:      " + sha256
-puts "SHA256-Half: " + sha256[0..19]
+puts "SHA256-Half: " + sha256[0..sha256.length/2-1]
