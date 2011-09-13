@@ -145,9 +145,8 @@ nnoremap <leader>s :%s//<left>
 
 nnoremap <leader>l :set list!<CR>
 nnoremap <leader>n :set number! <CR>
-nnoremap <silent> <Leader>m :LustyJuggler<CR>
+nnoremap <silent> <Leader>p :LustyJuggler<CR>
 noremap <leader>j :CommandT<cr>
-noremap <leader>y :TMiniBufExplorer<cr>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>t :NERDTreeToggle<cr>
 nnoremap <leader>r :call rainbow#Toggle()<cr>k
