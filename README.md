@@ -12,17 +12,17 @@ Based on : http://github.com/ryanb/dotfiles
 
 Installation
 -------------
-    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.sh -o - | bash
+    curl https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.sh -o - | bash
 
 Or manually:
     git clone git://github.com/pastjean/dotfiles 
     cd dotfiles
-    rake
+    bash tools/install.sh
 
 
-For Mac
---------
-    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.mac.sh -o - | bash
+For Homebrew
+------------
+    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.homebrew.sh -o - | bash
 
 For Ruby
 --------
