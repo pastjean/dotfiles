@@ -1,9 +1,12 @@
-PROJECTS=$HOME/projets
 ZSH=$HOME/.zsh
-. $ZSH/config.zsh
-. $ZSH/aliases.zsh
-. $ZSH/completion.zsh
-. ~/.profile
+
+# Set my personnal project dir
+PROJECTS=$HOME/projets
+
+plugins=()
+
+source $ZSH/zsh.sh
+source ~/.profile
 
 if [[ -a ~/.localrc ]]
 then
