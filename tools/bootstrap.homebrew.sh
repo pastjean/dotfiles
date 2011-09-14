@@ -8,9 +8,3 @@ echo 'export PATH=$DIR/bin:$PATH' >> .localrc
 export PATH=$DIR/bin:$PATH
 
 brew install wget
-
-# closure-compiler
-# android-sdk
-# android-ndk
-# ctags
-# rlwrap
