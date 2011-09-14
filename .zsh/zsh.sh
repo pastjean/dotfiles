@@ -16,7 +16,13 @@ compinit -i
 
 # Load all plugins
 for plugin ($plugins); do
- if [ -f $ZSH/plugins/$plugin/*.zsh ]; then
-   source $ZSH/plugins/$plugin/$plugin.plugin.zsh
- fi
+  if [ -f $ZSH/plugins/$plugin/*.zsh ]; then
+    source $ZSH/plugins/$plugin/$plugin.plugin.zsh
+  fi
 done
+
+# Load the theme
+if [ ! "$ZSH_THEME" = ""  ]
+then
+  source "$ZSH/themes/$ZSH_THEME.zsh-theme"
+fi

@@ -1,5 +1,7 @@
 ZSH=$HOME/.zsh
 
+ZSH_THEME="pastjean"
+
 # Set my personnal project dir
 PROJECTS=$HOME/projets
 
