@@ -3,7 +3,7 @@
 ## Fetch from git
 if [[ ! -a dotfiles ]] 
 then
-  git clone https://pastjean@github.com/pastjean/dotfiles.git dotfiles  
+  git clone https://github.com/pastjean/dotfiles.git dotfiles  
 fi;
 
 if [[ ! -d dotfiles ]]
