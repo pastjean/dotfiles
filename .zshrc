@@ -8,7 +8,11 @@ PROJECTS=$HOME/projets
 plugins=(osx dir)
 
 source $ZSH/zsh.sh
-source ~/.profile
+
+if [[ -a ~/.profile ]]
+then
+  source ~/.profile
+fi
 
 if [[ -a ~/.localrc ]]
 then
