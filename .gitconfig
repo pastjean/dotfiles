@@ -12,7 +12,7 @@
 [diff]
   renamelimit = 0
 [alias]
-  tree = log --graph --pretty=format:\"%h - %ad - %s\" --date=relative
+  tree = log --graph --oneline --decorate
   help = help -w
   aa = add --all
   amend = commit --amend
