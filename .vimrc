@@ -54,6 +54,9 @@ set showmatch
 set showmode
 set showcmd
 
+au InsertEnter * hi StatusLine ctermfg=196 guifg=#F92672
+au InsertLeave * hi StatusLine guifg=#455354 guibg=fg
+
 "au VimResized * exe "normal! \<cw>="
 
 " }
