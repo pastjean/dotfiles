@@ -97,3 +97,8 @@ function trash() {
   IFS=$temp_ifs
 }
 
+CurrentFile=$0
+
+function osx(){
+  echo $CurrentFile
+}
