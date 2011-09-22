@@ -50,7 +50,7 @@ set ruler
 set number
 set cmdheight=1
 set laststatus=2
-set statusline=%F%m%r%h\ %w\ Line:\ %l/%L:%c
+set statusline=\ %F%m%r%h\ %w\ [%{&ff}/%{&fenc}]%=Line:\ %l/%L:%c\ \ %P
 set showmatch
 set showmode
 set showcmd
@@ -81,7 +81,6 @@ nnoremap D d$
 " Make horizontal scrolling less horrible.
 set sidescroll=1
 set sidescrolloff=10
-
 " }
 " => Searching and movement =================================================== {
 nnoremap / /\v
@@ -146,6 +145,7 @@ imap <C-L> <ESC><C-L>
 
 nnoremap <leader>s :%s/<left>
 
+nnoremap <leader>w :set wrap!<CR>
 nnoremap <leader>l :set list!<CR>
 nnoremap <leader>n :set number! <CR>
 nnoremap <silent> <Leader>p :LustyJuggler<CR>
