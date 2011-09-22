@@ -24,6 +24,7 @@ set splitright
 set autoindent 
 set smartindent 
 set cindent
+set indentexpr
 set viewoptions=cursor,unix
 set history=1000
 "set undofile
@@ -143,7 +144,7 @@ nmap <C-L> :bn<CR>
 imap <C-H> <ESC><C-H>
 imap <C-L> <ESC><C-L>
 
-nnoremap <leader>s :%s//<left>
+nnoremap <leader>s :%s/<left>
 
 nnoremap <leader>l :set list!<CR>
 nnoremap <leader>n :set number! <CR>
@@ -151,7 +152,7 @@ nnoremap <silent> <Leader>p :LustyJuggler<CR>
 noremap <leader>j :CommandT<cr>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>t :NERDTreeToggle<cr>
-nnoremap <leader>r :call rainbow#Toggle()<cr>k
+nnoremap <leader>r :call rainbow#Toggle()<cr>
 let g:EasyMotion_leader_key = '<Leader>m'
 
 " => Visual Wrap Text
