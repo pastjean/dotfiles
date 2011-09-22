@@ -28,7 +28,7 @@ set viewoptions=cursor,unix
 set history=1000
 "set undofile
 "set undoreload=10000
-"set undolevels=1000
+set undolevels=1000
 set noswapfile
 set wildmenu
 set wildmode=list:longest
@@ -57,8 +57,6 @@ set showcmd
 au InsertEnter * hi StatusLine ctermfg=196 guifg=#F92672
 au InsertLeave * hi StatusLine guifg=#455354 guibg=fg
 
-"au VimResized * exe "normal! \<cw>="
-
 " }
 
 " }
@@ -79,7 +77,6 @@ set whichwrap=h,l,<,>,[,] " line change when going left or right
 
 nnoremap Y y$
 nnoremap D d$
-
 " Make horizontal scrolling less horrible.
 set sidescroll=1
 set sidescrolloff=10
@@ -96,7 +93,7 @@ set hlsearch
 set gdefault
 set virtualedit+=block
 
-map <leader><space> :noh<cr>
+map <leader><space> :nohl<cr>
 
 " Heresy
 inoremap <c-a> <esc>I
@@ -106,20 +103,22 @@ inoremap <c-e> <esc>A
 " }
 " => Filetype specific <======================================================= {
 " FileType specific Stuff
-" C
-au FileType c setlocal foldmethod=syntax
-" Html
-au FileType html setlocal foldmethod=manual
-" Javascript
-au FileType javascript setlocal foldmethod=marker
-au FileType javascript setlocal foldmarker={,}
-" Ruby
-au FileType ruby setlocal foldmethod=syntax
-" Vagrant
-au BufRead,BufNewFile Vagrantfile set ft=ruby
-" Vim
-au FileType vim setlocal foldmethod=marker
-au FileType help setlocal textwidth=78
+
+" " C
+" au FileType c setlocal foldmethod=syntax
+" " Html
+" au FileType html setlocal foldmethod=manual
+" " Javascript
+" au FileType javascript setlocal foldmethod=marker
+" au FileType javascript setlocal foldmarker={,}
+" " Ruby
+" au FileType ruby setlocal foldmethod=syntax
+" " Vagrant
+" au BufRead,BufNewFile Vagrantfile set ft=ruby
+" " Vim
+" au FileType vim setlocal foldmethod=marker
+" au FileType help setlocal textwidth=78
+
 " }
 " => Mappings <================================================================ {
 let mapleader = ","
@@ -194,3 +193,4 @@ if has('gui_running')
   set guicursor+=v:block-vCursor-blinkon0
 endif
 " }
+
