@@ -1,7 +1,7 @@
 #!/bin/bash
 DEST_DIR=$HOME
 
-if [ $1 == "test" ];then
+if [ "$1" == "test" ];then
   echo "testing......"
   DEST_DIR=$(pwd)/test_install_script
   mkdir $DEST_DIR
