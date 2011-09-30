@@ -7,7 +7,7 @@
 " => Preamble <================================================================ {
 
 filetype off
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 filetype plugin indent on
 set nocompatible "power to vim
 " }
@@ -24,7 +24,6 @@ set splitright
 set autoindent 
 set smartindent 
 set cindent
-set indentexpr
 set viewoptions=cursor,unix
 set history=1000
 "set undofile
