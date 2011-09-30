@@ -100,5 +100,15 @@ function trash() {
 CurrentFile=$0
 
 function osx(){
-  echo $CurrentFile
+  cat << EOF
+tab() - opens a new tab in current directory
+pfd - outputs the directory finder is in
+pfs - outputs the file selected in finder
+cdf - cd to finder window 1 directory
+pushdf - pushd to finder window 1 directory
+quick-look <file> ... - opens <file> in quick-look
+man-preview <file> - open the man page in preview.app
+trash() <file> ... - moves <file> to trash
+osx() - this help
+EOF
 }
