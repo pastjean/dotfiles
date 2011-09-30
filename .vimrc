@@ -148,7 +148,7 @@ nnoremap <leader>w :set wrap!<CR>
 nnoremap <leader>l :set list!<CR>
 nnoremap <leader>n :set number! <CR>
 nnoremap <silent> <Leader>p :LustyJuggler<CR>
-noremap <leader>j :CommandT<cr>
+nnoremap <leader>j :CommandTFlush<cr>:CommandT<cr>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>t :NERDTreeToggle<cr>
 nnoremap <leader>r :call rainbow#Toggle()<cr>
@@ -164,6 +164,13 @@ vnoremap ]  <ESC>`>a]<ESC>`<i[<ESC>
 
 " }
 " => Plugin/Filters <========================================================== {
+
+" Suppress lustyJuggler warning => for osx vim
+let g:LustyJugglerSuppressRubyWarning = 1
+
+" Principally for commandT
+let g:CommandTAlwaysShowDotFiles = 1
+set wildignore+=*.o,*.obj,*.d,.git,node_modules,.DS_Store
 
 " Permits to execute and replace inline
 nmap gp :.!python<CR>
