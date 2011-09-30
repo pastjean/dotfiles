@@ -4,7 +4,7 @@ DEST_DIR=$HOME
 
 if [ "$1" == "test" ];then
   echo "testing......"
-  DEST_DIR=$(pwd)/test_install_script
+  DEST_DIR=$DIR/test_install_script
   mkdir $DEST_DIR
 fi
 
