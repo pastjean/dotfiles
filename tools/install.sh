@@ -1,4 +1,5 @@
 #!/bin/bash
+DIR="$( cd "$( dirname "$0" )" && pwd )"
 DEST_DIR=$HOME
 
 if [ "$1" == "test" ];then
@@ -19,7 +20,7 @@ do
     echo "identical $file"
   else
     echo "link $file to $DEST_DIR/$file"
-    ln -is $(pwd)/$file $DEST_DIR/$file
+    ln -is $(DIR)/$file $DEST_DIR/$file
  fi;
 done
 
