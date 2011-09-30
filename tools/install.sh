@@ -20,7 +20,7 @@ do
     echo "identical $file"
   else
     echo "link $file to $DEST_DIR/$file"
-    ln -is $DIR/$file $DEST_DIR/$file
+    ln -nis $DIR/$file $DEST_DIR/$file
  fi;
 done
 
