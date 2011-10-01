@@ -6,9 +6,10 @@ echo "Installing Ruby 1.9.2 stable and making it the default Ruby ..."
   source .localrc
 
   ruby-build 1.9.2-p290
-  rbenv rehash
   rbenv global 1.9.2-p290
+  rbenv rehash
 
 echo "Installing Bundler, Heroku, Chef, lolcat(for fun)"
   gem install bundler heroku chef lolcat --no-rdoc --no-ri
 
+  rbenv rehash
