@@ -22,16 +22,16 @@ Or manually:
 
 For Homebrew
 ------------
-    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.homebrew.sh -o - | bash
+    curl https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.homebrew.sh -o - | bash
 
 For Ruby
 --------
-    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.ruby.sh -o - | bash
+    curl https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.ruby.sh -o - | bash
 
 For Node.js
 --------
-    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.node.sh -o - | bash
+    curl https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.node.sh -o - | bash
 
 For Clojure
 --------
-    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.clojure.sh -o - | bash
+    curl https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.clojure.sh -o - | bash
