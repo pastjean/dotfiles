@@ -147,7 +147,6 @@ nnoremap <leader>s :%s/<left>
 nnoremap <leader>w :set wrap!<CR>
 nnoremap <leader>l :set list!<CR>
 nnoremap <leader>n :set number! <CR>
-nnoremap <silent> <Leader>p :LustyJuggler<CR>
 nnoremap <leader>j :CommandTFlush<cr>:CommandT<cr>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>t :NERDTreeToggle<cr>
