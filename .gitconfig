@@ -1,6 +1,6 @@
 [user]
-  name = Pierre-Alexandre St-Jean
-  email = pa@stjean.me
+	name = Pierre-Alexandre St-Jean
+	email = pierrealexandre.stjean@gmail.com
 [github]
   user = pastjean
 [color]
@@ -13,6 +13,7 @@
   renamelimit = 0
 [alias]
   tree = log --graph --oneline --decorate
+  gl = log --color=always --all --graph --topo-order --pretty='format: %Cgreen%h%Creset %s%Cred%d%Creset%n'
   help = help -w
   aa = add --all
   amend = commit --amend
@@ -26,3 +27,11 @@
   threads = 0
 [help]
   format = web
+[core]
+	excludesfile = /Users/pastjean/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Users/pastjean/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
