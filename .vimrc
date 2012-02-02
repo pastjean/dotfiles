@@ -147,7 +147,7 @@ nnoremap <leader>s :%s/<left>
 nnoremap <leader>w :set wrap!<CR>
 nnoremap <leader>l :set list!<CR>
 nnoremap <leader>n :set number! <CR>
-nnoremap <leader>j :CommandTFlush<cr>:CommandT<cr>
+nnoremap <leader>j :CtrlP<cr>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>t :NERDTreeToggle<cr>
 nnoremap <leader>r :call rainbow#Toggle()<cr>

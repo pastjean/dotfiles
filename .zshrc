@@ -5,7 +5,7 @@ ZSH_THEME="pastjean"
 # Set my personnal project dir
 PROJECTS=$HOME/projets
 
-plugins=(osx dir)
+plugins=(osx dir nyan)
 
 source $ZSH/zsh.sh
 
