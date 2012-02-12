@@ -54,9 +54,6 @@ set showmatch
 set showmode
 set showcmd
 
-au InsertEnter * hi StatusLine ctermfg=196 guifg=#F92672
-au InsertLeave * hi StatusLine guifg=#455354 guibg=fg
-
 " }
 
 " }
@@ -89,7 +86,6 @@ set ignorecase
 set smartcase 
 set incsearch 
 set hlsearch
-set gdefault
 set virtualedit+=block
 
 map <leader><space> :nohl<cr>
