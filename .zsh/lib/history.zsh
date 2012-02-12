@@ -12,6 +12,5 @@ setopt extended_history
 setopt hist_expire_dups_first
 setopt hist_ignore_space
 
-setopt SHARE_HISTORY
 setopt APPEND_HISTORY
 
