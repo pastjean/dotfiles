@@ -112,7 +112,7 @@ inoremap <c-e> <esc>A
 " au BufRead,BufNewFile Vagrantfile set ft=ruby
 " " Vim
 " au FileType vim setlocal foldmethod=marker
-" au FileType help setlocal textwidth=78
+" au FileType help setlocal textwidth=80
 
 " }
 " => Mappings <================================================================ {
@@ -124,7 +124,6 @@ noremap ; :
 " => Shortcut keys
 nnoremap <C-S> :w<CR>
 imap <C-S> <C-O><C-S>
-set pastetoggle=<F2> "disables vim from formatting paste
 
 inoremap <c-cr> <esc>A<cr>
 
@@ -144,6 +143,7 @@ nnoremap <leader>w :set wrap!<CR>
 nnoremap <leader>l :set list!<CR>
 nnoremap <leader>n :set number! <CR>
 nnoremap <leader>j :CtrlP<cr>
+nnoremap <leader>b :CtrlPBuffer<cr>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>t :NERDTreeToggle<cr>
 nnoremap <leader>r :call rainbow#Toggle()<cr>
@@ -168,8 +168,6 @@ let g:CommandTAlwaysShowDotFiles = 1
 set wildignore+=*.o,*.obj,*.d,.git,node_modules,.DS_Store
 
 " Permits to execute and replace inline
-nmap gp :.!python<CR>
-vmap gp :!python<CR>
 nmap gr :.!ruby<CR>
 vmap gr :!ruby<CR>
 
