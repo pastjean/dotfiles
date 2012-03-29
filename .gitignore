@@ -1,5 +1,6 @@
 .DS_Store
 tags
 .vim/tmp/*
+.vim/.netrwhist
 *.o
 *.bundle
