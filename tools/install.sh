@@ -1,5 +1,5 @@
 #!/bin/bash
-DIR="$( cd "$( dirname "$0" )" && pwd )"
+DIR="$( cd "$( dirname "$0" )/.." && pwd )"
 DEST_DIR=$HOME
 
 if [ "$1" == "test" ];then
