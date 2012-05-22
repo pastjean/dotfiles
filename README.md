@@ -15,14 +15,21 @@ Installation
     curl https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.sh -o - | bash
 
 Or manually:
+
     git clone git://github.com/pastjean/dotfiles 
     cd dotfiles
     bash tools/install.sh
 
 
-For Homebrew
+For Homebrew (http://mxcl.github.com/homebrew/)
 ------------
-    curl https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.homebrew.sh -o - | bash
+
+    DIR=$HOME/.brew
+    mkdir -p $DIR
+    curl -L https://github.com/mxcl/homebrew/tarball/master | tar xvz --strip 1 -C $DIR
+
+    echo 'export PATH=$DIR/bin:$PATH' >> .localrc
+    export PATH=$DIR/bin:$PATH
 
 For Ruby
 --------
