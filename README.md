@@ -12,17 +12,19 @@ Based on : http://github.com/ryanb/dotfiles
 
 Installation
 -------------
-    curl https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.sh -o - | bash
+    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.sh -o - | bash
 
 Or manually:
 
     git clone git://github.com/pastjean/dotfiles 
     cd dotfiles
-    bash tools/install.sh
+    bash install.sh
 
 
 For Homebrew (http://mxcl.github.com/homebrew/)
 ------------
+
+Personally I prefer to install homebrew in my user dir and not pollute my systems.
 
     DIR=$HOME/.brew
     mkdir -p $DIR
@@ -33,12 +35,16 @@ For Homebrew (http://mxcl.github.com/homebrew/)
 
 For Ruby
 --------
-    curl https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.ruby.sh -o - | bash
+
+make a rbenv + ruby-build setup
+
 
 For Node.js
---------
-    curl https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.node.sh -o - | bash
+-----------
+
+install node plz
 
 For Clojure
---------
-    curl https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.clojure.sh -o - | bash
+-----------
+
+still want clojure ?
