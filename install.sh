@@ -10,7 +10,9 @@ fi
 
 mkdir -p $DEST_DIR/bin
 
+cd $DIR
 FILES_TO_LINK=$(ls -A | grep -v -e ".git" -e ".gitignore" -e "tools" -e "README.md" -e "DS_Store" -e "bin" ; ls -A bin/*)
+
 
 # Link files
 for file in $FILES_TO_LINK
@@ -22,11 +24,4 @@ do
     echo "link $file to $DEST_DIR/$file"
     ln -nis $DIR/$file $DEST_DIR/$file
  fi;
-done
-
-
-echo "Thoses are the file that were possibly replaced in the process!!! look at them"
-for dir in $DEST_DIR $DEST_DIR/bin
-do
-  find $dir -maxdepth 1 -name \*.bak
 done

@@ -14,4 +14,4 @@ fi;
 
 cd dotfiles
 
-bash tools/install.sh
+bash install.sh
