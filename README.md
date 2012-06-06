@@ -20,6 +20,12 @@ Or manually:
     cd dotfiles
     bash install.sh
 
+OSX Defaults
+------------
+
+Setup default OSX preferences
+
+    bash $HOME/.osx
 
 For Homebrew (http://mxcl.github.com/homebrew/)
 ------------
