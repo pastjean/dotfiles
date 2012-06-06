@@ -39,11 +39,17 @@ Personally I prefer to install homebrew in my user dir and not pollute my system
     echo 'export PATH=$DIR/bin:$PATH' >> .localrc
     export PATH=$DIR/bin:$PATH
 
+Homebrew apps
+
+    brew install ack ctags git hub
+
 For Ruby
 --------
 
 make a rbenv + ruby-build setup
 
+
+    gem install pry pry-nav awesome_print
 
 For Node.js
 -----------
