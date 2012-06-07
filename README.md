@@ -1,17 +1,10 @@
-My dotfiles
-===========
+dotfiles
+========
 
-Thoses are my dotfiles, principally for:
+Dotfiles are your $HOME your $CASTLE and you should personalize your $HOME/$CASTLE how you like it. So get on it and personalize your settings and save them in an easy to bootstrap repository like this one.
 
-* vim
-* zsh
-
-There will surely be other addons.
-
-Based on : http://github.com/ryanb/dotfiles
-
-Installation
--------------
+install
+-------
     curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.sh -o - | bash
 
 Or manually:
@@ -30,7 +23,7 @@ Setup default OSX preferences
 For Homebrew (http://mxcl.github.com/homebrew/)
 ------------
 
-Personally I prefer to install homebrew in my user dir and not pollute my systems.
+Personally I prefer to install homebrew in my $HOME dir and not pollute my systems.
 
     DIR=$HOME/.brew
     mkdir -p $DIR
@@ -43,20 +36,31 @@ Homebrew apps
 
     brew install ack ctags git hub
 
-For Ruby
---------
-
-make a rbenv + ruby-build setup
+how it works
+------------
 
 
-    gem install pry pry-nav awesome_print
+- **bin/**: `bin/` directory will be added to `$PATH`.
+- **topic/\*.zsh**: Any files ending in `.zsh` gets loaded by zsh at the start
+  of the shell
+- **topic/\*.symlink**: Any files ending in `.symlink` get symlinked into
+  your `$HOME`. 
+- **topic/\*.completion.sh**: Any files ending in `completion.sh` get loaded
+  last so that they get loaded after we set up zsh autocomplete functions.
+- **$HOME/.localrc**: a file named `.localrc` can be created and will be loaded
+  at the start of the shell.
 
-For Node.js
------------
+add-ons
+-------
 
-install node plz
+    # for more colors in commands like ls
+    brew install grc
 
-For Clojure
------------
+thanks
+------
+- @ryanb http://github.com/ryanb/dotfiles 
 
-still want clojure ?
+And the topical part from holman
+- @holman https://github.com/holman/dotfiles
+
+- @sjl
