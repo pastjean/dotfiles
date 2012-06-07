@@ -1,8 +1,7 @@
 #!/bin/sh
-
-if test "" = "--all"; then
-  git shortlog -n  | grep "):" | sed 's|:||'
+if test "$1" = "--all"; then
+  git shortlog -n $@ | grep "):" | sed 's|:||'
   echo
 fi
 
-echo total      133
+echo total `git log --oneline | wc -l`
