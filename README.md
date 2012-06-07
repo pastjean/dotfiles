@@ -56,6 +56,9 @@ add-ons
     # for more colors in commands like ls
     brew install grc
 
+    # Betters commands like `ls` most are prefixed by g (ie: `gls` for `ls`) but
+    # some are aliased
+    brew install coreutils
 thanks
 ------
 - @ryanb http://github.com/ryanb/dotfiles 

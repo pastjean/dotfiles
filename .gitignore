@@ -1,6 +1,4 @@
 .DS_Store
-tags
-.vim/tmp/*
-.vim/.netrwhist
-*.o
-*.bundle
+vim/vim.symlink/.netrwhist
+git/gitconfig.symlink
+
