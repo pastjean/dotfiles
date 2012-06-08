@@ -1,7 +1,7 @@
 dotfiles
 ========
 
-Dotfiles are your $HOME your $CASTLE and you should personalize your $HOME/$CASTLE how you like it. So get on it and personalize your settings and save them in an easy to bootstrap repository like this one.
+Dotfiles are your $HOME your $CASTLE and you should personalize your $HOME/$CASTLE how you like it. So get on it, personalize your settings and save them in an easy to bootstrap repository like this one.
 
 install
 -------
