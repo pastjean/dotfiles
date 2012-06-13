@@ -1,21 +1,28 @@
-ZSH=$HOME/.zsh
+ZSHRC="$(readlink $HOME/.zshrc)"
 
-ZSH_THEME="pastjean"
+ZSH=$(dirname $ZSHRC)
 
 # Set my personnal project dir
 PROJECTS=$HOME/projets
 
+ZSH_THEME="pastjean"
+
+
 plugins=(osx dir)
 
-source $ZSH/zsh.sh
 
-if [[ -a ~/.profile ]]
-then
-  source ~/.profile
-fi
+#for config_file ($ZSH/**/*.zsh) source $config_file
+
+# source $ZSH/zsh.sh
 
 if [[ -a ~/.localrc ]]
 then
   source ~/.localrc
 fi
 
+# initialize autocomplete here, otherwise functions won't be loaded
+autoload -U compinit
+compinit
+
+# load every completion after autocomplete loads
+for config_file ($ZSH/**/completion.sh) source $config_file
