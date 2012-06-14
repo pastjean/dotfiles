@@ -3,8 +3,12 @@ dotfiles
 
 Dotfiles are your $CASTLE and you should personalize your $CASTLE how you like it. So get on it, personalize your settings and save them in an easy to bootstrap repository like this one.
 
+![Nice prompt](http://i.imgur.com/7R1GB.jpg)
+
+![Vimmmmm](http://i.imgur.com/aQbzT.jpg)
 install
 -------
+    # doesn't work anymore
     curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.sh -o - | bash
 
 Or manually:
