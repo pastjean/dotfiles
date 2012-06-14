@@ -23,7 +23,7 @@ function git_prompt
     set_color normal
     printf ' on %s ' \u2b60
     set_color magenta
-    printf '%s' (git currentbranch ^/dev/null)
+    printf '%s' (git branch --contains HEAD | grep '*' | tr -s ' ' | cut -d ' ' -f2 ^/dev/null)
     set_color green
 #git_prompt_status
     set_color normal
