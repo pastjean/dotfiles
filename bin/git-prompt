@@ -41,6 +41,6 @@ if $(echo "$INDEX" | grep '^[AMDR]. ' &> /dev/null); then
     STATUS="!$STATUS"
 fi
 
-[[ "$INDEX$STATUS" == "$INDEX" ]] && [[ "" == "$INDEX" ]] && STATUS="⚑"
+[[ "$INDEX$STATUS" == "$INDEX" ]] && [[ "" != "$INDEX" ]] && STATUS="⚑"
   
 echo -n $STATUS
