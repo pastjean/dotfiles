@@ -1,7 +1,7 @@
 dotfiles
 ========
 
-Dotfiles are your $HOME your $CASTLE and you should personalize your $HOME/$CASTLE how you like it. So get on it, personalize your settings and save them in an easy to bootstrap repository like this one.
+Dotfiles are your $CASTLE and you should personalize your $CASTLE how you like it. So get on it, personalize your settings and save them in an easy to bootstrap repository like this one.
 
 install
 -------
@@ -41,6 +41,8 @@ how it works
 
 
 - **bin/**: `bin/` directory will be added to `$PATH`.
+- **topic/install.sh: Any file named install.sh will get loaded on installation by bash
+  of the shell
 - **topic/\*.zsh**: Any files ending in `.zsh` gets loaded by zsh at the start
   of the shell
 - **topic/\*.symlink**: Any files ending in `.symlink` get symlinked into

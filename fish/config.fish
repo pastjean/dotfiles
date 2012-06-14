@@ -15,8 +15,19 @@ set PATH "$HOME/local/bin" $PATH
 set PATH "$HOME/.brew/bin" $PATH
 set PATH "$HOME/.rbenv/bin" $PATH
 
-
 set BROWSER open
+
+set DOTFILES (dirname (dirname (readlink $HOME/.config/fish/config.fish)))
+
+set PATH "$DOTFILES/bin" $PATH
+
+for FISHFILE in (ls $DOTFILES/**/*.fish)
+  # Don't load file this file
+  if test "$FISHFILE" != "$DOTFILES/fish/config.fish"
+    . $FISHFILE
+  end
+end
+# Source all .fish files in dotfile dir
 
 if test -z (which git-prompt-status)
   function git-prompt-status
@@ -38,6 +49,8 @@ end
 
 function fish_prompt
   set last_status $status
+
+  z --add "$PWD"
 
   set_color magenta
   printf '%s' (whoami)
@@ -75,4 +88,7 @@ end
 
 if status --is-interactive
   fortune -s | lolcat
+end
+function __fish_method_missing --on-event fish_command_not_found
+  echo "WHATCHU TYPING ---> $argv"
 end
