@@ -41,16 +41,21 @@ how it works
 
 
 - **bin/**: `bin/` directory will be added to `$PATH`.
-- **topic/install.sh: Any file named install.sh will get loaded on installation by bash
+- **topic/install.sh**: Any file named install.sh will get loaded on installation by bash
   of the shell
-- **topic/\*.zsh**: Any files ending in `.zsh` gets loaded by zsh at the start
-  of the shell
+- **topic/\*.fish**: Any files ending in `.fish` gets loaded by fish the shell
 - **topic/\*.symlink**: Any files ending in `.symlink` get symlinked into
   your `$HOME`. 
-- **topic/\*.completion.sh**: Any files ending in `completion.sh` get loaded
-  last so that they get loaded after we set up zsh autocomplete functions.
+
+
+### Old ZSH things
+
 - **$HOME/.localrc**: a file named `.localrc` can be created and will be loaded
   at the start of the shell.
+- **topic/\*.zsh**: Any files ending in `.zsh` gets loaded by zsh at the start
+  of the shell
+- **topic/\*.completion.sh**: Any files ending in `completion.sh` get loaded
+  last so that they get loaded after we set up zsh autocomplete functions.
 
 add-ons
 -------
