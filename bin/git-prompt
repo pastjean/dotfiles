@@ -43,5 +43,4 @@ fi
 
 [[ "$INDEX$STATUS" == "$INDEX" ]] && [[ "" == "$INDEX" ]] && STATUS="⚑"
   
-if $(echo "$INDEX" | grep '^.*'
 echo -n $STATUS

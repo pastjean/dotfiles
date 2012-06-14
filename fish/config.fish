@@ -25,7 +25,7 @@ function git_prompt
     set_color magenta
     printf '%s' (git branch --contains HEAD | grep '*' | tr -s ' ' | cut -d ' ' -f2 ^/dev/null)
     set_color green
-#git_prompt_status
+    git-prompt-status
     set_color normal
   end
 end
