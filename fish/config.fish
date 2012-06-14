@@ -18,6 +18,12 @@ set PATH "$HOME/.rbenv/bin" $PATH
 
 set BROWSER open
 
+if test -z (which git-prompt-status)
+  function git-prompt-status
+  printf ''
+  end
+end
+
 function git_prompt
   if git rev-parse --show-toplevel >/dev/null 2>&1
     set_color normal
