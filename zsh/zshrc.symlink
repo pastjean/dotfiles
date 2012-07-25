@@ -1,6 +1,6 @@
 ZSHRC="$(readlink $HOME/.zshrc)"
 
-ZSH=$(dirname $ZSHRC)
+ZSH="$(dirname $ZSHRC)"
 
 # Set my personnal project dir
 PROJECTS=$HOME/projets

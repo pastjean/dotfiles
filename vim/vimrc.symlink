@@ -41,7 +41,9 @@ set expandtab "spaces no tabs
 " Display {
 syntax on
 set background=dark
-colorscheme molokai
+"colorscheme molokai
+" i now prefer solarized! it is more smooth on the eyes
+colorscheme solarized
 set cursorline " Cursor highlight
 set listchars=tab:▸\ ,eol:¬
 
