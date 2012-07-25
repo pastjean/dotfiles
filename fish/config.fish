@@ -83,7 +83,7 @@ end
 
 
 if test -s $HOME/.config/fish/local.fish
-      source $HOME/.config/fish/local.fish
+      . $HOME/.config/fish/local.fish
 end
 
 if status --is-interactive
