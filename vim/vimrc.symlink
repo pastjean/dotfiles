@@ -173,6 +173,7 @@ set wildignore+=*.o,*.obj,*.d,.git,node_modules,.DS_Store
 nmap gr :.!ruby<CR>
 vmap gr :!ruby<CR>
 
+let g:Powerline_symbols = 'fancy'
 " }
 " => In GUI - MacVim or GVIM <================================================= {
 if has('gui_running')
@@ -193,6 +194,7 @@ if has('gui_running')
   " Different cursors for different modes.
   set guicursor=n-c:block-Cursor-blinkon0
   set guicursor+=v:block-vCursor-blinkon0
+
 endif
 " }
 
