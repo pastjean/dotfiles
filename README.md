@@ -6,22 +6,26 @@ Dotfiles are your $CASTLE and you should personalize your $CASTLE how you like i
 ![Nice prompt](http://i.imgur.com/7R1GB.jpg)
 
 ![Vimmmmm](http://i.imgur.com/aQbzT.jpg)
+
 install
 -------
-    # doesn't work anymore
-    curl https://raw.github.com/pastjean/dotfiles/master/bootstrap.sh -o - | bash
 
-Or manually:
+### via `curl`
+    curl -L https://github.com/pastjean/dotfiles/raw/master/tools/install.sh | sh
+
+### via `wget`
+    wget --no-check-certificate https://github.com/pastjean/dotfiles/raw/master/tools/install.sh -O - | sh
+
+### Or manually:
 
     git clone git://github.com/pastjean/dotfiles 
     cd dotfiles
     bash install.sh
 
-
-
-Full install
-
     # dotfiles
+    git clone git://github.com/pastjean/dotfiles 
+    cd dotfiles
+    bash install.sh
 
 
     # homebrew
