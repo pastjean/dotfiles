@@ -17,6 +17,37 @@ Or manually:
     cd dotfiles
     bash install.sh
 
+
+
+Full install
+
+    # dotfiles
+
+
+    # homebrew
+    mkdir -p ~/.brew
+    curl -L https://github.com/mxcl/homebrew/tarball/master | tar xvz --strip 1 -C ~/.brew
+
+    echo 'export PATH=~/.brew/bin:$PATH' >> .localrc
+    export PATH=~/.brew/bin:$PATH
+
+    # rbenv
+    git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
+
+    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.localrc
+    echo 'eval "$(rbenv init -)"' >> ~/.localrc
+
+    # ruby-build
+    mkdir -p ~/.rbenv/plugins
+    cd ~/.rbenv/plugins
+    git clone git://github.com/sstephenson/ruby-build.git
+    
+    # oh my zsh
+    git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+    chsh -s /bin/zsh
+
+    echo "Restart your shell buddy"
+
 how it works
 ------------
 
@@ -28,15 +59,6 @@ how it works
 - **topic/\*.symlink**: Any files ending in `.symlink` get symlinked into
   your `$HOME`. 
 
-
-### Old ZSH things
-
-- **$HOME/.localrc**: a file named `.localrc` can be created and will be loaded
-  at the start of the shell.
-- **topic/\*.zsh**: Any files ending in `.zsh` gets loaded by zsh at the start
-  of the shell
-- **topic/\*.completion.sh**: Any files ending in `completion.sh` get loaded
-  last so that they get loaded after we set up zsh autocomplete functions.
 
 OSX Defaults
 ------------
