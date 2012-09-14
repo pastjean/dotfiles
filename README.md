@@ -5,8 +5,6 @@ Dotfiles are your $CASTLE and you should personalize your $CASTLE how you like i
 
 ![Nice prompt](http://i.imgur.com/7R1GB.jpg)
 
-![Vimmmmm](http://i.imgur.com/aQbzT.jpg)
-
 install
 -------
 
