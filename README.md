@@ -67,7 +67,7 @@ OSX Defaults
 
 Setup default OSX preferences
 
-    bash $HOME/.osx
+    bash $DOTFILES/osx/defaults
 
 [Homebrew](http://mxcl.github.com/homebrew/)
 --------------------------------------------
@@ -99,8 +99,7 @@ add-ons
 thanks
 ------
 - @ryanb http://github.com/ryanb/dotfiles 
+- @sjl
 
 And the topical part from holman
 - @holman https://github.com/holman/dotfiles
-
-- @sjl

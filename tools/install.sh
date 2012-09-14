@@ -11,16 +11,14 @@ hash git >/dev/null && /usr/bin/env git clone https://github.com/pastjean/dotfil
   echo "git not installed"
   exit
 }
-
-    git clone git://github.com/pastjean/dotfiles 
-    cd dotfiles
-    bash install.sh
+############################################################################
+# Begin
+############################################################################
 
     # dotfiles
     git clone git://github.com/pastjean/dotfiles 
-    cd dotfiles
+    cd ~/.dotfiles
     bash install.sh
-
 
     # homebrew
     mkdir -p ~/.brew
