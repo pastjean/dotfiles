@@ -89,5 +89,8 @@ CUSTOM_INSTALL="$DIR/**/install.sh"
 
 for INSTALL_SCRIPT in $CUSTOM_INSTALL
 do
-  install "$INSTALL_SCRIPT"
+  if [[ "$INSTALL_SCRIPT" != "$DIR/tools/install.sh" ]]
+  then;
+    install "$INSTALL_SCRIPT"
+  fi;
 done
