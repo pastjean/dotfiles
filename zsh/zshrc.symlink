@@ -5,7 +5,8 @@ DOTFILES="$(dirname $(dirname $ZSHRC))"
 ZSH=$HOME/.oh-my-zsh
 
 # Optionally, if you set this to "random", it'll load a random theme each
-ZSH_THEME="random"
+ZSH_THEME="pastjean"
+ZSH_THEME="pastjean-powerline"
 # dstufft
 # kennethreitz
 
@@ -30,7 +31,7 @@ ZSH_THEME="random"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git osx)
 
 source $ZSH/oh-my-zsh.sh
 
