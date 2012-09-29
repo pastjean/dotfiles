@@ -3,7 +3,7 @@ dotfiles
 
 Dotfiles are your $CASTLE and you should personalize your $CASTLE how you like it. So get on it, personalize your settings and save them in an easy to bootstrap repository like this one.
 
-![Nice prompt](http://i.imgur.com/7R1GB.jpg)
+![Nice prompt](https://raw.github.com/pastjean/dotfiles/master/tools/install.sh)
 
 install
 -------
