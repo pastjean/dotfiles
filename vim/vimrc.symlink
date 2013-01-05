@@ -56,6 +56,11 @@ set showmatch
 set showmode
 set showcmd
 
+" I Want a mouse
+set mouse=a
+" and more caracters to redraw
+set ttyfast
+
 " }
 
 " }
