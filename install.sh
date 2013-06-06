@@ -8,6 +8,7 @@ export DESTINATION=$HOME
 
 # short
 # takes the path passed as first parameter and replace $HOME long path to ~
+# usefull to save space in shell output
 #
 # ex:
 #   short "/home/pastjean/happy/halloween.txt"

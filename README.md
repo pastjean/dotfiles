@@ -9,53 +9,20 @@ install
 -------
 
 ### via `curl`
-    curl -L https://github.com/pastjean/dotfiles/raw/master/tools/install.sh | sh
+    curl -L https://github.com/pastjean/dotfiles/raw/master/tools/bootstrap.sh | sh
+    # if you want to change de destination dir use instead
+    curl -L https://github.com/pastjean/dotfiles/raw/master/tools/bootstrap.sh | DESTINATION_DIR="<the-dir>" sh
+
 
 ### via `wget`
     wget --no-check-certificate https://github.com/pastjean/dotfiles/raw/master/tools/install.sh -O - | sh
-
-### Or manually:
-
-    git clone git://github.com/pastjean/dotfiles 
-    cd dotfiles
-    bash install.sh
-
-    # dotfiles
-    git clone git://github.com/pastjean/dotfiles 
-    cd dotfiles
-    bash install.sh
-
-
-    # homebrew
-    mkdir -p ~/.brew
-    curl -L https://github.com/mxcl/homebrew/tarball/master | tar xvz --strip 1 -C ~/.brew
-
-    echo 'export PATH=~/.brew/bin:$PATH' >> .localrc
-    export PATH=~/.brew/bin:$PATH
-
-    # rbenv
-    git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
-
-    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.localrc
-    echo 'eval "$(rbenv init -)"' >> ~/.localrc
-
-    # ruby-build
-    mkdir -p ~/.rbenv/plugins
-    cd ~/.rbenv/plugins
-    git clone git://github.com/sstephenson/ruby-build.git
-    
-    # oh my zsh
-    git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-    chsh -s /bin/zsh
-
-    echo "Restart your shell buddy"
 
 how it works
 ------------
 
 
 - **bin/**: `bin/` directory will be added to `$PATH`.
-- **topic/\*.install.sh**: Any file named install.sh will get loaded on installation by bash
+- **topic/\*.install.sh**: Any file named \*install.sh will get loaded on installation by bash
   of the shell
 - **topic/\*.fish**: Any files ending in `.fish` gets loaded by fish the shell
 - **topic/\*.symlink**: Any files ending in `.symlink` get symlinked into

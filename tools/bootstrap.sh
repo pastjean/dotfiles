@@ -1,10 +1,11 @@
-
 # Thanks to oh-my-zsh for a hint on the bootstraping
-# TODO: refactor tasks into functions
 
-# TODO: If variable dotfiles dir not define define a default one
-DOTFILES_DIR="$HOME/.dotfilest"
 REPO="https://github.com/pastjean/dotfiles"
+
+if [[ $DESTINATION_DIR == "" ]]
+then
+  DESTINATION_DIR="$HOME/.dotfiles"
+fi;
 
 
 if [ -d $DOTFILES_DIR ]
