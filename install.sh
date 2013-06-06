@@ -1,11 +1,9 @@
 #!/bin/bash
 DIR="$( cd $( dirname $0 ) && pwd )"
-DESTINATION=$HOME
 
-if [[ "$@" =~ "bootstrap" ]];then
-  echo "Bootstrapping : You need git"
-  # I don't know if i implement this feature or do manual clone
-fi
+export DOTFILES_DIR=$DIR
+export DESTINATION=$HOME
+
 # Some Utility Functionssss
 
 # short
@@ -20,12 +18,15 @@ short() {
 
 # If we are testing dont execute for real just echo some things
 if [[ "$@" =~ "test" ]];then
-  echo "Testing......"
+  export TESTING="true"
+  echo 'Testing......'
+  echo ""
   install() {
-    echo "Testing install $@"
+    echo "Testing install: $@"
+    bash "$@"
   }
   link() {
-    echo "Testing linking $@"
+    echo "Testing linking: $@"
   }
 else
   install() {
@@ -85,12 +86,12 @@ done
 
 
 # Custom install scripts
-CUSTOM_INSTALL="$DIR/**/install.sh"
+CUSTOM_INSTALL="$DIR/**/*.install.sh"
 
 for INSTALL_SCRIPT in $CUSTOM_INSTALL
 do
   if [[ "$INSTALL_SCRIPT" != "$DIR/tools/install.sh" ]]
-  then;
+  then
     install "$INSTALL_SCRIPT"
   fi;
 done

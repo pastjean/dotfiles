@@ -55,7 +55,7 @@ how it works
 
 
 - **bin/**: `bin/` directory will be added to `$PATH`.
-- **topic/install.sh**: Any file named install.sh will get loaded on installation by bash
+- **topic/\*.install.sh**: Any file named install.sh will get loaded on installation by bash
   of the shell
 - **topic/\*.fish**: Any files ending in `.fish` gets loaded by fish the shell
 - **topic/\*.symlink**: Any files ending in `.symlink` get symlinked into
