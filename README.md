@@ -9,13 +9,13 @@ install
 -------
 
 ### via `curl`
-    curl -L https://github.com/pastjean/dotfiles/raw/master/tools/bootstrap.sh | sh
+    curl -L https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.sh | sh
     # if you want to change de destination dir use instead
-    curl -L https://github.com/pastjean/dotfiles/raw/master/tools/bootstrap.sh | DESTINATION_DIR="<the-dir>" sh
+    curl -L https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.sh | DESTINATION_DIR="<the-dir>" sh
 
 
 ### via `wget`
-    wget --no-check-certificate https://github.com/pastjean/dotfiles/raw/master/tools/install.sh -O - | sh
+    wget --no-check-certificate https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.sh -O - | sh
 
 how it works
 ------------
