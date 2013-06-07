@@ -32,8 +32,11 @@ echo ' `"8bbdP"Y8   `"YbbdP"`    "Y888    88     88  88   `"Ybbd8"`  `"YbbdP" '
 echo ""
 echo ""
 echo "....is now bootstrapped."
-echo "To install run:"  
-echo "                bash $DOTFILES_DIR/install.sh"  
+echo "To link and install preferences files run:"  
+echo "       bash $DOTFILES_DIR/install.sh"
+echo ""
+echo "To have external tools:"
+echo "       bash $DOTFILES_DIR/tools/installothers.sh"
   
   
   
