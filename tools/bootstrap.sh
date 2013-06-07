@@ -2,9 +2,9 @@
 
 REPO="https://github.com/pastjean/dotfiles"
 
-if [[ $DESTINATION_DIR == "" ]]
+if [[ $DOTFILES_DIR == "" ]]
 then
-  DESTINATION_DIR="$HOME/.dotfiles"
+  DOTFILES_DIR="$HOME/.dotfiles"
 fi;
 
 
