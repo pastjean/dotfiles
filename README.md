@@ -50,23 +50,11 @@ Personally I prefer to install homebrew in my $HOME dir and not pollute my syste
 
 Homebrew apps
 
-    brew install ack ctags git hub
+    brew install wget
 
-
-add-ons
--------
-
-    # for more colors in commands like in ls
-    brew install grc
-
-    # Betters commands like `ls` most are prefixed by g (ie: `gls` for `ls`) but
-    # some are aliased
-    brew install coreutils
 
 thanks
 ------
 - @ryanb http://github.com/ryanb/dotfiles 
 - @sjl
-
-And the topical part from holman
-- @holman https://github.com/holman/dotfiles
+- @holman (topics) https://github.com/holman/dotfiles
