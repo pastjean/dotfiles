@@ -14,12 +14,15 @@ install
 ### 2. Bootstrap it
     
 via `curl` (it's really only a git clone tough)
+
     curl -L https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.sh | sh
 
 manual directory specification
+
     curl -L https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.sh | DOTFILES_DIR="<the-dir>" sh
 
 via `wget`
+
     wget --no-check-certificate https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.sh -O - | sh
 
 
