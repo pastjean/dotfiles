@@ -8,25 +8,18 @@ Dotfiles are your $CASTLE and you should personalize your $CASTLE how you like i
 install
 -------
 
-### via `curl`
+### 1. Get apple developper tools (for homebrew, compilers and git)
+    https://developer.apple.com/downloads/
+
+### 2. Bootstrap it via `curl` (it's really only a git clone tough)
     curl -L https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.sh | sh
-    # if you want to change de destination dir use instead
+
+### 2. manual directory specification
     curl -L https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.sh | DOTFILES_DIR="<the-dir>" sh
 
-
-### via `wget`
+### 2. via `wget`
     wget --no-check-certificate https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.sh -O - | sh
 
-how it works
-------------
-
-
-- **bin/**: `bin/` directory will be added to `$PATH`.
-- **topic/\*.install.sh**: Any file named \*install.sh will get loaded on installation by bash
-  of the shell
-- **topic/\*.fish**: Any files ending in `.fish` gets loaded by fish the shell
-- **topic/\*.symlink**: Any files ending in `.symlink` get symlinked into
-  your `$HOME`. 
 
 
 OSX Defaults
@@ -39,7 +32,7 @@ Setup default OSX preferences
 [Homebrew](http://mxcl.github.com/homebrew/)
 --------------------------------------------
 
-Personally I prefer to install homebrew in my $HOME dir and not pollute my systems.
+Personally I prefer to install homebrew in my $HOME dir and not pollute my system.
 
     DIR=$HOME/.brew
     mkdir -p $DIR
@@ -48,10 +41,23 @@ Personally I prefer to install homebrew in my $HOME dir and not pollute my syste
     echo 'export PATH=$DIR/bin:$PATH' >> .localrc
     export PATH=$DIR/bin:$PATH
 
-Homebrew apps
+[oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+------------------------------------------------------
 
-    brew install wget
+    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 
+
+
+How it works
+------------
+
+
+- **bin/**: `bin/` directory will be added to `$PATH`.
+- **topic/\*.install.sh**: Any file named \*install.sh will get loaded on installation by bash
+  of the shell
+- **topic/\*.fish**: Any files ending in `.fish` gets loaded by fish the shell
+- **topic/\*.symlink**: Any files ending in `.symlink` get symlinked into
+  your `$HOME`. 
 
 thanks
 ------
