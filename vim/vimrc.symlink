@@ -6,6 +6,10 @@
 
 " => Preamble <================================================================ {
 
+" Disable default from plugins
+let g:multi_cursor_use_default_mapping=0
+
+" Start plugins
 filetype off
 call pathogen#infect()
 filetype plugin indent on
@@ -154,6 +158,8 @@ nnoremap <leader>b :CtrlPBuffer<cr>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>t :NERDTreeToggle<cr>
 nnoremap <leader>r :call rainbow#Toggle()<cr>
+nnoremap <leader>zw :ZoomWin<cr>
+
 let g:EasyMotion_leader_key = '<Leader>m'
 
 " => Visual Wrap Text
@@ -179,11 +185,22 @@ nmap gr :.!ruby<CR>
 vmap gr :!ruby<CR>
 
 let g:Powerline_symbols = 'fancy'
+
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+
+let g:syntastic_enable_signs=1
+let g:syntastic_quiet_warnings=0
+let g:syntastic_auto_loc_list=2
+
 " }
 " => In GUI - MacVim or GVIM <================================================= {
 if has('gui_running')
-  set guifont=Menlo:h12
-  set guifont=Mensch:h12 " make it beautiful
+  set guifont=Menlo:h14
+  set guifont=Mensch:h14 " make it beautiful
+  set guifont=Monaco:h14
 
   " Remove unusefull scrollbars
   set guioptions-=l
