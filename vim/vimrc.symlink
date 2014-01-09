@@ -37,6 +37,15 @@ set noswapfile
 set wildmenu
 set wildmode=list:longest
 
+if exists('+colorcolumn')
+  set colorcolumn=80
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929 
+match OverLength /\%81v.\+/
+
 " Tabs, spaces, wrapping {
 set ts=2 sw=2 sts=2 "tabs
 set expandtab "spaces no tabs
@@ -199,8 +208,6 @@ let g:syntastic_auto_loc_list=2
 " => In GUI - MacVim or GVIM <================================================= {
 if has('gui_running')
   set guifont=Menlo:h14
-  set guifont=Mensch:h14 " make it beautiful
-  set guifont=Monaco:h14
 
   " Remove unusefull scrollbars
   set guioptions-=l
