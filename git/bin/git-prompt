@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# FUnny symbols
+# Arrow : ➤
+# Arrow : ➜
+# Up arrow : ↑
+# Down arrow : ↓
+# Up-Down arrow : ↕
+# x : ✘
+# check : ✔
+# Lightning : ⚡
+# Cloud : ☁
+# sun : ✹
+# Cloud : ☁
+# Star : ✭
+# bold + : ✚
+# multiplier : ✖
+# Small = : ═
+# left cursor : ‹
+# right cursor : ›
+# More symbols to choose from:
+# ☀ ✹ ☄ ♆ ♀ ♁ ♐ ♇ ♈ ♉ ♚ ♛ ♜ ♝ ♞ ♟ ♠ ♣ ⚢ ⚲ ⚳ ⚴ ⚥ ⚤ ⚦ ⚒ ⚑ ⚐ ♺ ♻ ♼ ☰ ☱ ☲ ☳ ☴ ☵ ☶ ☷
+# ✡ ✔ ✖ ✚ ✱ ✤ ✦ ❤ ➜ ➟ ➼ ✂ ✎ ✐ ⨀ ⨁ ⨂ ⨍ ⨎ ⨏ ⨷ ⩚ ⩛ ⩡ ⩱ ⩲ ⩵  ⩶ ⨠ 
+# ⬅ ⬆ ⬇ ⬈ ⬉ ⬊ ⬋ ⬒ ⬓ ⬔ ⬕ ⬖ ⬗ ⬘ ⬙ ⬟  ⬤ 〒 ǀ ǁ ǂ ĭ Ť Ŧ
+
+INDEX=$(git status --porcelain 2> /dev/null)
+STATUS=""
+
+
+if $(echo "$INDEX" | grep '^UU ' &> /dev/null); then
+    STATUS="C$STATUS"
+fi
+
+if $(echo "$INDEX" | grep '^.[MD] ' &> /dev/null); then
+    STATUS="⚡$STATUS"
+elif $(echo "$INDEX" | grep '^?? ' &> /dev/null); then
+    STATUS="⚡$STATUS"
+fi
+
+if $(echo "$INDEX" | grep '^[AMDR]. ' &> /dev/null); then
+    STATUS="!$STATUS"
+fi
+
+[[ "$INDEX$STATUS" == "$INDEX" ]] && [[ "" != "$INDEX" ]] && STATUS="⚑"
+  
+echo -n $STATUS

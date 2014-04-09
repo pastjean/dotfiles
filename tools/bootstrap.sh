@@ -31,7 +31,8 @@ echo '"8a,   ,d88  "8a,   ,a8"   88,      88     88  88  "8b,   ,aa  aa    ]8I'
 echo ' `"8bbdP"Y8   `"YbbdP"`    "Y888    88     88  88   `"Ybbd8"`  `"YbbdP" '
 echo ""
 echo ""
-echo "....is now bootstrapped."
+echo "....is now bootstrapped and on your computer."
+echo ""
 echo "To link and install preferences files run:"  
 echo "       bash $DOTFILES_DIR/install.sh"
 echo ""
