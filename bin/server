@@ -1,3 +1,16 @@
-#!/bin/sh
+#!/usr/bin/env python
+import SimpleHTTPServer
 
-python -m SimpleHTTPServer
+class MyHTTPRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+    def end_headers(self):
+        self.send_my_headers()
+
+        SimpleHTTPServer.SimpleHTTPRequestHandler.end_headers(self)
+
+    def send_my_headers(self):
+        self.send_header("Access-Control-Allow-Origin", "*")
+	self.send_header("cache-control", "private, max-age=0, no-cache")
+
+
+if __name__ == '__main__':
+    SimpleHTTPServer.test(HandlerClass=MyHTTPRequestHandler)
