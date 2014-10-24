@@ -1,33 +1,34 @@
-#!/bin/bash
-DIR="$( cd $( dirname $0 ) && pwd )"
+#!/usr/bin/env bash
+
+DIR="$( cd $( dirname $0 )/.. && pwd )"
+
+echo $DIR
 
 export DOTFILES_DIR=$DIR
 export DESTINATION=$HOME
 
-# Some Utility Functionssss
-
-# short
+# shorthome
 # takes the path passed as first parameter and replace $HOME long path to ~
 # usefull to save space in shell output
 #
 # ex:
-#   short "/home/pastjean/happy/halloween.txt"
+#   shorthome "/home/pastjean/happy/halloween.txt"
 #   # returns ~/happy/halloween.txt
-short() {
+shorthome() {
   echo "~${1#$HOME}"
 }
 
 # If we are testing dont execute for real just echo some things
-if [[ "$@" =~ "test" ]];then
+if [[ "$@" =~ "test" || "$TESTING" == "true" || "$TESTING" == "TRUE" ]];then
   export TESTING="true"
   echo 'Testing......'
   echo ""
   install() {
     echo "Testing install: $@"
-    bash "$@"
+    echo "                 this script would be run inspect it"
   }
   link() {
-    echo "Testing linking: $@"
+    echo "Testing linking: $(shorthome "$1") -> $(shorthome "$2")"
   }
 else
   install() {
@@ -36,8 +37,8 @@ else
     bash "$@"
   }
   link() {
-    LILL1=$(short "$1")
-    LILL2=$(short "$2")
+    LILL1=$(shorthome "$1")
+    LILL2=$(shorthome "$2")
     echo "linking $LILL1 to $LILL2"
     ln -s "$1" "$2" 
   }
@@ -47,7 +48,7 @@ fi
 # ----------------------
 
 # Link symlinks
-SYMLINKS="$DIR/**/*.symlink"
+SYMLINKS="$(ls -d $DIR/**/*.symlink)"
 
 skipAll=""
 overwriteAll=""
@@ -55,6 +56,7 @@ backupAll=""
 
 for LINK in $SYMLINKS
 do
+
   overwrite=""
   backup=""
   skip=""
@@ -76,18 +78,19 @@ do
       [[ "$action" == "B" ]] && backupAll="true"
     fi
 
-    if [[ "$skipAll" == "" ]]
+    if [[ "$skipAll" == "" || "$skip" == "" ]]
     then
       [[ "$overwriteAll" == "true" || "$overwrite" == "true" ]] && rm -rf $TARGET
       [[ "$backupAll" == "true" || "$backup" == "true" ]] && mv "$TARGET" "$DESTINATION/$FILE.backup"
 
       link "$LINK" "$TARGET"
+      
     fi
 done
 
 
 # Custom install scripts
-CUSTOM_INSTALL="$DIR/**/*.install.sh"
+CUSTOM_INSTALL="$(ls $DIR/**/*.install.sh)"
 
 for INSTALL_SCRIPT in $CUSTOM_INSTALL
 do

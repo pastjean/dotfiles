@@ -1,9 +1,4 @@
-# homebrew
-mkdir -p ~/.brew
-curl -L https://github.com/mxcl/homebrew/tarball/master | tar xvz --strip 1 -C ~/.brew
-
-echo 'export PATH=~/.brew/bin:$PATH' >> .localrc
-export PATH=~/.brew/bin:$PATH
+#!/usr/bin/env bash
 
 # rbenv
 git clone git://github.com/sstephenson/rbenv.git ~/.rbenv

@@ -1,6 +1,5 @@
 # Adds git autocompletion to current shell if git was installed through homebrew
 
-$(which brew)
 if test -f $(which brew)
 then
 

@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# Make sure we’re using the latest Homebrew
 brew update
-
-# Upgrade any already-installed formulae
 brew upgrade
 
 # Install GNU core utilities (those that come with OS X are outdated)
 brew install coreutils
-echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
+brew install findutils
+brew install bash
+
+echo "Don’t forget to add  a to \$PATH."
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 
 
@@ -25,9 +25,10 @@ brew install git
 brew install rename
 brew install tree
 
-brew tap phinze/cask
-brew install brew-cask
+brew install caskroom/cask/brew-cask
 brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
+
+# brew cask install --appdir="/Applications" ${apps[@]}
 
 # Outdated and else are removed
 brew cleanup
