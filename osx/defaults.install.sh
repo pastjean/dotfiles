@@ -3,6 +3,13 @@
 # Script taken and adapted from https://github.com/mathiasbynens/dotfiles
 # ~/.osx — http://mths.be/osx
 
+echo "Setting up OSX Default settings"
+
+if [[ $(uname) != "Darwin" ]];then
+  echo "dafak, you are not on OSX get outa here pal"
+  exit
+fi
+
 # Ask for the administrator password upfront
 sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.osx` has finished

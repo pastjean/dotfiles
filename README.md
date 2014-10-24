@@ -7,12 +7,6 @@ Dotfiles is your $CASTLE and you should personalize your $CASTLE how you like it
 
 Install
 -------
-
-### 1. Get apple developper tools (if you don't have it already)
-
-    https://developer.apple.com/downloads/
-
-### 2. Bootstrap it
     
 via `curl` (it's really only a git clone tough)
 
@@ -22,28 +16,12 @@ manual directory specification
 
     curl -L https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.sh | DOTFILES_DIR="<the-dir>" sh
 
-via `wget`
-
-    wget --no-check-certificate https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.sh -O - | sh
-
 OSX Defaults
 ------------
 
 Setup default OSX preferences
 
     bash $DOTFILES/osx/defaults
-
-[Homebrew](http://mxcl.github.com/homebrew/)
---------------------------------------------
-
-Personally I prefer to install homebrew in my $HOME dir and not pollute my system.
-
-    DIR=$HOME/.brew
-    mkdir -p $DIR
-    curl -L https://github.com/mxcl/homebrew/tarball/master | tar xvz --strip 1 -C $DIR
-
-    echo 'export PATH=$DIR/bin:$PATH' >> $HOME/.localrc
-    export PATH=$DIR/bin:$PATH
 
 [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 ------------------------------------------------------
