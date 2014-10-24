@@ -16,6 +16,7 @@ end
 prepend_to_path "$HOME/bin"
 prepend_to_path "$HOME/local/bin"
 prepend_to_path "$HOME/.brew/bin"
+prepend_to_path "$HOME/.rbenv/shims"
 prepend_to_path "$HOME/.rbenv/bin"
 prepend_to_path "$DOTFILES/bin" $PATH
 
@@ -73,20 +74,37 @@ for plugin in (find $FISH_TOPIC_DIR/plugins -name "*.fish")
 end
 # Prompt
 # --------------------
-function git_prompt
-    if git root >/dev/null 2>&1
-        set_color normal
-        printf ' on '
-        set_color magenta
-        printf '%s' (git currentbranch ^/dev/null)
-        set_color green
-        git_prompt_status
-        set_color normal
-    end
-end
-
 function prompt_pwd --description 'Print the current working directory, shortend to fit the prompt'
     echo $PWD | sed -e "s|^$HOME|~|"
+end
+
+function fish_prompt
+  set last_status $status
+end
+
+function to_human_time -d "Turn a timestamp (in s) to a readable time 165392 => 1d 21h 56m 32s"
+  set tmp $argv[1]
+  set days (math "$tmp / 60 / 60 / 24")
+  set hours (math "$tmp / 60 / 60 % 24")
+  set minutes (math "$tmp /60 % 60")
+  set seconds (math "$tmp % 60")
+  
+  set str ""
+  test "$days" -gt "0"; and set str "$str "$days"d"
+  test "$hours" -gt "0"; and set str "$str "$hours"h"
+  test "$minutes" -gt "0"; and set str "$str "$minutes"m"
+  set str "$str "$seconds"s"
+  echo "$str"
+end
+
+function git_dirty -d "Check if we are in a git repo and if it is dirty"
+ git rev-parse --is-inside-work-tree ^/dev/null;and echo "hello"
+#; and set ingit 0\
+  if test 0 -eq $ingit
+  echo "ingit"
+  end
+
+  # (git diff --quiet --ignore-submodules HEAD ; or echo "*")
 end
 
 function fish_prompt
@@ -98,11 +116,11 @@ function fish_prompt
   
   # fasd -A "$PWD"
     if test $last_status -eq 0
-        set_color white -o
-        printf '><((°> '
+        set_color magenta -o
+        printf '❯ '
     else
         set_color red -o
-        printf '[%d] ><((ˣ> ' $last_status
+        printf '❯ ' $last_status
     end
   
 end
