@@ -16,6 +16,17 @@ manual directory specification
 
     curl -L https://raw.github.com/pastjean/dotfiles/master/tools/bootstrap.sh | DOTFILES_DIR="<the-dir>" sh
 
+
+How it works
+------------
+
+- **bin/**: `bin/` directory will be added to `$PATH`.
+
+- **[topic]/\*.install.sh**: Any file named \*install.sh will run on installation
+- **[topic]/\*.fish**: Any files ending in `.fish` gets loaded by fish the shell
+- **[topic]/\*.symlink**: Any files ending in `.symlink` gets symlinked into
+  your `$HOME`. 
+
 OSX Defaults
 ------------
 
@@ -28,19 +39,8 @@ Setup default OSX preferences
 
     curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 
-How it works
-------------
-
-- **bin/**: `bin/` directory will be added to `$PATH`.
-
-- **[topic]/\*.install.sh**: Any file named \*install.sh will get loaded on installation by bash
-  of the shell
-- **[topic]/\*.fish**: Any files ending in `.fish` gets loaded by fish the shell
-- **[topic]/\*.symlink**: Any files ending in `.symlink` get symlinked into
-  your `$HOME`. 
-
-thanks
-------
+thanks (for the multiple ideas)
+--------------------------------
 - @ryanb http://github.com/ryanb/dotfiles 
 - @sjl
 - @holman (on topics) https://github.com/holman/dotfiles
