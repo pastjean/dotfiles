@@ -1,7 +1,7 @@
 dotfiles
 ========
 
-Dotfiles is your $CASTLE and you should personalize your $CASTLE how you like it.
+Dotfiles is your `$CASTLE` and you should personalize your `$CASTLE` how you like it.
 
 ![Nice prompt](tools/ohmyzsh-capture.png)
 
@@ -20,7 +20,7 @@ manual directory specification
 How it works
 ------------
 
-- **bin/**: `bin/` directory will be added to `$PATH`.
+- **bin/**: `bin/` directory will be added to your `$PATH`.
 
 - **[topic]/\*.install.sh**: Any file named \*install.sh will run on installation
 - **[topic]/\*.fish**: Any files ending in `.fish` gets loaded by fish the shell
