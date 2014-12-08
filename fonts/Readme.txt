@@ -1,1 +1,1 @@
-If you have problems with me putting thoses fonts here tell me and i'm am gonna remove them
+If you have problems with me putting thoses fonts here please do tell me! I'm gonna be a nice guy and remove them.
