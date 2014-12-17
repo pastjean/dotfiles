@@ -1,33 +1,50 @@
 [ui]
 username = Pierre-Alexandre St-Jean <pa@stjean.me>
+commitsubrepos = False
+ignore = ~/.hgignore
 
-[default]
-outgoing = --graph
-incoming = --graph
-diff = -p
-rebase = --keepbranches
-addremove = --similarity 100
+[schemes]
+cov=https://hg.corp.coveo.com
+bb=ssh://hg@bitbucket.org/
+gh=git://github.com
+ghs=git+ssh://git@github.com
+ghh=https://github.com
+
+[auth]
+hg.corp.coveo.com.prefix = hg.corp.coveo.com
+hg.corp.coveo.com.username = pastjean
+mercurial.corp.coveo.com.prefix = mercurial.corp.coveo.com
+mercurial.corp.coveo.com.username = pastjean
+
+[hostfingerprints]
+hg.corp.coveo.com = af:56:e0:a2:11:86:b7:03:8c:b7:e8:42:3b:86:99:4e:a6:a3:03:0a
+mercurial.corp.coveo.com = f9:ae:0b:e0:48:94:e2:22:79:b7:f1:3d:3f:b0:c1:5f:c1:27:69:1e
 
 [diff]
 git = True
 unified = 5
 
-[alias]
-untrack = rm -Af
+[extensions]
+bookmarks =
+churn =
+color =
+graphlog =
+mq =
+progress =
+schemes =
+fetch =
+shelve =
+
+[progress]
+delay = 0.5
+
+[default]
+rebase = --keepbranches
+addremove = --similarity 100
 
 [pager]
 pager=LESS='FSRX' less
 ignore=version, help, update, push, pull, merge, fetch, convert, clone, record, crecord, grep, status, add, addremove, revert, commit, init
-
-[extensions]
-bookmarks = 
-churn =
-color = 
-graphlog =
-pager = 
-mq =
-progress =
-schemes =
 
 [color]
 status.modified = cyan
@@ -48,3 +65,44 @@ diff.trailingwhitespace = white_background
 
 [bookmarks]
 tack.current = True # bookmarks will not move , only the current one
+
+[alias]
+# Nudge: just push the current branch.
+nudge = push --branch .
+
+# Some useful little aliases.
+st = status -SC
+? = summary
+fdiff = diff -U 10000000000000
+qfdiff = qdiff -U 10000000000000
+
+# Commit message shortcuts.
+cm = commit -m
+cus = commit -m 'Update subrepository state.'
+cmm = commit -m 'Merge.'
+
+# Diff.
+d = diff -p --color=auto
+
+# Run a colored diff and pipe it to less.
+dl = !"$HG" diff -p --color=never $@ | vim -R -c 'set ft=diff' -
+
+# Make a new repo with some sensible defaults.
+mkrepo = !$HG init $1 && cd $1 && \
+          echo 'syntax: glob'  > .hgignore && \
+          echo ''             >> .hgignore && \
+          echo '.DS_Store'    >> .hgignore && \
+          echo '*.pyc'        >> .hgignore && \
+          echo '*.swp'        >> .hgignore && \
+          echo '*.swo'        >> .hgignore && \
+          echo '*.un~'        >> .hgignore && \
+          echo '.ropeproject' >> .hgignore && \
+          echo 'tags'         >> .hgignore && \
+          echo "[paths]\n" >> .hg/hgrc
+
+# Easily add ignore patterns to .hgignore and commit.
+ignore = ![ -n "$@" ] && echo '$@' >> `$HG root`/.hgignore && \
+          $HG commit `$HG root`/.hgignore -Am 'Add "$@" to .hgignore.'
+
+
+%include ~/.hgrc_local
