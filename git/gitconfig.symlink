@@ -1,0 +1,63 @@
+[alias]
+
+	tags = tag -l
+	branches = branch -a
+  remotes = remote -v
+
+	g = grep --break --heading --line-number
+
+	# View abbreviated SHA, description, and history graph of the latest 20 commits  
+  l = log --pretty=oneline -n 20 --graph --abbrev-commit
+  
+  # View the current working tree status using the short format  
+	s = status -s
+  
+  # Show the diff between the latest commit and the current state
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+  
+	# Clone a repository including all submodules
+  c = clone --recursive
+
+  # Amend the currently staged files to the latest commit
+  amend = commit --amend --reuse-message=HEAD
+
+  # Credit an author on the latest commit
+	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+
+  # List contributors with number of commits
+	contributors = shortlog --summary --numbered
+
+[commit]
+  template = ~/.gitmessage
+
+[user]
+	name = Pierre-Alexandre St-Jean
+	email = pa@stjean.me
+
+[push]
+	default = simple
+
+[grep]
+	extendRegexp = true
+	lineNumber = true
+
+[color]
+  ui = true
+
+[help]
+
+  # Automatically correct and execute mistyped commands
+  autocorrect = 1
+
+[merge]
+
+  # Include summaries of merged commits in newly created merge commit messages
+  log = true
+
+[core]
+  # Make `git rebase` safer on OS X
+  # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+  trustctime = false
+
+[include]
+  path = ~/.gitconfig.local
