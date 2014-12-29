@@ -4,11 +4,8 @@ commitsubrepos = False
 ignore = ~/.hgignore
 
 [schemes]
-cov=https://hg.corp.coveo.com
-bb=ssh://hg@bitbucket.org/
-gh=git://github.com
-ghs=git+ssh://git@github.com
-ghh=https://github.com
+cov=https://hg.corp.coveo.com/
+
 
 [auth]
 hg.corp.coveo.com.prefix = hg.corp.coveo.com
