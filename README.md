@@ -30,11 +30,6 @@ How it works
 
 - **[topic]/\*.install.sh**: Any file named \*install.sh will run on installation
 
-[oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
-------------------------------------------------------
-
-    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-
 thanks (for the multiple ideas)
 --------------------------------
 
