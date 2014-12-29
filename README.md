@@ -21,18 +21,14 @@ How it works
 ------------
 
 - **bin/**: `bin/` directory will be added to your `$PATH`.
-
-- **[topic]/\*.install.sh**: Any file named \*install.sh will run on installation
-- **[topic]/\*.fish**: Any files ending in `.fish` gets loaded by fish the shell
+- **[topic]/bin**: directories will be added to your `$PATH`
 - **[topic]/\*.symlink**: Any files ending in `.symlink` gets symlinked into
   your `$HOME`. 
 
-OSX Defaults
-------------
+- **[topic]/\*.zsh**: Any files ending in `.zsh` gets loaded by the zsh shell 
+- **[topic]/\*.fish**: Any files ending in `.fish` gets loaded by the fish shell
 
-Setup default OSX preferences
-
-    bash $DOTFILES/osx/defaults
+- **[topic]/\*.install.sh**: Any file named \*install.sh will run on installation
 
 [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 ------------------------------------------------------
@@ -41,6 +37,7 @@ Setup default OSX preferences
 
 thanks (for the multiple ideas)
 --------------------------------
+
 - @ryanb http://github.com/ryanb/dotfiles 
 - @sjl
 - @holman (on topics) https://github.com/holman/dotfiles

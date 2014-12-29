@@ -7,4 +7,3 @@ chsh -s /bin/zsh
 echo "Restart your shell buddy"
 
 /usr/bin/env zsh
-source ~/.zshrc

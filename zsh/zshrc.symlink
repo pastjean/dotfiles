@@ -39,7 +39,7 @@ then
 fi
 
 # Topical bin dirs
-for TOPICBIN in $(find $DOTFILES -type d -name bin)
+for TOPICBIN in $(find $DOTFILES -type d -name bin -mindepth 1 -maxdepth 2)
 do
   if [[ -d $TOPICBIN ]]
   then
@@ -47,5 +47,8 @@ do
   fi
 done
 
-
-
+# custom scripts
+for SCRIPT in $(find $DOTFILES -type f | egrep ".zsh$")
+do
+  source $SCRIPT
+done
