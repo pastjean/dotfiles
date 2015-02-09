@@ -2,7 +2,7 @@
 
 if [[ $(uname) == "Darwin" ]];then
 
-  if [[ ! -d ~/.brew ]];then 
+  if [[ ! -d ~/.brew ]];then
     mkdir -p ~/.brew
     curl -L https://github.com/mxcl/homebrew/tarball/master | tar xvz --strip 1 -C ~/.brew
 
@@ -21,4 +21,7 @@ if [[ $(uname) == "Darwin" ]];then
   fi
 else
   echo "- Homebrew is not needed if you're not on OSX"
+  exit
 fi
+
+echo "Run the brew script if you want to install more tools $DOTFILES_DIR/brew/brew"

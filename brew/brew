@@ -15,7 +15,14 @@ brew install wget --enable-iri
 
 # What else i need
 brew install ack rename tree
+brew install python
 brew install git
+brew install hg
+brew install svn
+
+# Other random or not so random dev tools
+brew install mono
+brew install ant
 
 brew install caskroom/cask/brew-cask
 brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
