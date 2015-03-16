@@ -59,6 +59,7 @@
   # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
   trustctime = false
 	excludesfile = /Users/pastjean/.gitignore_global
+	quotepath = false
 
 [include]
   path = ~/.gitconfig.local
