@@ -170,6 +170,7 @@ nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>t :NERDTreeToggle<cr>
 nnoremap <leader>r :call rainbow#Toggle()<cr>
 nnoremap <leader>zw :ZoomWin<cr>
+nmap <F8> :TagbarToggle<CR>
 
 let g:EasyMotion_leader_key = '<Leader>m'
 
@@ -183,6 +184,9 @@ vnoremap ]  <ESC>`>a]<ESC>`<i[<ESC>
 
 " }
 " => Plugin/Filters <========================================================== {
+
+let g:go_disable_autoinstall = 0  
+let g:neocomplete#enable_at_startup = 1
 
 " Suppress lustyJuggler warning => for osx vim
 let g:LustyJugglerSuppressRubyWarning = 1
@@ -240,3 +244,30 @@ else
 endif
 
 
+let g:tagbar_type_go = {  
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
