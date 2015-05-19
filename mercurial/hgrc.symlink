@@ -6,6 +6,9 @@ ignore = ~/.hgignore
 [schemes]
 cov=https://hg.corp.coveo.com/
 
+[paths]
+hg.corp.coveo.com = https://hg.corp.coveo.com/
+mercurial.corp.coveo.com = https://mercurial.corp.coveo.com/
 
 [auth]
 hg.corp.coveo.com.prefix = hg.corp.coveo.com
@@ -31,6 +34,7 @@ progress =
 schemes =
 fetch =
 shelve =
+mercurial_keyring =
 
 [progress]
 delay = 0.5
