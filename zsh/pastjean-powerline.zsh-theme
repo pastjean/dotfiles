@@ -53,7 +53,7 @@ function _vc_prompt(){
 }
 
 function _hg_info() {
-  local OLD_BG_COLOR="$BG_COLOR"
+  local OLD_BG_COLOR= $(eval "echo '$BG_COLOR'")
 
   if [ $(in_hg) ]; then
     BG_COLOR=green
