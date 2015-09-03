@@ -64,7 +64,7 @@ set ruler
 set number
 set cmdheight=1
 set laststatus=2
-set statusline=\ %F%m%r%h\ %w\ [%{&ff}/%{&fenc}]%=Line:\ %l/%L:%c\ \ %P
+"set statusline=\ %F%m%r%h\ %w\ [%{&ff}/%{&fenc}]%=Line:\ %l/%L:%c\ \ %P
 set showmatch
 set showmode
 set showcmd
@@ -188,11 +188,14 @@ vnoremap ]  <ESC>`>a]<ESC>`<i[<ESC>
 let g:go_disable_autoinstall = 0  
 let g:neocomplete#enable_at_startup = 1
 
-" Suppress lustyJuggler warning => for osx vim
-let g:LustyJugglerSuppressRubyWarning = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
+if executable("ag")
+    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+endif
 
 " Principally for commandT
-let g:CommandTAlwaysShowDotFiles = 1
 set wildignore+=*.o,*.obj,*.d,.git,node_modules,.DS_Store
 
 " Permits to execute and replace inline
