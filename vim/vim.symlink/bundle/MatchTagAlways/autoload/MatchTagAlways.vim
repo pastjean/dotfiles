@@ -17,10 +17,19 @@
 
 
 let s:script_folder_path = escape( expand( '<sfile>:p:h' ), '\' )
-py import sys
-py import vim
-exe 'python sys.path = sys.path + ["' . s:script_folder_path . '/../python"]'
-py import mta_vim
+if has('python')
+    " Python 2
+    py import sys
+    py import vim
+    exe 'python sys.path = sys.path + ["' . s:script_folder_path . '/../python"]'
+    py import mta_vim
+else
+    " Python 3
+    py3 import sys
+    py3 import vim
+    exe 'python3 sys.path = sys.path + ["' . s:script_folder_path . '/../python"]'
+    py3 import mta_vim
+endif
 
 
 if g:mta_use_matchparen_group
@@ -70,11 +79,51 @@ endfunction
 
 function! s:GetEnclosingTagLocations()
   " Sadly, pyeval does not exist before Vim 7.3.584
-  if v:version >= 703 && has( 'patch584' )
-    return pyeval( 'mta_vim.LocationOfEnclosingTagsInWindowView()' )
+  if has('python')
+    if v:version >= 703 && has( 'patch584' )
+      return pyeval( 'mta_vim.LocationOfEnclosingTagsInWindowView()' )
+    else
+      py vim.command( 'return ' + str( mta_vim.LocationOfEnclosingTagsInWindowView() ) )
+    endif
   else
-    py vim.command( 'return ' + str( mta_vim.LocationOfEnclosingTagsInWindowView() ) )
+    if v:version >= 703 && has( 'patch584' )
+      return py3eval( 'mta_vim.LocationOfEnclosingTagsInWindowView()' )
+    else
+      py3 vim.command( 'return ' + str( mta_vim.LocationOfEnclosingTagsInWindowView() ) )
+    endif
   endif
+endfunction
+
+function! MatchTagAlways#GoToEnclosingTag()
+  let [ opening_tag_line, opening_tag_column, closing_tag_line, closing_tag_column ] =
+        \ s:GetEnclosingTagLocations()
+  let first_window_line = line( 'w0' )
+
+  if opening_tag_line < first_window_line
+    return
+  endif
+
+  let pos = getpos('.')
+  let current_line = pos[1]
+  let current_column = pos[2]
+
+  if (closing_tag_line == opening_tag_line)
+    if current_column >= closing_tag_column
+      let line = opening_tag_line
+      let column = opening_tag_column
+    else
+      let line = closing_tag_line
+      let column = closing_tag_column
+    endif
+  elseif current_line == closing_tag_line
+    let line = opening_tag_line
+    let column = opening_tag_column
+  else
+    let line = closing_tag_line
+    let column = closing_tag_column
+  endif
+
+  call cursor(line, column)
 endfunction
 
 

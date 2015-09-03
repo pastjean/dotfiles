@@ -13,6 +13,7 @@ let g:multi_cursor_use_default_mapping=0
 filetype off
 call pathogen#infect()
 filetype plugin indent on
+set hidden
 set nocompatible "power to vim
 " }
 " => Basic options <=========================================================== {
@@ -69,7 +70,7 @@ set showmode
 set showcmd
 
 if has('gui_running')
-  set guifont=Monaco:h14
+  set guifont=Droid\ Sans\ Mono\ for\ Powerline:h16 
   colorscheme molokai
 endif
 
@@ -161,18 +162,15 @@ nmap <C-L> :bn<CR>
 imap <C-H> <ESC><C-H>
 imap <C-L> <ESC><C-L>
 
-nnoremap <leader>s :%s/<left>
-
 nnoremap <leader>w :set wrap!<CR>
 nnoremap <leader>l :set list!<CR>
 nnoremap <leader>n :set number! <CR>
-nnoremap <leader>j :CtrlP<cr>
-nnoremap <leader>b :CtrlPBuffer<cr>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>t :NERDTreeToggle<cr>
-nnoremap <leader>r :call rainbow#Toggle()<cr>
+nnoremap <leader>r :RainbowParenthesesToggle<cr>
 nnoremap <leader>zw :ZoomWin<cr>
-nmap <F8> :TagbarToggle<CR>
+nnoremap <leader>p :TagbarToggle<cr>
+
 
 let g:EasyMotion_leader_key = '<Leader>m'
 
@@ -200,8 +198,6 @@ set wildignore+=*.o,*.obj,*.d,.git,node_modules,.DS_Store
 " Permits to execute and replace inline
 nmap gr :.!ruby<CR>
 vmap gr :!ruby<CR>
-
-let g:Powerline_symbols = 'fancy'
 
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
