@@ -1,5 +1,5 @@
 [ui]
-username = Pierre-Alexandre St-Jean <pa@stjean.me>
+username = Pierre-Alexandre St-Jean <pastjean@coveo.com>
 commitsubrepos = False
 ignore = ~/.hgignore
 

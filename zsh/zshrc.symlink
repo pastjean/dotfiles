@@ -48,7 +48,6 @@ do
   source $SCRIPT
 done
 
-if [[ -a $HOME/.localrc ]]
-then
-  source $HOME/.localrc
-fi
+[ -f ~/.localrc ] && source ~/.localrc
+[ -f ~/.coveo_profile ] && source ~/.coveo_profile
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

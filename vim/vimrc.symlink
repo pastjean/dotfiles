@@ -56,9 +56,6 @@ set expandtab "spaces no tabs
 " Display {
 syntax on
 set background=dark
-"colorscheme molokai
-" i now prefer solarized! it is more smooth on the eyes
-colorscheme solarized
 set cursorline " Cursor highlight
 set listchars=tab:▸\ ,eol:¬
 
@@ -70,6 +67,11 @@ set statusline=\ %F%m%r%h\ %w\ [%{&ff}/%{&fenc}]%=Line:\ %l/%L:%c\ \ %P
 set showmatch
 set showmode
 set showcmd
+
+if has('gui_running')
+  set guifont=Monaco:h14
+  colorscheme molokai
+endif
 
 " I Want a mouse
 set mouse=a
@@ -213,7 +215,6 @@ let g:syntastic_auto_loc_list=2
 " }
 " => In GUI - MacVim or GVIM <================================================= {
 if has('gui_running')
-  set guifont=Menlo:h14
 
   " Remove unusefull scrollbars
   set guioptions-=l
