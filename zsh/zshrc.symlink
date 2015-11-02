@@ -28,6 +28,11 @@ plugins=(git osx frontend-search boot2docker golang nvm docker)
 # User configuration
 source $ZSH/oh-my-zsh.sh
 
+if [[ -d /usr/local/bin ]]
+then
+  export PATH=/usr/local/bin:$PATH
+fi
+
 if [[ -d ~/bin ]]
 then
   export PATH=$HOME/bin:$PATH
@@ -51,3 +56,6 @@ done
 [ -f ~/.localrc ] && source ~/.localrc
 [ -f ~/.coveo_profile ] && source ~/.coveo_profile
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# added by travis gem
+[ -f /Users/pastjean/.travis/travis.sh ] && source /Users/pastjean/.travis/travis.sh
