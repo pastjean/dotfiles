@@ -1,9 +1,0 @@
-#!/usr/bin/env sh
-
-npm update -g
-npm install -g gulp bower
-
-npm install -g serve http-server
-
-# Nice git calendaring
-npm install -g git-stats ghcal
