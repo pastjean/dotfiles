@@ -29,6 +29,15 @@ function __fish_method_missing --on-event fish_command_not_found
 #  echo "WHATCHU TYPING ---> $argv"
 end
 
+
+function prepend_to_path -d "Prepend the given dir to PATH if it exists and is not already in it"
+    if test -d $argv[1]
+        if not contains $argv[1] $PATH
+            set -gx PATH "$argv[1]" $PATH
+        end
+    end
+end
+
 # Plugins dir (ala oh-my-zsh)
 # ---------------------------
 
@@ -38,14 +47,6 @@ end
 
 # Env vars
 # --------------------
-
-function prepend_to_path -d "Prepend the given dir to PATH if it exists and is not already in it"
-    if test -d $argv[1]
-        if not contains $argv[1] $PATH
-            set -gx PATH "$argv[1]" $PATH
-        end
-    end
-end
 
 prepend_to_path "$HOME/bin"
 prepend_to_path "$HOME/local/bin"
