@@ -74,36 +74,8 @@ nudge = push --branch .
 # Some useful little aliases.
 st = status -SC
 ? = summary
-fdiff = diff -U 10000000000000
-qfdiff = qdiff -U 10000000000000
-
-# Commit message shortcuts.
-cm = commit -m
-cus = commit -m 'Update subrepository state.'
-cmm = commit -m 'Merge.'
-
-# Diff.
-d = diff -p --color=auto
 
 # Run a colored diff and pipe it to less.
 dl = !"$HG" diff -p --color=never $@ | vim -R -c 'set ft=diff' -
-
-# Make a new repo with some sensible defaults.
-mkrepo = !$HG init $1 && cd $1 && \
-          echo 'syntax: glob'  > .hgignore && \
-          echo ''             >> .hgignore && \
-          echo '.DS_Store'    >> .hgignore && \
-          echo '*.pyc'        >> .hgignore && \
-          echo '*.swp'        >> .hgignore && \
-          echo '*.swo'        >> .hgignore && \
-          echo '*.un~'        >> .hgignore && \
-          echo '.ropeproject' >> .hgignore && \
-          echo 'tags'         >> .hgignore && \
-          echo "[paths]\n" >> .hg/hgrc
-
-# Easily add ignore patterns to .hgignore and commit.
-ignore = ![ -n "$@" ] && echo '$@' >> `$HG root`/.hgignore && \
-          $HG commit `$HG root`/.hgignore -Am 'Add "$@" to .hgignore.'
-
 
 %include ~/.hgrc_local

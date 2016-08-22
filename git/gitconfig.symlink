@@ -41,7 +41,27 @@
 	lineNumber = true
 
 [color]
-	ui = true
+	ui = always
+[color "diff"]
+	meta = yellow bold
+	commit = green bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = "red bold 52"
+	newNormal = "green bold"
+	newHighlight = "green bold 22"
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
 
 [help]
   # Automatically correct and execute mistyped commands
@@ -50,23 +70,49 @@
 [merge]
   # Include summaries of merged commits in newly created merge commit messages
 	log = true
+	tool = opendiff
 
 [core]
   # Make `git rebase` safer on OS X
   # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
   	trustctime = false
-	excludesfile = /Users/pastjean/.gitignore_global
 	quotepath = false
+	excludesfile = /Users/pastjean/.gitignore
+	attributesfile = ~/.gitattributes
+	# insanely beautiful diffs
+	pager = diff-highlight | diff-so-fancy | less -r
 
 [include]
 	path = ~/.gitconfig.local
+
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+
+[interactive]
+	diffFilter = diff-highlight
+
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
+
+# rewrites of repo paths
+[url "git@github.com:"]
+	insteadOf = "gh:"
+	insteadOf = "git://github.com"
+	pushInsteadOf = "github:"
+	pushInsteadOf = "git://github.com/"
+    pushInsteadOf = "https://github.com/"
+[url "git@gist.github.com:"]
+	insteadOf = "gst:"
+	pushInsteadOf = "gist:"
+	pushInsteadOf = "git://gist.github.com/"
+	pushInsteadOf = "https://gist.github.com/"
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
 	cmd = /Users/pastjean/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
-[filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
