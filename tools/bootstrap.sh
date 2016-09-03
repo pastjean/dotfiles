@@ -47,11 +47,3 @@ echo ""
 echo "To link and install preferences files run:"  
 echo "       bash $DOTFILES_DIR/install.sh"
 echo ""
-echo "To have external tools:"
-echo "       bash $DOTFILES_DIR/tools/installothers.sh"
-  
-  
-  
-  
-  
- 
