@@ -24,11 +24,10 @@ if [[ "$@" =~ "test" || "$TESTING" == "true" || "$TESTING" == "TRUE" ]];then
   echo 'Testing......'
   echo ""
   install() {
-    echo "Testing install: $@"
-    echo "                 this script would be run inspect it"
+    echo "[TEST] exec: $@"
   }
   link() {
-    echo "Testing linking: $(shorthome "$1") -> $(shorthome "$2")"
+    echo "[TEST] ln -s $(shorthome "$1") -> $(shorthome "$2")"
   }
 else
   install() {
@@ -90,7 +89,7 @@ done
 
 
 # Custom install scripts
-CUSTOM_INSTALL="$(ls $DIR/**/*.install.sh)"
+CUSTOM_INSTALL="$(ls $DIR/**/install.sh)"
 
 for INSTALL_SCRIPT in $CUSTOM_INSTALL
 do
