@@ -4,21 +4,19 @@ commitsubrepos = False
 ignore = ~/.hgignore
 
 [schemes]
-cov=https://hg.corp.coveo.com/
+cov = https://hg.corp.coveo.com/
 
 [paths]
 hg.corp.coveo.com = https://hg.corp.coveo.com/
 mercurial.corp.coveo.com = https://mercurial.corp.coveo.com/
 
+[hostsecurity]
+hg.corp.coveo.com:minimumprotocol=tls1.0
+mercurial.corp.coveo.com:minimumprotocol=tls1.0
+
 [auth]
 hg.corp.coveo.com.prefix = hg.corp.coveo.com
 hg.corp.coveo.com.username = pastjean
-mercurial.corp.coveo.com.prefix = mercurial.corp.coveo.com
-mercurial.corp.coveo.com.username = pastjean
-
-[hostfingerprints]
-hg.corp.coveo.com = 92:7e:60:cb:95:b3:34:33:74:52:25:43:79:e3:d8:1f:84:29:6f:fd
-mercurial.corp.coveo.com = f9:ae:0b:e0:48:94:e2:22:79:b7:f1:3d:3f:b0:c1:5f:c1:27:69:1e
 
 [diff]
 git = True
