@@ -1,5 +1,5 @@
 if test -e (which fasd)
-  function -e fish_preexec _run_fasd
+  function _run_fasd -e fish_preexec
     fasd --proc (fasd --sanitize "$argv") > "/dev/null" 2>&1
   end
 

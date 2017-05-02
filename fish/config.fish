@@ -7,7 +7,10 @@ function ...;   cd ../..; end
 function ....;  cd ../../..; end
 function .....; cd ../../../..; end
 
-# I give up, vim style
+function reload
+    source ~/.config/fish/config.fish
+end
+
 alias :q exit
 
 # Completions aliases
@@ -21,14 +24,6 @@ function make_completion --argument alias command
 end
 
 make_completion g "git"
-
-# Basic Config
-# ------------
-
-function __fish_method_missing --on-event fish_command_not_found
-#  echo "WHATCHU TYPING ---> $argv"
-end
-
 
 function prepend_to_path -d "Prepend the given dir to PATH if it exists and is not already in it"
     if test -d $argv[1]
@@ -63,8 +58,29 @@ set BROWSER open
 
 # Prompt
 # ------
+#⇡
+# ⇣
+
+set fish_prompt_pwd_dir_length 3
+
+set __fish_git_prompt_showdirtystate 'yes'
+set __fish_git_prompt_showupstream 'no'
+set __fish_git_prompt_color_branch yellow
+set __fish_git_prompt_color_upstream_ahead green
+set __fish_git_prompt_color_upstream_behind red
+set __fish_git_prompt_char_dirtystate '*'
+set __fish_git_prompt_char_upstream_ahead '+'
+set __fish_git_prompt_char_upstream_behind '-'
+
 
 function fish_prompt
+  #__fish_hg_prompt
+  # __fish_git_prompt
+  set_color blue
+  printf '%s ' (prompt_pwd)
+  set_color black
+  printf '%s%s\n' (__fish_git_prompt) (__fish_hg_prompt)
+
   set last_status $status
 
   if test "$SSH_CONNECTION" != ""
@@ -77,9 +93,10 @@ function fish_prompt
         printf 'λ  '
     else
         set_color red -o
-        printf '😱  ' $last_status
+        printf '⚡  ' $last_status
     end
 
+    set_color normal
 end
 
 # Local settings

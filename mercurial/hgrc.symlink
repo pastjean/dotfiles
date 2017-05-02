@@ -32,7 +32,6 @@ progress =
 schemes =
 fetch =
 shelve =
-mercurial_keyring =
 
 [progress]
 delay = 0.5
