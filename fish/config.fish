@@ -40,6 +40,8 @@ for plugin in (find $FISH_TOPIC_DIR/plugins -name "*.fish")
   . $plugin
 end
 
+set -g fish_function_path "$FISH_TOPIC_DIR/functions" $fish_function_path
+
 # Env vars
 # --------------------
 
@@ -62,27 +64,34 @@ set BROWSER open
 
 set fish_prompt_pwd_dir_length 3
 
-#set __fish_git_prompt_showdirtystate 'yes'
-set __fish_git_prompt_showupstream 'yes'
-#set __fish_git_prompt_color_dirtystate brblack
-#set __fish_git_prompt_color_branch brblack
-set __fish_git_prompt_color_upstream_ahead brblue
-set __fish_git_prompt_color_upstream_behind brblue
-set __fish_git_prompt_char_upstream_ahead ' ⇡'
-set __fish_git_prompt_char_upstream_behind ' ⇣'
+set __fish_git_prompt_color brblack
+set __fish_git_prompt_color_branch brblack
+set __fish_git_prompt_showdirtystate 'yes'
+set __fish_git_prompt_char_dirtystate '⚡'
+set __fish_git_prompt_color_dirtystate brblack
+
+set __fish_git_prompt_char_stateseparator ''
+
+set __fish_git_prompt_showupstream 'auto'
+set __fish_git_prompt_color_upstream brblue
+set __fish_git_prompt_char_upstream_ahead '⇡'
+set __fish_git_prompt_char_upstream_behind '⇣'
 set __fish_git_prompt_char_upstream_equal ''
 set __fish_git_prompt_char_upstream_diverged ' ↕'
-#set __fish_git_prompt_char_stateseparator ''
+set __fish_git_prompt_char_upstream_prefix ' '
+
+set -g fish_color_hg_clean brblack
+set -g fish_color_hg_modified brblack
+set -g fish_color_hg_dirty brblack
 
 function fish_prompt
+  set last_status $status # this must be the first line
+
+  set -l normal (set_color normal)
   #__fish_hg_prompt
   # __fish_git_prompt
   set_color blue
-  printf '%s ' (prompt_pwd)
-  set_color black
-  printf '%s\n' (__fish_git_prompt)
-
-  set last_status $status
+  printf "%s $normal%s%s\n" (prompt_pwd) (__fish_git_prompt "\ue0a0%s") (__fish_hg_prompt)
 
   if test "$SSH_CONNECTION" != ""
     printf "%s@%s " (whoami) (hostname|cut -d . -f 1)
