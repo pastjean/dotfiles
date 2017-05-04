@@ -1,15 +1,10 @@
-set FISH_RC (readlink $HOME/.config/fish/config.fish)
-set FISH_TOPIC_DIR (dirname $FISH_RC)
-set DOTFILES (dirname $FISH_TOPIC_DIR)
+set FISH_TOPIC_DIR (dirname (realpath "$HOME/.config/fish/config.fish"))
+set DOTFILES (dirname (dirname $FISH_TOPIC_DIR))
 
 function ..;    cd ..; end
 function ...;   cd ../..; end
 function ....;  cd ../../..; end
 function .....; cd ../../../..; end
-
-function reload
-    source ~/.config/fish/config.fish
-end
 
 alias :q exit
 
@@ -33,17 +28,11 @@ function prepend_to_path -d "Prepend the given dir to PATH if it exists and is n
     end
 end
 
-# Plugins dir (ala oh-my-zsh)
-# ---------------------------
-
-for plugin in (find $FISH_TOPIC_DIR/plugins -name "*.fish")
-  . $plugin
-end
-
-set -g fish_function_path "$FISH_TOPIC_DIR/functions" $fish_function_path
-
 # Env vars
 # --------------------
+
+# Dotfiles functions
+set -g fish_function_path "$FISH_TOPIC_DIR/functions" $fish_function_path
 
 prepend_to_path "$HOME/bin"
 prepend_to_path "$HOME/local/bin"
@@ -114,5 +103,38 @@ end
 if test -f $HOME/.local.fish
     . $HOME/.local.fish
 end
+
+# fasd
+# --------------
+if test -e (which fasd)
+  function _run_fasd -e fish_preexec
+    fasd --proc (fasd --sanitize "$argv") > "/dev/null" 2>&1
+  end
+
+  function z
+    cd (fasd -d -l -1 "$argv")
+  end
+else
+  echo "🍒  Please install 'fasd' first!"
+end
+
+# osx
+# --------------
+function pfd
+  echo '
+   tell application "Finder"
+     return POSIX path of (target of window 1 as alias)
+   end tell
+  ' | osascript - ^/dev/null
+end
+
+function cdf
+  cd (pfd)
+end
+
+# rbenv
+prepend_to_path "$HOME/.rbenv/bin"
+status --is-interactive; and . (rbenv init -|psub)
+
 
 true
