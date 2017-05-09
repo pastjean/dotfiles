@@ -80,7 +80,7 @@ function fish_prompt
   #__fish_hg_prompt
   # __fish_git_prompt
   set_color blue
-  printf "%s $normal%s%s\n" (prompt_pwd) (__fish_git_prompt "\ue0a0%s") (__fish_hg_prompt)
+  printf "%s $normal%s%s\n" (prompt_pwd) (__fish_git_prompt "⑂ %s") (__fish_hg_prompt)
 
   if test "$SSH_CONNECTION" != ""
     printf "%s@%s " (whoami) (hostname|cut -d . -f 1)
