@@ -79,6 +79,9 @@ module.exports = {
     // for advanced config flags please refer to https://hyper.is/#cfg
   },
 
+  hyperlinks: {
+    defaultBrowser: true
+  },
   // a list of plugins to fetch and install from npm
   // format: [@org/]project[#version]
   // examples:
@@ -86,6 +89,7 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
+    'hyperlinks'
   //  'hyper-simple-vibrancy'
   ],
 

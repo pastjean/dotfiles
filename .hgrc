@@ -19,8 +19,8 @@ hg.corp.coveo.com.prefix = hg.corp.coveo.com
 hg.corp.coveo.com.username = pastjean
 
 [diff]
-git = True
-unified = 5
+#git = True
+#unified = 5
 
 [extensions]
 bookmarks =
@@ -32,6 +32,8 @@ progress =
 schemes =
 fetch =
 shelve =
+strip =
+hggit =
 
 [progress]
 delay = 0.5
