@@ -77,7 +77,7 @@
   # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
   	trustctime = false
 	quotepath = false
-	excludesfile = /Users/pastjean/.gitignore
+	excludesfile = /Users/pastjean/.gitignore_global
 	attributesfile = ~/.gitattributes
 	# insanely beautiful diffs
 	pager = diff-highlight | diff-so-fancy | less -r
@@ -114,5 +114,5 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Users/pastjean/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Volumes/SuperExtern/Backup Laptop/pastjean/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true

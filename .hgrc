@@ -33,7 +33,7 @@ schemes =
 fetch =
 shelve =
 strip =
-hggit =
+#hggit =
 
 [progress]
 delay = 0.5
