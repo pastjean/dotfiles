@@ -26,10 +26,10 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-let s:Cache = neocomplete#util#get_vital().import('System.Cache')
+let s:Cache = neocomplete#util#get_vital().import('System.Cache.Deprecated')
 
 " Cache loader.
-function! neocomplete#cache#load_from_cache(cache_dir, filename, ...) "{{{
+function! neocomplete#cache#load_from_cache(cache_dir, filename, ...) abort "{{{
   let is_string = get(a:000, 0, 0)
 
   try
@@ -43,7 +43,8 @@ do
   local list = {}
   for line in io.lines(vim.eval(
       'neocomplete#cache#encode_name(a:cache_dir, a:filename)')) do
-    list = loadstring('return ' .. line)()
+    list = (loadstring) and loadstring('return ' .. line)()
+                        or  load('return ' .. line)()
   end
 
   for i = 1, #list do
@@ -78,7 +79,7 @@ EOF
 endfunction"}}}
 
 " New cache loader.
-function! neocomplete#cache#check_cache(cache_dir, key, async_cache_dictionary, keyword_cache, is_string) "{{{
+function! neocomplete#cache#check_cache(cache_dir, key, async_cache_dictionary, keyword_cache, is_string) abort "{{{
   if !has_key(a:async_cache_dictionary, a:key)
     return
   endif
@@ -103,7 +104,7 @@ function! neocomplete#cache#check_cache(cache_dir, key, async_cache_dictionary, 
 endfunction"}}}
 
 " For buffer source cache loader.
-function! neocomplete#cache#get_cache_list(cache_dir, async_cache_list) "{{{
+function! neocomplete#cache#get_cache_list(cache_dir, async_cache_list) abort "{{{
   let cache_list = a:async_cache_list
 
   let loaded_keywords = []
@@ -119,7 +120,7 @@ function! neocomplete#cache#get_cache_list(cache_dir, async_cache_list) "{{{
   return [loaded, loaded_keywords]
 endfunction"}}}
 
-function! neocomplete#cache#save_cache(cache_dir, filename, keyword_list) "{{{
+function! neocomplete#cache#save_cache(cache_dir, filename, keyword_list) abort "{{{
   if neocomplete#util#is_sudo()
     return
   endif
@@ -133,19 +134,19 @@ function! neocomplete#cache#save_cache(cache_dir, filename, keyword_list) "{{{
 endfunction"}}}
 
 " Cache helper.
-function! neocomplete#cache#getfilename(cache_dir, filename) "{{{
+function! neocomplete#cache#getfilename(cache_dir, filename) abort "{{{
   let cache_dir = neocomplete#get_data_directory() . '/' . a:cache_dir
   return s:Cache.getfilename(cache_dir, a:filename)
 endfunction"}}}
-function! neocomplete#cache#filereadable(cache_dir, filename) "{{{
+function! neocomplete#cache#filereadable(cache_dir, filename) abort "{{{
   let cache_dir = neocomplete#get_data_directory() . '/' . a:cache_dir
   return s:Cache.filereadable(cache_dir, a:filename)
 endfunction"}}}
-function! neocomplete#cache#readfile(cache_dir, filename) "{{{
+function! neocomplete#cache#readfile(cache_dir, filename) abort "{{{
   let cache_dir = neocomplete#get_data_directory() . '/' . a:cache_dir
   return s:Cache.readfile(cache_dir, a:filename)
 endfunction"}}}
-function! neocomplete#cache#writefile(cache_dir, filename, list) "{{{
+function! neocomplete#cache#writefile(cache_dir, filename, list) abort "{{{
   if neocomplete#util#is_sudo()
     return
   endif
@@ -153,16 +154,16 @@ function! neocomplete#cache#writefile(cache_dir, filename, list) "{{{
   let cache_dir = neocomplete#get_data_directory() . '/' . a:cache_dir
   return s:Cache.writefile(cache_dir, a:filename, a:list)
 endfunction"}}}
-function! neocomplete#cache#encode_name(cache_dir, filename)
+function! neocomplete#cache#encode_name(cache_dir, filename) abort
   " Check cache directory.
   let cache_dir = neocomplete#get_data_directory() . '/' . a:cache_dir
   return s:Cache.getfilename(cache_dir, a:filename)
 endfunction
-function! neocomplete#cache#check_old_cache(cache_dir, filename) "{{{
+function! neocomplete#cache#check_old_cache(cache_dir, filename) abort "{{{
   let cache_dir = neocomplete#get_data_directory() . '/' . a:cache_dir
   return  s:Cache.check_old_cache(cache_dir, a:filename)
 endfunction"}}}
-function! neocomplete#cache#make_directory(directory) "{{{
+function! neocomplete#cache#make_directory(directory) abort "{{{
   let directory =
         \ neocomplete#get_data_directory() .'/'.a:directory
   if !isdirectory(directory)
@@ -178,7 +179,7 @@ endfunction"}}}
 let s:sdir = neocomplete#util#substitute_path_separator(
       \ fnamemodify(expand('<sfile>'), ':p:h'))
 
-function! neocomplete#cache#async_load_from_file(cache_dir, filename, pattern, mark) "{{{
+function! neocomplete#cache#async_load_from_file(cache_dir, filename, pattern, mark) abort "{{{
   if !neocomplete#cache#check_old_cache(a:cache_dir, a:filename)
         \ || neocomplete#util#is_sudo()
     return neocomplete#cache#encode_name(a:cache_dir, a:filename)
@@ -203,9 +204,8 @@ function! neocomplete#cache#async_load_from_file(cache_dir, filename, pattern, m
         \ ]
   return s:async_load(argv, a:cache_dir, a:filename)
 endfunction"}}}
-function! neocomplete#cache#async_load_from_tags(cache_dir, filename, filetype, pattern, mark, is_create_tags) "{{{
+function! neocomplete#cache#async_load_from_tags(cache_dir, filename, filetype, pattern, mark) abort "{{{
   if !neocomplete#cache#check_old_cache(a:cache_dir, a:filename)
-        \ || !neocomplete#cache#check_old_cache('tags_output', a:filename)
         \ || neocomplete#util#is_sudo()
     return neocomplete#cache#encode_name(a:cache_dir, a:filename)
   endif
@@ -215,38 +215,7 @@ function! neocomplete#cache#async_load_from_tags(cache_dir, filename, filetype, 
   let pattern_file_name =
         \ neocomplete#cache#encode_name('tags_patterns', a:filename)
 
-  if a:is_create_tags
-    if !executable(g:neocomplete#ctags_command)
-      echoerr 'Create tags error! Please install '
-            \ . g:neocomplete#ctags_command . '.'
-      return neocomplete#cache#encode_name(a:cache_dir, a:filename)
-    endif
-
-    " Create tags file.
-    let tags_file_name =
-          \ neocomplete#cache#encode_name('tags_output', a:filename)
-
-    let default = get(g:neocomplete#ctags_arguments, '_', '')
-    let args = get(g:neocomplete#ctags_arguments, a:filetype, default)
-
-    if has('win32') || has('win64')
-      let filename =
-            \ neocomplete#util#substitute_path_separator(a:filename)
-      let command = printf('%s -f "%s" %s "%s" ',
-            \ g:neocomplete#ctags_command, tags_file_name, args, filename)
-    else
-      let command = printf('%s -f ''%s'' 2>/dev/null %s ''%s''',
-            \ g:neocomplete#ctags_command, tags_file_name, args, a:filename)
-    endif
-
-    if neocomplete#has_vimproc()
-      call vimproc#system_bg(command)
-    else
-      call system(command)
-    endif
-  else
-    let tags_file_name = '$dummy$'
-  endif
+  let tags_file_name = '$dummy$'
 
   let filter_pattern =
         \ get(g:neocomplete#tags_filter_patterns, a:filetype, '')
@@ -262,34 +231,31 @@ function! neocomplete#cache#async_load_from_tags(cache_dir, filename, filetype, 
         \ ]
   return s:async_load(argv, a:cache_dir, a:filename)
 endfunction"}}}
-function! s:async_load(argv, cache_dir, filename) "{{{
-  " if 0
-  if neocomplete#has_vimproc()
-    let vim_path = s:search_vim_path()
+function! s:async_load(argv, cache_dir, filename) abort "{{{
+  let vim_path = s:search_vim_path()
 
-    if vim_path == ''
-      " Error
-      return
-    elseif !executable(vim_path)
-      call neocomplete#print_error(
-            \ printf('Vim path : "%s" is not executable.', vim_path))
-      let g:neocomplete#use_vimproc = 0
-      return
-    endif
-
+  if vim_path == '' || !executable(vim_path)
+    call neocomplete#async_cache#main(a:argv)
+  else
     let args = [vim_path, '-u', 'NONE', '-i', 'NONE', '-n',
           \       '-N', '-S', s:sdir.'/async_cache.vim']
           \ + a:argv
     call vimproc#system_bg(args)
     " call vimproc#system(args)
     " call system(join(args))
-  else
-    call neocomplete#async_cache#main(a:argv)
   endif
 
   return neocomplete#cache#encode_name(a:cache_dir, a:filename)
 endfunction"}}}
-function! s:search_vim_path() "{{{
+function! s:search_vim_path() abort "{{{
+  if exists('s:vim_path')
+    return s:vim_path
+  endif
+
+  if !neocomplete#has_vimproc()
+    return ''
+  endif
+
   let paths = vimproc#get_command_name(v:progname, $PATH, -1)
   if empty(paths)
     if has('gui_macvim')
@@ -302,7 +268,7 @@ function! s:search_vim_path() "{{{
         return ''
       endif
 
-      let vim_path = '/Applications/MacVim.app/Contents/MacOS/Vim'
+      let s:vim_path = '/Applications/MacVim.app/Contents/MacOS/Vim'
     else
       call neocomplete#print_error(
             \ printf('Vim path : "%s" is not found.'.
@@ -315,16 +281,15 @@ function! s:search_vim_path() "{{{
     let base_path = neocomplete#util#substitute_path_separator(
           \ fnamemodify(paths[0], ':p:h'))
 
-    let vim_path = base_path .
-          \ (neocomplete#util#is_windows() ? '/vim.exe' : '/vim')
+    let s:vim_path = base_path . '/vim'
 
-    if !executable(vim_path) && neocomplete#util#is_mac()
+    if !executable(s:vim_path) && neocomplete#util#is_mac()
       " Note: Search "Vim" instead of vim.
-      let vim_path = base_path. '/Vim'
+      let s:vim_path = base_path. '/Vim'
     endif
   endif
 
-  return vim_path
+  return s:vim_path
 endfunction"}}}
 
 let &cpo = s:save_cpo

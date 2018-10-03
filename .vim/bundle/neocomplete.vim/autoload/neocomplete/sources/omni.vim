@@ -38,21 +38,22 @@ let s:source = {
       \ 'kind' : 'manual',
       \ 'mark' : '[O]',
       \ 'rank' : 50,
+      \ 'min_pattern_length' : 0,
       \ 'hooks' : {},
       \}
 
 let s:List = neocomplete#util#get_vital().import('Data.List')
 
-function! s:source.hooks.on_init(context) "{{{
+function! s:source.hooks.on_init(context) abort "{{{
   " Initialize omni completion pattern. "{{{
   call neocomplete#util#set_default_dictionary(
         \'g:neocomplete#sources#omni#input_patterns',
         \'html,xhtml,xml,markdown,mkd',
-        \'<[^>]*')
+        \'<\|\s[[:alnum:]-]*')
   call neocomplete#util#set_default_dictionary(
         \'g:neocomplete#sources#omni#input_patterns',
         \'css,scss,sass',
-        \'^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]')
+        \'\w\+\|\w\+[):;]\?\s\+\w*\|[@!]')
   call neocomplete#util#set_default_dictionary(
         \'g:neocomplete#sources#omni#input_patterns',
         \'javascript',
@@ -97,6 +98,10 @@ function! s:source.hooks.on_init(context) "{{{
         \'g:neocomplete#sources#omni#input_patterns',
         \'clojure',
         \'\%(([^)]\+\)\|\*[[:alnum:]_-]\+')
+  call neocomplete#util#set_default_dictionary(
+        \'g:neocomplete#sources#omni#input_patterns',
+        \'rust',
+        \'[^.[:digit:] *\t]\%(\.\|\::\)\%(\h\w*\)\?')
 
   " External language interface check.
   if has('ruby')
@@ -112,27 +117,26 @@ function! s:source.hooks.on_init(context) "{{{
   "}}}
 endfunction"}}}
 
-function! s:source.get_complete_position(context) "{{{
-  let filetype = neocomplete#get_context_filetype()
+function! s:source.get_complete_position(context) abort "{{{
   let a:context.source__complete_results =
         \ s:set_complete_results_pos(
-        \   s:get_omni_funcs(filetype), a:context.input)
+        \   s:get_omni_funcs(a:context.filetype), a:context.input)
 
   return s:get_complete_pos(a:context.source__complete_results)
 endfunction"}}}
 
-function! s:source.gather_candidates(context) "{{{
+function! s:source.gather_candidates(context) abort "{{{
   return s:get_candidates(
         \ s:set_complete_results_words(
         \  a:context.source__complete_results),
         \  a:context.complete_pos, a:context.complete_str)
 endfunction"}}}
 
-function! neocomplete#sources#omni#define() "{{{
+function! neocomplete#sources#omni#define() abort "{{{
   return s:source
 endfunction"}}}
 
-function! s:get_omni_funcs(filetype) "{{{
+function! s:get_omni_funcs(filetype) abort "{{{
   let funcs = []
   for ft in insert(split(a:filetype, '\.'), '_')
     let omnifuncs = neocomplete#util#convert2list(
@@ -162,7 +166,7 @@ function! s:get_omni_funcs(filetype) "{{{
 
   return s:List.uniq(funcs)
 endfunction"}}}
-function! s:get_omni_list(list) "{{{
+function! s:get_omni_list(list) abort "{{{
   let omni_list = []
 
   " Convert string list.
@@ -177,21 +181,20 @@ function! s:get_omni_list(list) "{{{
   return omni_list
 endfunction"}}}
 
-function! s:set_complete_results_pos(funcs, cur_text) "{{{
+function! s:set_complete_results_pos(funcs, cur_text) abort "{{{
   " Try omnifunc completion. "{{{
   let complete_results = {}
   for [omnifunc, pattern] in a:funcs
     if neocomplete#is_auto_complete()
-          \ && a:cur_text !~# '\%(' . pattern . '\m\)$'
+          \ && (pattern == ''
+          \     || a:cur_text !~# '\%(' . pattern . '\m\)$')
       continue
     endif
 
     " Save pos.
     let pos = getpos('.')
-    let line = getline('.')
 
     try
-      silent! call setline('.', s:get_current_line())
       let complete_pos = call(omnifunc, [1, ''])
     catch
       call neocomplete#print_error(
@@ -201,9 +204,8 @@ function! s:set_complete_results_pos(funcs, cur_text) "{{{
       let complete_pos = -1
     finally
       if getpos('.') != pos
-        silent! call setpos('.', pos)
+        call setpos('.', pos)
       endif
-      silent! call setline('.', line)
     endtry
 
     if complete_pos < 0
@@ -223,7 +225,7 @@ function! s:set_complete_results_pos(funcs, cur_text) "{{{
 
   return complete_results
 endfunction"}}}
-function! s:set_complete_results_words(complete_results) "{{{
+function! s:set_complete_results_words(complete_results) abort "{{{
   " Try source completion.
   for [omnifunc, result] in items(a:complete_results)
     if neocomplete#complete_check()
@@ -231,13 +233,11 @@ function! s:set_complete_results_words(complete_results) "{{{
     endif
 
     let pos = getpos('.')
-    let line = getline('.')
 
     try
-      silent! call cursor(0, result.complete_pos)
-      silent! call setline('.', s:get_current_line())
       let ret = call(omnifunc, [0, result.complete_str])
-      let list = type(ret) == type([]) ? ret : ret.words
+      let list = type(ret) == type(0) ? [] :
+            \ type(ret) == type([]) ? ret : ret.words
     catch
       call neocomplete#print_error(
             \ 'Error occurred calling omnifunction: ' . omnifunc)
@@ -245,10 +245,7 @@ function! s:set_complete_results_words(complete_results) "{{{
       call neocomplete#print_error(v:exception)
       let list = []
     finally
-      if getpos('.') != pos
-        silent! call setpos('.', pos)
-      endif
-      silent! call setline('.', line)
+      call setpos('.', pos)
     endtry
 
     let list = s:get_omni_list(list)
@@ -258,7 +255,7 @@ function! s:set_complete_results_words(complete_results) "{{{
 
   return a:complete_results
 endfunction"}}}
-function! s:get_complete_pos(complete_results) "{{{
+function! s:get_complete_pos(complete_results) abort "{{{
   if empty(a:complete_results)
     return -1
   endif
@@ -272,7 +269,7 @@ function! s:get_complete_pos(complete_results) "{{{
 
   return complete_pos
 endfunction"}}}
-function! s:get_candidates(complete_results, complete_pos, complete_str) "{{{
+function! s:get_candidates(complete_results, complete_pos, complete_str) abort "{{{
   " Append prefix.
   let candidates = []
   for result in values(a:complete_results)
@@ -289,10 +286,6 @@ function! s:get_candidates(complete_results, complete_pos, complete_str) "{{{
   endfor
 
   return candidates
-endfunction"}}}
-function! s:get_current_line() abort "{{{
-  return (col('.') == 1) ? '' :
-        \ substitute(getline('.')[ : col('.')-1], '\h\w*$', '', '')
 endfunction"}}}
 
 let &cpo = s:save_cpo

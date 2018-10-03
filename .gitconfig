@@ -40,8 +40,6 @@
 	extendRegexp = true
 	lineNumber = true
 
-[color]
-	ui = always
 [color "diff"]
 	meta = yellow bold
 	commit = green bold
@@ -86,9 +84,10 @@
 	path = ~/.gitconfig.local
 
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
 	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
 
 [interactive]
 	diffFilter = diff-highlight
@@ -97,22 +96,5 @@
 	log = diff-highlight | less
 	show = diff-highlight | less
 	diff = diff-highlight | less
-
-# rewrites of repo paths
-[url "git@github.com:"]
-	insteadOf = "gh:"
-	insteadOf = "git://github.com"
-	pushInsteadOf = "github:"
-	pushInsteadOf = "git://github.com/"
-    pushInsteadOf = "https://github.com/"
-[url "git@gist.github.com:"]
-	insteadOf = "gst:"
-	pushInsteadOf = "gist:"
-	pushInsteadOf = "git://gist.github.com/"
-	pushInsteadOf = "https://gist.github.com/"
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Volumes/SuperExtern/Backup Laptop/pastjean/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+[fetch]
+	prune = true

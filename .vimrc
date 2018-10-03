@@ -58,7 +58,7 @@ set expandtab "spaces no tabs
 syntax on
 set background=dark
 set cursorline " Cursor highlight
-set listchars=tab:▸\ ,eol:¬
+set listchars=tab:▸\ ,eol:¬,trail:-,extends:>,precedes:<,nbsp:+
 
 set ruler
 set number
@@ -210,6 +210,9 @@ let g:multi_cursor_quit_key='<Esc>'
 let g:syntastic_enable_signs=1
 let g:syntastic_quiet_warnings=0
 let g:syntastic_auto_loc_list=2
+
+let g:racer_experimental_completer = 1
+set hidden
 
 " }
 " => In GUI - MacVim or GVIM <================================================= {

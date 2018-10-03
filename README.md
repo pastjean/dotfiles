@@ -7,7 +7,7 @@ Install
 -------
 
 ```sh
-git clone git@github.com:pastjean/dotfiles.git "~/.dotiles"
+git clone git@github.com:pastjean/dotfiles.git "$HOME/.dotfiles"
 cd dotfiles
 bash install.sh
 ```

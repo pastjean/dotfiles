@@ -34,14 +34,16 @@ end
 # Dotfiles functions
 set -g fish_function_path "$FISH_TOPIC_DIR/functions" $fish_function_path
 
-prepend_to_path "$HOME/bin"
 prepend_to_path "$HOME/local/bin"
+prepend_to_path "$HOME/.local/bin"
 prepend_to_path "$HOME/.brew/bin"
 prepend_to_path "$DOTFILES/bin"
 prepend_to_path "$HOME/.fzf/bin/"
 
 set -g -x GOPATH "$HOME/go"
-prepend_to_path "$HOME/go/bin"
+prepend_to_path "$GOPATH/bin"
+
+prepend_to_path "$HOME/bin"
 
 set -g -x fish_greeting ''
 set -g -x EDITOR vim

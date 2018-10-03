@@ -39,23 +39,27 @@ let s:source = {
       \ 'hooks' : {},
       \}
 
-function! s:source.hooks.on_init(context) "{{{
+function! s:source.hooks.on_init(context) abort "{{{
   let g:neocomplete#sources#tags#cache_limit_size =
         \ get(g:, 'neocomplete#sources#tags#cache_limit_size', 500000)
+
+  augroup neocomplete "{{{
+    autocmd BufWritePost * call neocomplete#sources#tag#make_cache(0)
+  augroup END"}}}
 
   " Create cache directory.
   call neocomplete#cache#make_directory('tags_cache')
 endfunction"}}}
 
-function! s:source.hooks.on_final(context) "{{{
+function! s:source.hooks.on_final(context) abort "{{{
   silent! delcommand NeoCompleteTagMakeCache
 endfunction"}}}
 
-function! neocomplete#sources#tag#define() "{{{
+function! neocomplete#sources#tag#define() abort "{{{
   return s:source
 endfunction"}}}
 
-function! s:source.gather_candidates(context) "{{{
+function! s:source.gather_candidates(context) abort "{{{
   if !has_key(s:async_tags_list, bufnr('%'))
         \ && !has_key(s:tags_list, bufnr('%'))
     call neocomplete#sources#tag#make_cache(0)
@@ -71,7 +75,7 @@ function! s:source.gather_candidates(context) "{{{
   return copy(get(s:tags_list, bufnr('%'), []))
 endfunction"}}}
 
-function! s:initialize_tags(filename) "{{{
+function! s:initialize_tags(filename) abort "{{{
   " Initialize tags list.
   let ft = &filetype
   if ft == ''
@@ -83,10 +87,10 @@ function! s:initialize_tags(filename) "{{{
         \ 'cachename' : neocomplete#cache#async_load_from_tags(
         \              'tags_cache', a:filename,
         \              neocomplete#get_keyword_pattern(ft, s:source.name),
-        \              ft, s:source.mark, 0)
+        \              ft, s:source.mark)
         \ }
 endfunction"}}}
-function! neocomplete#sources#tag#make_cache(force) "{{{
+function! neocomplete#sources#tag#make_cache(force) abort "{{{
   if !neocomplete#is_enabled()
     call neocomplete#initialize()
   endif
@@ -94,7 +98,11 @@ function! neocomplete#sources#tag#make_cache(force) "{{{
   let bufnumber = bufnr('%')
 
   let s:async_tags_list[bufnumber] = []
-  for tags in map(filter(tagfiles(), 'getfsize(v:val) > 0'),
+  let tagfiles = tagfiles()
+  if get(g:, 'loaded_neoinclude', 0)
+    let tagfiles += neoinclude#include#get_tag_files()
+  endif
+  for tags in map(filter(tagfiles, 'getfsize(v:val) > 0'),
         \ "neocomplete#util#substitute_path_separator(
         \    fnamemodify(v:val, ':p'))")
     if tags !~? '/doc/tags\%(-\w\+\)\?$' &&
