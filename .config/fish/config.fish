@@ -94,7 +94,7 @@ function fish_prompt
         printf 'λ  '
     else
         set_color red -o
-        printf '⚡  ' $last_status
+        printf 'x  ' $last_status
     end
 
     set_color normal
@@ -140,3 +140,6 @@ status --is-interactive; and source (rbenv init -|psub)
 
 
 true
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/pa/google-cloud-sdk/path.fish.inc' ]; . '/Users/pa/google-cloud-sdk/path.fish.inc'; end
