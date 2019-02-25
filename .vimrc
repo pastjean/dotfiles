@@ -167,7 +167,7 @@ nnoremap <leader>l :set list!<CR>
 nnoremap <leader>n :set number! <CR>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>t :NERDTreeToggle<cr>
-nnoremap <leader>r :RainbowParenthesesToggle<cr>
+nnoremap <leader>r :RainbowToggle<cr>
 nnoremap <leader>zw :ZoomWin<cr>
 nnoremap <leader>p :TagbarToggle<cr>
 
@@ -185,6 +185,7 @@ vnoremap ]  <ESC>`>a]<ESC>`<i[<ESC>
 " }
 " => Plugin/Filters <========================================================== {
 
+let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 let g:go_disable_autoinstall = 0  
 let g:neocomplete#enable_at_startup = 1
 

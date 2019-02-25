@@ -16,7 +16,12 @@ let s:DIRECTION = { 'forward': 0, 'backward': 1, 'bidirection': 2}
 
 
 " Init: {{{
+let s:loaded = s:FALSE
 function! EasyMotion#init()
+    if s:loaded
+        return
+    endif
+    let s:loaded = s:TRUE
     call EasyMotion#highlight#load()
     " Store previous motion info
     let s:previous = {}
@@ -138,6 +143,13 @@ function! EasyMotion#S(num_strokes, visualmode, direction) " {{{
     call s:EasyMotion(re, a:direction, a:visualmode ? visualmode() : '', is_inclusive)
     return s:EasyMotion_is_cancelled
 endfunction " }}}
+function! EasyMotion#OverwinF(num_strokes) " {{{
+    let re = s:findMotion(a:num_strokes, s:DIRECTION.bidirection)
+    call EasyMotion#reset()
+    if re isnot# ''
+        return EasyMotion#overwin#move(re)
+    endif
+endfunction "}}}
 function! EasyMotion#T(num_strokes, visualmode, direction) " {{{
     if a:direction == 1
         let is_inclusive = 0
@@ -169,13 +181,21 @@ function! EasyMotion#WB(visualmode, direction) " {{{
 endfunction " }}}
 function! EasyMotion#WBW(visualmode, direction) " {{{
     let s:current.is_operator = mode(1) ==# 'no' ? 1: 0
-    call s:EasyMotion('\(\(^\|\s\)\@<=\S\|^$\)', a:direction, a:visualmode ? visualmode() : '', 0)
+    let regex_without_file_ends = '\v(^|\s)\zs\S|^$'
+    let regex = l:regex_without_file_ends
+                \ . (a:direction == 1 ? '' : '|%$')
+                \ . (a:direction == 0 ? '' : '|%^')
+    call s:EasyMotion(l:regex, a:direction, a:visualmode ? visualmode() : '', 0)
     return s:EasyMotion_is_cancelled
 endfunction " }}}
 function! EasyMotion#WBK(visualmode, direction) " {{{
     " vim's iskeyword style word motion
     let s:current.is_operator = mode(1) ==# 'no' ? 1: 0
-    call s:EasyMotion('\(\(\<\|\>\|\s\)\@<=\S\|^$\)', a:direction, a:visualmode ? visualmode() : '', 0)
+    let regex_without_file_ends = '\v<|^\S|\s\zs\S|>\zs\S|^$'
+    let regex = l:regex_without_file_ends
+                \ . (a:direction == 1 ? '' : '|%$')
+                \ . (a:direction == 0 ? '' : '|%^')
+    call s:EasyMotion(l:regex, a:direction, a:visualmode ? visualmode() : '', 0)
     return s:EasyMotion_is_cancelled
 endfunction " }}}
 function! EasyMotion#E(visualmode, direction) " {{{
@@ -187,14 +207,30 @@ endfunction " }}}
 function! EasyMotion#EW(visualmode, direction) " {{{
     let s:current.is_operator = mode(1) ==# 'no' ? 1: 0
     let is_inclusive = mode(1) ==# 'no' ? 1 : 0
-    call s:EasyMotion('\(\S\(\s\|$\)\|^$\)', a:direction, a:visualmode ? visualmode() : '', is_inclusive)
+    " Note: The stopping positions for 'E' and 'gE' differs. Thus, the regex
+    " for direction==2 cannot be the same in both directions. This will be
+    " ignored.
+    let regex_stub = '\v\S(\s|$)'
+    let regex = l:regex_stub
+                \ . (a:direction == 0 ? '' : '|^$|%^')
+                \ . (a:direction == 1 ? '' : '|%$')
+    call s:EasyMotion(l:regex, a:direction, a:visualmode ? visualmode() : '', 0)
     return s:EasyMotion_is_cancelled
 endfunction " }}}
 function! EasyMotion#EK(visualmode, direction) " {{{
     " vim's iskeyword style word motion
     let s:current.is_operator = mode(1) ==# 'no' ? 1: 0
     let is_inclusive = mode(1) ==# 'no' ? 1 : 0
-    call s:EasyMotion('\(\S\(\>\|\<\|\s\)\@=\|^$\)', a:direction, a:visualmode ? visualmode() : '', is_inclusive)
+    " Note: The stopping positions for 'e' and 'ge' differs. Thus, the regex
+    " for direction==2 cannot be the same in both directions. This will be
+    " ignored.
+    let regex_stub = '\v.\ze>|\S\ze\s*$|\S\ze\s|\k\zs>\S\ze|\S<'
+    let regex = l:regex_stub
+                \ . (a:direction == 0 ? '' : '|^$|%^')
+                \ . (a:direction == 1 ? '' : '|%$')
+    call s:EasyMotion(l:regex, a:direction, a:visualmode ? visualmode() : '', 0)
+
+
     return s:EasyMotion_is_cancelled
 endfunction " }}}
 " -- JK Motion ---------------------------
@@ -205,8 +241,8 @@ function! EasyMotion#JK(visualmode, direction) " {{{
     if g:EasyMotion_startofline
         call s:EasyMotion('^\(\w\|\s*\zs\|$\)', a:direction, a:visualmode ? visualmode() : '', 0)
     else
-        let c = col('.')
-        let pattern = printf('^.\{-}\zs\(\%%<%dv.\%%>%dv\|$\)', c + 1, c)
+        let vcol  = EasyMotion#helper#vcol('.')
+        let pattern = printf('^.\{-}\zs\(\%%<%dv.\%%>%dv\|$\)', vcol + 1, vcol)
         call s:EasyMotion(pattern, a:direction, a:visualmode ? visualmode() : '', 0)
     endif
     return s:EasyMotion_is_cancelled
@@ -272,7 +308,8 @@ let s:config = {
 \   'visualmode': s:FALSE,
 \   'direction': s:DIRECTION.forward,
 \   'inclusive': s:FALSE,
-\   'accept_cursor_pos': s:FALSE
+\   'accept_cursor_pos': s:FALSE,
+\   'overwin': s:FALSE
 \ }
 
 function! s:default_config() abort
@@ -284,9 +321,13 @@ endfunction
 
 function! EasyMotion#go(...) abort
     let c = extend(s:default_config(), get(a:, 1, {}))
-    let s:current.is_operator = mode(1) ==# 'no' ? 1: 0
-    call s:EasyMotion(c.pattern, c.direction, c.visualmode ? visualmode() : '', c.inclusive, c)
-    return s:EasyMotion_is_cancelled
+    if c.overwin
+        return EasyMotion#overwin#move(c.pattern)
+    else
+        let s:current.is_operator = mode(1) ==# 'no' ? 1: 0
+        call s:EasyMotion(c.pattern, c.direction, c.visualmode ? visualmode() : '', c.inclusive, c)
+        return s:EasyMotion_is_cancelled
+    endif
 endfunction
 function! EasyMotion#User(pattern, visualmode, direction, inclusive, ...) " {{{
     let s:current.is_operator = mode(1) ==# 'no' ? 1: 0
@@ -391,7 +432,13 @@ endfunction " }}}
 " Helper Functions: {{{
 " -- Message -----------------------------
 function! s:Message(message) " {{{
-    echo 'EasyMotion: ' . a:message
+    if g:EasyMotion_verbose
+        echo 'EasyMotion: ' . a:message
+    else
+        " Make the current message disappear
+        echo ''
+        " redraw
+    endif
 endfunction " }}}
 function! s:Prompt(message) " {{{
     echohl Question
@@ -453,16 +500,28 @@ function! s:SetLines(lines, key) " {{{
 endfunction " }}}
 
 " -- Get characters from user input ------
-function! s:GetChar() " {{{
-    let char = getchar()
-    if char == 27
-        " Escape key pressed
-        redraw
-        call s:Message('Cancelled')
-        return ''
-    endif
-    return nr2char(char)
-endfunction " }}}
+function! s:GetChar(...) abort "{{{
+    let mode = get(a:, 1, 0)
+    while 1
+        " Workaround for https://github.com/osyo-manga/vital-over/issues/53
+        try
+            let char = call('getchar', a:000)
+        catch /^Vim:Interrupt$/
+            let char = 3 " <C-c>
+        endtry
+        if char == 27 || char == 3
+            " Escape or <C-c> key pressed
+            redraw
+            call s:Message('Cancelled')
+            return ''
+        endif
+        " Workaround for the <expr> mappings
+        if string(char) !=# "\x80\xfd`"
+            return mode == 1 ? !!char
+            \    : type(char) == type(0) ? nr2char(char) : char
+        endif
+    endwhile
+endfunction "}}}
 
 " -- Find Motion Helper ------------------
 function! s:findMotion(num_strokes, direction) "{{{
@@ -502,19 +561,25 @@ function! s:convertRegep(input) "{{{
     " 2. migemo
     " 3. smartsign
     " 4. smartcase
-    let re = s:should_use_regexp() ? a:input : s:escape_regexp_char(a:input)
+    let use_migemo = s:should_use_migemo(a:input)
+    let re = use_migemo || s:should_use_regexp() ? a:input : s:escape_regexp_char(a:input)
 
     " Convert space to match only start of spaces
     if re ==# ' '
         let re = '\s\+'
     endif
 
-    if s:should_use_migemo(a:input)
+    if use_migemo
         let re = s:convertMigemo(re)
     endif
 
     if s:should_use_smartsign(a:input)
-        let re = s:convertSmartsign(a:input)
+        let r = s:convertSmartsign(a:input)
+        if use_migemo
+            let re = re . '\m\|' . r
+        else
+            let re = r
+        endif
     endif
 
     let case_flag = EasyMotion#helper#should_case_sensitive(
@@ -534,10 +599,7 @@ function! s:convertMigemo(re) "{{{
     if ! has_key(s:migemo_dicts, &l:encoding)
         let s:migemo_dicts[&l:encoding] = EasyMotion#helper#load_migemo_dict()
     endif
-    if re =~# '^\a$'
-        let re = get(s:migemo_dicts[&l:encoding], re, a:re)
-    endif
-    return re
+    return get(s:migemo_dicts[&l:encoding], re, a:re)
 endfunction "}}}
 function! s:convertSmartsign(chars) "{{{
     " Convert given chars to smartsign string
@@ -582,7 +644,7 @@ function! s:should_use_regexp() "{{{
     return g:EasyMotion_use_regexp == 1 && s:flag.regexp == 1
 endfunction "}}}
 function! s:should_use_migemo(char) "{{{
-    if ! g:EasyMotion_use_migemo || match(a:char, '\A') != -1
+    if ! g:EasyMotion_use_migemo || match(a:char, '[^!-~]') != -1
         return 0
     endif
 
@@ -677,14 +739,6 @@ function! s:GetVisualStartPosition(c_pos, v_start, v_end, search_direction) "{{{
 endfunction "}}}
 
 " -- Others ------------------------------
-function! s:is_cmdwin() "{{{
-  return bufname('%') ==# '[Command Line]'
-endfunction "}}}
-function! s:should_use_wundo() "{{{
-    " wundu cannot use in command-line window and
-    " unless undolist is not empty
-    return ! s:is_cmdwin() && undotree().seq_last != 0
-endfunction "}}}
 function! s:handleEmpty(input, visualmode) "{{{
     " if empty, reselect and return 1
     if empty(a:input)
@@ -1042,12 +1096,8 @@ function! s:PromptUser(groups) "{{{
     " }}}
 
     " -- Put labels on targets & Get User Input & Restore all {{{
-    " Save undo tree {{{
-    let s:undo_file = tempname()
-    if s:should_use_wundo()
-        execute "wundo" s:undo_file
-    endif
-    "}}}
+    " Save undo tree
+    let undo_lock = EasyMotion#undo#save()
     try
         " Set lines with markers {{{
         call s:SetLines(lines_items, 'marker')
@@ -1094,21 +1144,8 @@ function! s:PromptUser(groups) "{{{
             \ )
         " }}}
 
-        " Restore undo tree {{{
-        if s:should_use_wundo() && filereadable(s:undo_file)
-            silent execute "rundo" s:undo_file
-            call delete(s:undo_file)
-            unlet s:undo_file
-        else
-            " Break undo history (undobreak)
-            let old_undolevels = &undolevels
-            set undolevels=-1
-            keepjumps call setline('.', getline('.'))
-            let &undolevels = old_undolevels
-            unlet old_undolevels
-            " FIXME: Error occur by GundoToggle for undo number 2 is empty
-            keepjumps call setline('.', getline('.'))
-        endif "}}}
+        " Restore undo tree
+        call undo_lock.restore()
 
         redraw
     endtry "}}}
@@ -1369,7 +1406,7 @@ function! s:EasyMotion(regexp, direction, visualmode, is_inclusive, ...) " {{{
         " if you just use cursor(s:current.cursor_position) to jump back,
         " current line will become middle of line window
         if ! empty(a:visualmode)
-            keepjumps call winrestview({'lnum' : win_first_line, 'topline' : win_first_line})
+            keepjumps call winrestview({'lnum' : s:current.cursor_position[0], 'topline' : win_first_line})
         else
             " for adjusting cursorline
             keepjumps call cursor(s:current.cursor_position)
@@ -1517,7 +1554,8 @@ function! s:EasyMotion(regexp, direction, visualmode, is_inclusive, ...) " {{{
         redraw
 
         " Show exception message
-        if g:EasyMotion_ignore_exception != 1
+        " The verbose option will take precedence
+        if g:EasyMotion_verbose == 1 && g:EasyMotion_ignore_exception != 1
             echo v:exception
         endif
 

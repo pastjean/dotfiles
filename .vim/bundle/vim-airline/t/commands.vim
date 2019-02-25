@@ -22,10 +22,13 @@ describe 'commands'
     Expect g:airline_theme == 'simple'
     execute 'AirlineTheme dark'
     Expect g:airline_theme == 'dark'
+    execute 'AirlineTheme doesnotexist'
+    Expect g:airline_theme == 'dark'
+    colors molokai
+    Expect g:airline_theme == 'molokai'
   end
 
   it 'should have a refresh command'
     Expect exists(':AirlineRefresh') to_be_true
   end
 end
-

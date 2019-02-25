@@ -1,5 +1,7 @@
-" MIT License. Copyright (c) 2013-2015 Bailey Ling.
+" MIT License. Copyright (c) 2013-2018 Bailey Ling et al.
 " vim: et ts=2 sts=2 sw=2
+
+scriptencoding utf-8
 
 let s:show_buffers = get(g:, 'airline#extensions#tabline#show_buffers', 1)
 let s:buf_min_count = get(g:, 'airline#extensions#tabline#buffer_min_count', 0)
@@ -22,7 +24,7 @@ function! airline#extensions#tabline#autoshow#on()
   augroup airline_tabline_autoshow
     autocmd!
     if s:buf_min_count <= 0 && s:tab_min_count <= 1
-      set showtabline=2
+      call airline#extensions#tabline#enable()
     else
       if s:show_buffers == 1
         autocmd BufEnter  * call <sid>show_tabline(s:buf_min_count, len(airline#extensions#tabline#buflist#list()))
@@ -34,13 +36,13 @@ function! airline#extensions#tabline#autoshow#on()
 
     " Invalidate cache.  This has to come after the BufUnload for
     " s:show_buffers, to invalidate the cache for BufEnter.
-    autocmd BufAdd,BufUnload * call airline#extensions#tabline#buflist#invalidate()
+    autocmd BufLeave,BufAdd,BufUnload * call airline#extensions#tabline#buflist#invalidate()
   augroup END
 endfunction
 
 function! s:show_tabline(min_count, total_count)
   if a:total_count >= a:min_count
-    if &showtabline != 2
+    if &showtabline != 2 && &lines > 3
       set showtabline=2
     endif
   else
