@@ -32,6 +32,7 @@
 [user]
 	name = Pierre-Alexandre St-Jean
 	email = pa@stjean.me
+	signingkey = pa@stjean.me
 
 [push]
 	default = simple

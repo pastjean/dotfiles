@@ -143,3 +143,5 @@ true
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/pa/google-cloud-sdk/path.fish.inc' ]; . '/Users/pa/google-cloud-sdk/path.fish.inc'; end
+
+set -g -x GPG_TTY (tty)
