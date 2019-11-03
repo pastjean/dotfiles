@@ -12,13 +12,14 @@ cd $HOME/.dotfiles
 bash install.sh
 ```
 
-```
+```sh
 brew install fish \
              n \
              git \
              kubectl \
              golang \
              rbenv
+
 brew cask install 1password \
                   dropbox \
                   visual-studio-code \
