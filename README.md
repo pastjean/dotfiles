@@ -13,6 +13,8 @@ bash install.sh
 ```
 
 ```sh
+brew cask install adoptopenjdk
+
 brew install fish \
              n \
              git \
@@ -28,5 +30,6 @@ brew cask install 1password \
                   zoomus \
                   intellij-idea-ce \
                   firefox \
-                  homebrew/cask-versions/firefox-developer-edition
+                  homebrew/cask-versions/firefox-developer-edition \
+                  chai
 ```
