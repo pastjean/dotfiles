@@ -1,10 +1,8 @@
-dotfiles
-========
+# dotfiles
 
-Your preferences should be kept in your pocket like you care for them. 
+Your preferences should be kept in your pocket like you care for them.
 
-Install
--------
+## Install
 
 ```sh
 git clone git@github.com:pastjean/dotfiles.git "$HOME/.dotfiles"
@@ -33,3 +31,15 @@ brew cask install 1password \
                   homebrew/cask-versions/firefox-developer-edition \
                   chai
 ```
+
+Kap
+monodraw
+telegram
+viscosity
+handbrake
+istatsmenu
+transmision
+flux
+muzzle
+sketch
+vlc
