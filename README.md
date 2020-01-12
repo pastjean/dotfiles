@@ -32,6 +32,7 @@ brew cask install 1password \
                   chai
 ```
 
+amethyst
 Kap
 monodraw
 telegram
@@ -43,3 +44,11 @@ flux
 muzzle
 sketch
 vlc
+alacritty
+prusa slicer
+obs
+gifski
+openscad
+blender
+muzzle
+wireguard
