@@ -20,35 +20,42 @@ brew install fish \
              golang \
              rbenv
 
-brew cask install 1password \
-                  dropbox \
-                  visual-studio-code \
-                  iterm2 \
-                  spotify \
-                  zoomus \
-                  intellij-idea-ce \
-                  firefox \
-                  homebrew/cask-versions/firefox-developer-edition \
-                  chai
+brew cask install \
+    1password \
+    alacritty \
+    amethyst \
+    blender \
+    chai \
+    firefox \
+    flux \
+    handbrake \
+    homebrew/cask-versions/firefox-developer-edition \
+    iterm2 \
+    kap \
+    monodraw \
+    muzzle \
+    obs \
+    openscad \
+    prusaslicer \
+    sketch \
+    spotify \
+    telegram \
+    transmission \
+    visual-studio-code \
+    vlc
+
+# Work Stuff
+brew cask install \
+    viscosity \
+    zoomus \
+    intellij-idea-ce
+
+
 ```
 
-amethyst
-Kap
-monodraw
-telegram
-viscosity
-handbrake
+# Manual
+Slack
+Keynote
+Wireguard
 istatsmenu
-transmision
-flux
-muzzle
-sketch
-vlc
-alacritty
-prusa slicer
-obs
-gifski
-openscad
-blender
-muzzle
-wireguard
+

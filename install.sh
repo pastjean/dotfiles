@@ -24,12 +24,10 @@ link $DOTFILES_DIR/.config/fish/config.fish $HOME/.config/fish/config.fish
 link $DOTFILES_DIR/.vim $HOME/.vim
 link $DOTFILES_DIR/.gitconfig $HOME/.gitconfig
 link $DOTFILES_DIR/.gitmessage $HOME/.gitmessage
-link $DOTFILES_DIR/.hgignore $HOME/.hgignore
-link $DOTFILES_DIR/.hgrc $HOME/.hgrc
-link $DOTFILES_DIR/.hyper.js $HOME/.hyper.js
 link $DOTFILES_DIR/.irbrc $HOME/.irbrc
 link $DOTFILES_DIR/.tmux.conf $HOME/.tmux.conf
 link $DOTFILES_DIR/.vimrc $HOME/.vimrc
+link $DOTFILES_DIR/.alacritty.yml $HOME/.alacritty.yml
 
 echo "Done..."
 echo "All dotfiles are now linked, your are good to go"
