@@ -13,6 +13,7 @@ Your preferences should be kept in your pocket like you care for them.
 ## Install
 
 ```sh
+xcode-select --install # needed for git
 git clone git@github.com:pastjean/dotfiles.git "$HOME/.dotfiles"
 cd $HOME/.dotfiles
 bash install.sh
