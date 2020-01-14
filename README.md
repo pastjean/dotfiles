@@ -1,6 +1,14 @@
 # dotfiles
 
+
 Your preferences should be kept in your pocket like you care for them.
+
+## Nice stuff to backup
+
+- OpenVPN profiles
+- SSH keys
+- PGP keys
+- ...
 
 ## Install
 
@@ -26,6 +34,7 @@ brew cask install \
     amethyst \
     blender \
     chai \
+    docker \
     firefox \
     flux \
     handbrake \
@@ -35,6 +44,7 @@ brew cask install \
     monodraw \
     muzzle \
     obs \
+    openemu \
     openscad \
     prusaslicer \
     sketch \
@@ -50,12 +60,12 @@ brew cask install \
     zoomus \
     intellij-idea-ce
 
-
 ```
 
 # Manual
-Slack
-Keynote
-Wireguard
-istatsmenu
+
+- Slack
+- Keynote
+- Wireguard
+- istatsmenu
 
