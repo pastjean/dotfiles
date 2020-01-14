@@ -21,7 +21,8 @@ bash install.sh
 ## Software to install
 
 ```sh
-brew cask install adoptopenjdk
+brew tap adoptopenjdk/openjdk
+brew cask install adoptopenjdk11
 
 brew install fish \
              n \
