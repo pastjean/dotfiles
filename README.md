@@ -17,6 +17,8 @@ xcode-select --install # needed for git
 git clone git@github.com:pastjean/dotfiles.git "$HOME/.dotfiles"
 cd $HOME/.dotfiles
 bash install.sh
+bash brew_install.sh
+bash fish_install.sh
 ```
 
 ## Software to install
@@ -43,7 +45,6 @@ brew cask install \
     flux \
     handbrake \
     homebrew/cask-versions/firefox-developer-edition \
-    iterm2 \
     kap \
     monodraw \
     muzzle \
