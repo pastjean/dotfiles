@@ -1,7 +1,5 @@
 # dotfiles
 
-
-
 Your preferences should be kept in your pocket like you care for them.
 
 ## Nice stuff to backup
@@ -72,4 +70,4 @@ brew cask install \
 - Keynote
 - Wireguard
 - istatsmenu
-
+- tweetbot
