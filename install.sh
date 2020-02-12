@@ -28,6 +28,7 @@ link $DOTFILES_DIR/.irbrc $HOME/.irbrc
 link $DOTFILES_DIR/.tmux.conf $HOME/.tmux.conf
 link $DOTFILES_DIR/.vimrc $HOME/.vimrc
 link $DOTFILES_DIR/.alacritty.yml $HOME/.alacritty.yml
+link $DOTFILES_DIR/.curlrc $HOME/.curlrc
 
 echo "Done..."
 echo "All dotfiles are now linked, your are good to go"
