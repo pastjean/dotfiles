@@ -99,3 +99,5 @@
 	diff = diff-highlight | less
 [fetch]
 	prune = true
+[pull]
+	rebase = false
