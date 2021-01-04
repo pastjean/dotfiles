@@ -28,6 +28,7 @@ brew tap adoptopenjdk/openjdk
 brew cask install adoptopenjdk11
 
 brew install fish \
+             zoxide \
              n \
              git \
              kubectl \

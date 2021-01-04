@@ -125,3 +125,4 @@ end
 true
 
 set -g -x GPG_TTY (tty)
+set -g fish_user_paths "$HOME/.brew/sbin" $fish_user_paths
