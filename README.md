@@ -13,7 +13,7 @@ Your preferences should be kept in your pocket like you care for them.
 ## Install
 
 ```sh
-xcode-select --install # needed for git
+xcode-select --install
 git clone git@github.com:pastjean/dotfiles.git "$HOME/.dotfiles"
 cd $HOME/.dotfiles
 bash install.sh
@@ -24,14 +24,13 @@ bash fish_install.sh
 ## Software to install
 
 ```sh
-brew tap adoptopenjdk/openjdk
-brew cask install adoptopenjdk11
+// brew tap adoptopenjdk/openjdk
+// brew cask install adoptopenjdk11
 
 brew install fish \
              zoxide \
              n \
              git \
-             kubectl \
              golang \
              rbenv
 
@@ -41,11 +40,9 @@ brew cask install \
     amethyst \
     blender \
     chai \
-    docker \
     firefox \
     flux \
     handbrake \
-    homebrew/cask-versions/firefox-developer-edition \
     kap \
     monodraw \
     muzzle \
@@ -62,10 +59,8 @@ brew cask install \
 
 # Work Stuff
 brew cask install \
-    viscosity \
     zoomus \
-    intellij-idea-ce
-
+    slack
 ```
 
 # Manual
