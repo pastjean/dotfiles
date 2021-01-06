@@ -2,14 +2,6 @@
 
 Your preferences should be kept in your pocket like you care for them.
 
-## Nice stuff to backup
-
-
-- OpenVPN profiles
-- SSH keys
-- PGP keys
-- ...
-
 ## Install
 
 ```sh
@@ -17,8 +9,8 @@ xcode-select --install
 git clone git@github.com:pastjean/dotfiles.git "$HOME/.dotfiles"
 cd $HOME/.dotfiles
 bash install.sh
-bash brew_install.sh
-bash fish_install.sh
+bash installs/brew_install.sh
+fish installs/fish_install.fish
 ```
 
 ## Software to install
@@ -44,6 +36,7 @@ brew cask install \
     flux \
     handbrake \
     kap \
+    microsoft-edge \
     monodraw \
     muzzle \
     obs \
@@ -63,10 +56,13 @@ brew cask install \
     slack
 ```
 
+```fish
+which fish | sudo tee -a /etc/shells
+chsh -s (which fish)
+```
+
 # Manual
 
-- Slack
-- Keynote
 - Wireguard
 - istatsmenu
 - tweetbot
