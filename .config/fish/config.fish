@@ -1,7 +1,7 @@
 # osx
 # --------------
 function pfd
-  echo '
+    echo '
    tell application "Finder"
      return POSIX path of (target of window 1 as alias)
    end tell
@@ -9,16 +9,24 @@ function pfd
 end
 
 function cdf
-  cd (pfd)
+    cd (pfd)
 end
 
 # Vars & Aliases
 # --------------------
 
-function ..;    cd ..; end
-function ...;   cd ../..; end
-function ....;  cd ../../..; end
-function .....; cd ../../../..; end
+function ..
+    cd ..
+end
+function ...
+    cd ../..
+end
+function ....
+    cd ../../..
+end
+function .....
+    cd ../../../..
+end
 
 alias :q exit
 
@@ -27,7 +35,6 @@ set DOTFILES (dirname (dirname $FISH_TOPIC_DIR))
 
 # Dotfiles functions
 set -g fish_function_path "$FISH_TOPIC_DIR/functions" $fish_function_path
-
 
 set -g -x PATH "$HOME/bin" $PATH
 set -g -x PATH "$HOME/.brew/bin" "$HOME/.brew/sbin" $PATH

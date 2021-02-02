@@ -13,9 +13,6 @@
   
   # Show the diff between the latest commit and the current state
 	d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
-  
-  # Clone a repository including all submodules
-	c = clone --recursive
 
   # Amend the currently staged files to the latest commit
 	amend = commit --amend --reuse-message=HEAD
@@ -32,10 +29,16 @@
 [user]
 	name = Pierre-Alexandre St-Jean
 	email = pa@stjean.me
-	signingkey = pa@stjean.me
+	signingkey = BB4EC22A41C6FE73
 
 [push]
 	default = simple
+
+[fetch]
+	prune = true
+
+[pull]
+	rebase = false
 
 [grep]
 	extendRegexp = true
@@ -97,9 +100,6 @@
 	log = diff-highlight | less
 	show = diff-highlight | less
 	diff = diff-highlight | less
-[fetch]
-	prune = true
-[pull]
-	rebase = false
+
 [url "ssh://git@ssh.gitlab.1password.io:2227"]
 	insteadOf = https://gitlab.1password.io

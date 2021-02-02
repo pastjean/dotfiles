@@ -404,9 +404,11 @@ live_config_reload: true
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: /Users/pa/.brew/bin/tmux
-#  args:
-#    - --login
+  program: sh
+  args:
+    - -l
+    - -c
+    - "/Users/pa/.brew/bin/tmux attach || exec /Users/pa/.brew/bin/tmux"
 
 # Startup directory
 #
