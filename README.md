@@ -10,55 +10,47 @@ git clone git@github.com:pastjean/dotfiles.git "$HOME/.dotfiles"
 cd $HOME/.dotfiles
 bash install.sh
 bash installs/brew_install.sh
+export PATH=$HOME/.brew/bin:$PATH
+
 fish installs/fish_install.fish
 ```
 
 ## Software to install
 
 ```sh
-// brew tap adoptopenjdk/openjdk
-// brew cask install adoptopenjdk11
-
 brew install fish \
              zoxide \
              n \
-             git \
              golang \
              rbenv
 
-brew cask install \
-    1password \
-    alacritty \
-    amethyst \
-    blender \
-    chai \
-    firefox \
-    flux \
-    handbrake \
-    kap \
-    microsoft-edge \
-    monodraw \
-    muzzle \
-    obs \
-    openemu \
-    openscad \
-    prusaslicer \
-    sketch \
-    spotify \
-    telegram \
-    transmission \
-    visual-studio-code \
-    vlc
-
-# Work Stuff
-brew cask install \
-    zoomus \
-    slack
+brew install homebrew/cask/1password \
+    homebrew/cask/alacritty \
+    homebrew/cask/amethyst \
+    homebrew/cask/blender \
+    homebrew/cask/chai \
+    homebrew/cask/firefox \
+    homebrew/cask/flux \
+    homebrew/cask/handbrake \
+    homebrew/cask/kap \
+    homebrew/cask/microsoft-edge \
+    homebrew/cask/monodraw \
+    homebrew/cask/muzzle \
+    homebrew/cask/obs \
+    homebrew/cask/openemu \
+    homebrew/cask/openscad \
+    homebrew/cask/prusaslicer \
+    homebrew/cask/sketch \
+    homebrew/cask/spotify \
+    homebrew/cask/telegram \
+    homebrew/cask/transmission \
+    homebrew/cask/visual-studio-code \
+    homebrew/cask/vlc
 ```
 
 ```fish
 which fish | sudo tee -a /etc/shells
-chsh -s (which fish)
+chsh -s $(which fish)
 ```
 
 # Manual
