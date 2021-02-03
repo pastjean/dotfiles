@@ -22,7 +22,9 @@ brew install fish \
              zoxide \
              n \
              golang \
-             rbenv
+             rbenv \
+             starship \
+             diff-so-fancy
 
 brew install homebrew/cask/1password \
     homebrew/cask/alacritty \
