@@ -9,53 +9,20 @@ xcode-select --install
 git clone git@github.com:pastjean/dotfiles.git "$HOME/.dotfiles"
 cd $HOME/.dotfiles
 bash install.sh
-bash installs/brew_install.sh
-export PATH=$HOME/.brew/bin:$PATH
 
-fish installs/fish_install.fish
-```
+cd installs
+bash brew_install.sh
 
-## Software to install
+$HOME/.brew/bin/brew bundle
 
-```sh
-brew install fish \
-             zoxide \
-             n \
-             golang \
-             rbenv \
-             starship \
-             diff-so-fancy
-
-brew install homebrew/cask/1password \
-    homebrew/cask/alacritty \
-    homebrew/cask/amethyst \
-    homebrew/cask/blender \
-    homebrew/cask/chai \
-    homebrew/cask/firefox \
-    homebrew/cask/flux \
-    homebrew/cask/handbrake \
-    homebrew/cask/kap \
-    homebrew/cask/microsoft-edge \
-    homebrew/cask/monodraw \
-    homebrew/cask/muzzle \
-    homebrew/cask/obs \
-    homebrew/cask/openemu \
-    homebrew/cask/openscad \
-    homebrew/cask/prusaslicer \
-    homebrew/cask/sketch \
-    homebrew/cask/spotify \
-    homebrew/cask/telegram \
-    homebrew/cask/transmission \
-    homebrew/cask/visual-studio-code \
-    homebrew/cask/vlc
-```
-
-```fish
 which fish | sudo tee -a /etc/shells
 chsh -s $(which fish)
+
+fish installs/fish_install.fish
+
 ```
 
-# Manual
+# Manual installs
 
 - Wireguard
 - istatsmenu
