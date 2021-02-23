@@ -25,11 +25,12 @@
 
 [commit]
 	template = ~/.gitmessage
+	gpgSign = true
 
 [user]
 	name = Pierre-Alexandre St-Jean
 	email = pa@stjean.me
-	signingkey = BB4EC22A41C6FE73
+	signingkey = A75C40CDDF8BF225
 
 [push]
 	default = simple
