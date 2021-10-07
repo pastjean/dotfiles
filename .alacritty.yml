@@ -14,14 +14,14 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: alacritty
+  TERM: alacritty
 
 window:
   # Window dimensions (changes require restart)
@@ -105,15 +105,11 @@ window:
 font:
   # Normal (roman) font face
   normal:
-    # Font family
-    #
-    # Default:
-    #   - (macOS) Menlo
-    #   - (Linux/BSD) monospace
-    #   - (Windows) Consolas
-    family: FiraMono Nerd Font
-    style: Regular
-
+    family: FiraCode Nerd Font Mono
+    style: Retina
+  bold:
+    family: FiraCode Nerd Font Mono
+    style: Bold
   # Bold font face
   #bold:
     # Font family
@@ -402,11 +398,12 @@ live_config_reload: true
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
+#  program: /Users/pa/.brew/bin/fish
   program: sh
   args:
     - -l
     - -c
-    - "/Users/pa/.brew/bin/tmux attach || exec /Users/pa/.brew/bin/tmux"
+    - "/opt/homebrew/bin/tmux attach || exec /opt/homebrew/bin/tmux"
 
 # Startup directory
 #
@@ -774,12 +771,12 @@ key_bindings:
   # (macOS only)
   #- { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"            }
   #- { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory     }
-  #- { key: Key0,           mods: Command,                    action: ResetFontSize    }
+  - { key: Key0,           mods: Command,                    action: ResetFontSize    }
   - { key: Equals,         mods: Command,                    action: IncreaseFontSize }
   - { key: Plus,           mods: Command,                    action: IncreaseFontSize }
-  #- { key: NumpadAdd,      mods: Command,                    action: IncreaseFontSize }
+  - { key: NumpadAdd,      mods: Command,                    action: IncreaseFontSize }
   - { key: Minus,          mods: Command,                    action: DecreaseFontSize }
-  #- { key: NumpadSubtract, mods: Command,                    action: DecreaseFontSize }
+  - { key: NumpadSubtract, mods: Command,                    action: DecreaseFontSize }
   #- { key: V,              mods: Command,                    action: Paste            }
   #- { key: C,              mods: Command,                    action: Copy             }
   #- { key: C,              mods: Command, mode: Vi|~Search,  action: ClearSelection   }
