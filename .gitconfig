@@ -100,7 +100,5 @@
 	show = diff-highlight | less
 	diff = diff-highlight | less
 
-[url "ssh://git@ssh.gitlab.1password.io:2227"]
-	insteadOf = https://gitlab.1password.io
 [init]
 	defaultBranch = main
