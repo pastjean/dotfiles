@@ -1,8 +1,4 @@
 tap "cjbassi/ytop"
-tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/cask-versions"
-tap "homebrew/core"
 tap "joallard/cf-keylayout"
 brew "diff-so-fancy"
 brew "fish"
