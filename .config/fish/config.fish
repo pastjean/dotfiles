@@ -61,5 +61,5 @@ set -g -x PATH /opt/homebrew/bin $PATH
 
 starship init fish | source
 zoxide init fish | source
-
+/opt/homebrew/bin/brew shellenv | source
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
