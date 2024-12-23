@@ -27,6 +27,5 @@ fish installs/fish_install.fish
 
 # Manual installs
 
-- Wireguard
-- istatsmenu
-- tweetbot
+- Wireguard (app store)
+- 1password (1password.com/download)
