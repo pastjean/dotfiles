@@ -13,7 +13,8 @@ cd $HOME/.dotfiles
 bash install.sh
 
 # Homebrew and all it's apps
-bash installs/brew_install.sh
+# cmd from brew.sh 
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 $HOME/.brew/bin/brew bundle
 
 # Set up fish shell
