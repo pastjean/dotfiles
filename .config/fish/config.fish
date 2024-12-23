@@ -56,3 +56,10 @@ set BROWSER open
 if test -f $HOME/.local.fish
     source $HOME/.local.fish
 end
+
+set -g -x PATH /opt/homebrew/bin $PATH
+
+starship init fish | source
+zoxide init fish | source
+
+source /opt/homebrew/opt/asdf/libexec/asdf.fish
