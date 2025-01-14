@@ -1,0 +1,93 @@
+[general]
+live_config_reload = true
+
+[env]
+
+[font]
+normal = { family = "IosevkaTermSS17 Nerd Font", style = "Extended Medium" }
+bold = { family = "IosevkaTermSS17 Nerd Font", style = "Extended Heavy" }
+size = 14
+
+[window]
+dynamic_padding = true
+# Window decorations.
+# decorations = "Full" | "None" | "Transparent" | "Buttonless"
+decorations = "Transparent"
+# Background opacity (works on macOS & KDE Wayland only)
+# opacity = <float>
+# Background opacity as a floating point number from 0.0 to 1.0. The value 0.0 is completely transparent and 1.0 is opaque.
+# Default: 1.0
+opacity = 0.9
+blur = true
+
+
+[cursor]
+style = { shape = "Block", blinking = "Off" }
+unfocused_hollow = true
+thickness = 0.15
+
+# Cobalt2 Color Scheme for Alacritty
+[colors]
+# Default colors
+foreground = "#ffffff"
+background = "#193549"
+cursor = { text = "CellBackground", cursor = "#ffc600" }
+
+# Selection colors
+selection = { background = "#0050a4", text = "#ffffff" }
+
+[colors.primary]
+foreground = "#ffffff"
+background = "#193549"
+dim_foreground = "#c7c7c7"    # Dimmed version of the foreground
+bright_foreground = "#ffc600" # Bright yellow for bold text
+
+[colors.vi_mode_cursor]
+text = "CellBackground"
+cursor = "#ffc600"
+
+[colors.search]
+matches = { foreground = "#193549", background = "#ffc600" }
+focused_match = { foreground = "#193549", background = "#ff2f90" }
+
+[colors.hints]
+start = { foreground = "#193549", background = "#ffc600" }
+end = { foreground = "#193549", background = "#ff2f90" }
+
+[colors.line_indicator]
+foreground = "None"
+background = "None"
+
+[colors.footer_bar]
+foreground = "#193549"
+background = "#ffc600"
+
+[colors.normal]
+black = "#000000"
+red = "#ff0000"
+green = "#3ad900"
+yellow = "#ffc600"
+blue = "#6699cc"
+magenta = "#ff2f90"
+cyan = "#00c5c7"
+white = "#c7c7c7"
+
+[colors.bright]
+black = "#000000"
+red = "#ff0000"
+green = "#3ad900"
+yellow = "#ffc600"
+blue = "#6699cc"
+magenta = "#ff2f90"
+cyan = "#00c5c7"
+white = "#ffffff"
+
+[colors.dim]
+black = "#000000"
+red = "#cc0000"
+green = "#2ca000"
+yellow = "#cc9e00"
+blue = "#547aa5"
+magenta = "#cc2574"
+cyan = "#009ea0"
+white = "#9f9f9f"

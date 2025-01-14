@@ -15,7 +15,8 @@ bash install.sh
 # Homebrew and all it's apps
 # cmd from brew.sh 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-$HOME/.brew/bin/brew bundle
+# Follow steps from script then brew.sh
+brew bundle
 
 # Set up fish shell
 which fish | sudo tee -a /etc/shells
