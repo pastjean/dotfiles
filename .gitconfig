@@ -1,101 +1,89 @@
-[alias]
-	tags = tag -l
-	branches = branch -a
-	remotes = remote -v
-
-	g = grep --break --heading --line-number
-
-  # View abbreviated SHA, description, and history graph of the latest 20 commits  
- 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
-  
-  # View the current working tree status using the short format  
-	s = status -s
-  
-  # Show the diff between the latest commit and the current state
-	d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
-
-  # Amend the currently staged files to the latest commit
-	amend = commit --amend --reuse-message=HEAD
-
-  # Credit an author on the latest commit
-	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
-
-  # List contributors with number of commits
-	contributors = shortlog --summary --numbered
-
-[commit]
-	template = ~/.gitmessage
-
+# clearly makes git better
 [user]
 	name = Pierre-Alexandre St-Jean
 	email = pa@stjean.me
 
+[column]
+        ui = auto
+[branch]
+        sort = -committerdate
+[tag]
+        sort = version:refname
+[init]
+        defaultBranch = main
+[diff]
+        algorithm = histogram
+        colorMoved = plain
+        mnemonicPrefix = true
+        renames = true
 [push]
-	default = simple
-
+        default = simple
+        autoSetupRemote = true
+        followTags = true
 [fetch]
-	prune = true
+        prune = true
+        pruneTags = true
+        all = true
 
-[pull]
-	rebase = false
-
-[grep]
-	extendRegexp = true
-	lineNumber = true
-
-[color "diff"]
-	meta = yellow bold
-	commit = green bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = "red bold 52"
-	newNormal = "green bold"
-	newHighlight = "green bold 22"
-[color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
-[color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
+# why the hell not?
 
 [help]
-  # Automatically correct and execute mistyped commands
-  	autocorrect = 1
+        autocorrect = prompt
+[commit]
+        verbose = true
+		template = ~/.gitmessage
 
-[merge]
-  # Include summaries of merged commits in newly created merge commit messages
-	log = true
-	tool = opendiff
+[rerere]
+        enabled = true
+        autoupdate = true
+[core]
+        excludesfile = ~/.gitignore
+[rebase]
+        autoSquash = true
+        autoStash = true
+        updateRefs = true
+
+# a matter of taste (uncomment if you dare)
 
 [core]
-  # Make `git rebase` safer on OS X
-  # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
-  	trustctime = false
-	quotepath = false
-	excludesfile = /Users/pastjean/.gitignore_global
-	attributesfile = ~/.gitattributes
-	# insanely beautiful diffs
-	pager = diff-highlight | diff-so-fancy | less -r
+        # fsmonitor = true
+        # untrackedCache = true
+		# pager = diff-highlight | diff-so-fancy | less -r
 
-[include]
-	path = ~/.gitconfig.local
+[merge]
+        # (just 'diff3' if git version < 2.3)
+        conflictstyle = zdiff3 
+[pull]
+        rebase = true
 
-[interactive]
-	diffFilter = diff-highlight
 
-[pager]
-	log = diff-highlight | less
-	show = diff-highlight | less
-	diff = diff-highlight | less
+### OLD
 
-[init]
-	defaultBranch = main
+[alias]
+	# tags = tag -l
+	# branches = branch -a
+	# remotes = remote -v
+
+	# g = grep --break --heading --line-number
+
+  # View abbreviated SHA, description, and history graph of the latest 20 commits  
+ 	# l = log --pretty=oneline -n 20 --graph --abbrev-commit
+  
+  # View the current working tree status using the short format  
+	# s = status -s
+  
+  # Show the diff between the latest commit and the current state
+	# d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
+
+  # Amend the currently staged files to the latest commit
+	# amend = commit --amend --reuse-message=HEAD
+
+  # Credit an author on the latest commit
+	# credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+
+  # List contributors with number of commits
+	# contributors = shortlog --summary --numbered
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
