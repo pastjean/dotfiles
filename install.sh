@@ -30,6 +30,10 @@ link $DOTFILES_DIR/.vimrc $HOME/.vimrc
 link $DOTFILES_DIR/.alacritty.toml $HOME/.alacritty.toml
 link $DOTFILES_DIR/.curlrc $HOME/.curlrc
 
+# Claude Code skills
+mkdir -p $HOME/.claude
+link $DOTFILES_DIR/.claude/skills $HOME/.claude/skills
+
 echo "Done..."
 echo "All dotfiles are now linked, your are good to go"
 echo ""
