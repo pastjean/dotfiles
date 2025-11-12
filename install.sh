@@ -31,8 +31,12 @@ link $DOTFILES_DIR/.alacritty.toml $HOME/.alacritty.toml
 link $DOTFILES_DIR/.curlrc $HOME/.curlrc
 
 # Claude Code skills
-mkdir -p $HOME/.claude
-link $DOTFILES_DIR/.claude/skills $HOME/.claude/skills
+link "$DOTFILES_DIR/.claude/settings.json" "$HOME/.claude/settings.json"
+mkdir -p $HOME/.claude/skills
+for skill_dir in $DOTFILES_DIR/.claude/skills/*/; do
+    skill_name=$(basename "$skill_dir")
+    link "$skill_dir" "$HOME/.claude/skills/$skill_name"
+done
 
 echo "Done..."
 echo "All dotfiles are now linked, your are good to go"

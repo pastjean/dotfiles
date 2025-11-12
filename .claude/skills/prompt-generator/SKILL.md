@@ -1,3 +1,9 @@
+---
+name: prompt-generator
+description: Allows claude to help you craft a perfect PROMPT
+license: See claude metaprompt
+---
+
 # Prompt Generator (Metaprompt)
 
 Use this skill to help write high-quality prompts for Claude using Anthropic's Metaprompt methodology. This is a prompt engineering tool that uses examples of good prompts to generate a custom prompt template for your specific task.
