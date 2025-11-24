@@ -30,8 +30,11 @@ link $DOTFILES_DIR/.vimrc $HOME/.vimrc
 link $DOTFILES_DIR/.alacritty.toml $HOME/.alacritty.toml
 link $DOTFILES_DIR/.curlrc $HOME/.curlrc
 
-# Claude Code skills
+# Claude Code
+mkdir -p $HOME/.claude
+link "$DOTFILES_DIR/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 link "$DOTFILES_DIR/.claude/settings.json" "$HOME/.claude/settings.json"
+
 mkdir -p $HOME/.claude/skills
 for skill_dir in $DOTFILES_DIR/.claude/skills/*/; do
     skill_name=$(basename "$skill_dir")
