@@ -62,7 +62,6 @@ set -g -x PATH /opt/homebrew/bin $PATH
 
 starship init fish | source
 zoxide init fish | source
-source "$HOME/.cargo/env.fish"
 
 # ASDF configuration code
 if test -z $ASDF_DATA_DIR
@@ -78,15 +77,7 @@ if not contains $_asdf_shims $PATH
 end
 set --erase _asdf_shims
 
-# Added by `rbenv init` on Mon  7 Apr 2025 10:16:54 EDT
-status --is-interactive; and rbenv init - --no-rehash fish | source
-
-status --is-interactive; and pyenv init - fish | source
 fish_add_path $HOME/.local/bin
-
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
 
 # opencode
 fish_add_path /Users/pa/.opencode/bin
