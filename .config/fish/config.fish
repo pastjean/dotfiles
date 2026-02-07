@@ -87,3 +87,7 @@ fish_add_path $HOME/.local/bin
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
+# opencode
+fish_add_path /Users/pa/.opencode/bin
+
