@@ -30,20 +30,18 @@ function cdf
     cd (pfd)
 end
 
-
 set FISH_TOPIC_DIR (dirname (realpath "$HOME/.config/fish/config.fish"))
 set DOTFILES (dirname (dirname $FISH_TOPIC_DIR))
 
 # Dotfiles functions
 set -g fish_function_path "$FISH_TOPIC_DIR/functions" $fish_function_path
+set -g fish_complete_path "$FISH_TOPIC_DIR/completions" $fish_complete_path
 
-set -g -x PATH "$HOME/bin" $PATH
-set -g -x PATH "$DOTFILES/bin" $PATH
-
-set -g -x PATH "$HOME/go/bin" $PATH
-set -g -x PATH "$HOME/.cargo/bin" $PATH
-
-set -g -x PATH "$HOME/.fzf/bin/" $PATH
+fish_add_path $HOME/bin
+fish_add_path $DOTFILES/bin
+fish_add_path $HOME/go/bin
+fish_add_path $HOME/.cargo/bin
+fish_add_path $HOME/.fzf/bin/
 
 set -g -x fish_greeting ''
 set -g -x EDITOR vim
@@ -57,7 +55,7 @@ if test -f $HOME/.local.fish
     source $HOME/.local.fish
 end
 
-set -g -x PATH /opt/homebrew/bin $PATH
+fish_add_path /opt/homebrew/bin
 /opt/homebrew/bin/brew shellenv | source
 
 starship init fish | source
@@ -82,3 +80,6 @@ fish_add_path $HOME/.local/bin
 # opencode
 fish_add_path /Users/pa/.opencode/bin
 
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+fish_add_path $BUN_INSTALL/bin

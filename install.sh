@@ -21,6 +21,7 @@ link() {
 
 mkdir -p $HOME/.config/fish
 link $DOTFILES_DIR/.config/fish/config.fish $HOME/.config/fish/config.fish
+
 link $DOTFILES_DIR/.vim $HOME/.vim
 link $DOTFILES_DIR/.gitconfig $HOME/.gitconfig
 link $DOTFILES_DIR/.gitmessage $HOME/.gitmessage
