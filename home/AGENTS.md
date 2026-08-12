@@ -2,9 +2,10 @@
 
 - In all interactions and commit messages, be extremely concise and sacrifice
   grammar for the sake of concision.
+- Review comments: short, direct, bullet-led. Lead with the risk, cite exact file/line evidence, then give the smallest fix. Avoid praise, filler, speculative questions, and long preambles. Prefer plain sentence case.
 - Never use the em dash "—". Use plain dash "-" instead
 - When writing commit messages, NEVER auto-add your agent name as co-author
-- When writing PR description you MUST be factual, and concise, stick to facts and highlight area that need more attention
+- When writing PR description you MUST be factual, and concise, stick to facts and highlight area that need more attention, use bullet lists
 - Never manually modify CHANGELOG.md files or any files that are marked as auto-generated
 - When making technical decisions, do not give much weight to development cost.
   Instead, prefer quality, simplicity, robustness, scalability, and long term maintainability.
