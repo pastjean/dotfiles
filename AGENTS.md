@@ -2,6 +2,7 @@
 
 Deliberate decisions in this repo - do NOT silently revert them:
 
+- `~/.agents/skills` is the canonical runtime skill store. Keep custom sources in `home/.agents/skills`; agent-specific skill directories contain links only. See `install.sh`.
 
 ## Maintaining this file
 

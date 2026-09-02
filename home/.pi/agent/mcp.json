@@ -1,0 +1,78 @@
+{
+  "mcpServers": {
+    "aikido": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@aikidosec/mcp@latest"
+      ],
+      "transport": "stdio",
+      "lifecycle": "eager"
+    },
+    "context7": {
+      "transport": "streamable-http",
+      "url": "https://mcp.context7.com/mcp",
+      "lifecycle": "eager"
+    },
+    "gh_grep": {
+      "transport": "streamable-http",
+      "url": "https://mcp.grep.app",
+      "lifecycle": "eager"
+    },
+    "websearch": {
+      "transport": "streamable-http",
+      "url": "https://mcp.exa.ai/mcp",
+      "lifecycle": "eager"
+    },
+    "linear": {
+      "transport": "streamable-http",
+      "url": "https://mcp.linear.app/mcp",
+      "auth": {
+        "type": "oauth"
+      },
+      "lifecycle": "eager"
+    },
+    "protege": {
+      "transport": "streamable-http",
+      "url": "https://mcp-internal.withprotege.ai/mcp",
+      "auth": {
+        "type": "oauth"
+      },
+      "lifecycle": "lazy"
+    },
+    "notion": {
+      "transport": "streamable-http",
+      "url": "https://mcp.notion.com/mcp",
+      "auth": {
+        "type": "oauth"
+      },
+      "lifecycle": "lazy"
+    },
+    "chrome": {
+      "command": "npx",
+      "args": [
+        "node",
+        "/opt/homebrew/lib/node_modules/mcp-chrome-bridge/dist/mcp/mcp-server-stdio.js"
+      ],
+      "transport": "stdio",
+      "lifecycle": "lazy"
+    },
+    "protege-local": {
+      "transport": "streamable-http",
+      "url": "http://localhost:3002/mcp",
+      "auth": {
+        "type": "oauth"
+      },
+      "lifecycle": "lazy"
+    },
+    "lucid-memory": {
+      "command": "/Users/pa/.lucid/bin/lucid-server",
+      "args": [],
+      "env": {
+        "LUCID_CLIENT": "pi"
+      },
+      "transport": "stdio",
+      "lifecycle": "lazy"
+    }
+  }
+}
