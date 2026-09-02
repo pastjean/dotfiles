@@ -24,9 +24,7 @@
     "chrome": {
       "type": "local",
       "command": [
-        "npx",
-        "node",
-        "/opt/homebrew/lib/node_modules/mcp-chrome-bridge/dist/mcp/mcp-server-stdio.js"
+        "mcp-chrome-stdio"
       ]
     }
   },

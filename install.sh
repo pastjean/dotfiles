@@ -51,6 +51,13 @@ for skill_dir in "$HOME_DIR"/.agents/skills/*/; do
     link "$skill_dir" "$HOME/.agents/skills/$(basename "$skill_dir")"
 done
 
+# Agent CLIs used by session hooks and MCP configuration.
+if command -v npm >/dev/null 2>&1; then
+    npm install --global gh-axi chrome-devtools-axi lavish-axi mcp-chrome-bridge
+else
+    echo "npm not found; skipping agent CLI installs"
+fi
+
 # Upstream skills: managed by the skills CLI (https://skills.sh), updatable
 # via `npx skills update`. Add more with: npx skills add <owner/repo> -g -a claude-code -a opencode -y
 if command -v npx >/dev/null 2>&1; then

@@ -49,11 +49,8 @@
       "lifecycle": "lazy"
     },
     "chrome": {
-      "command": "npx",
-      "args": [
-        "node",
-        "/opt/homebrew/lib/node_modules/mcp-chrome-bridge/dist/mcp/mcp-server-stdio.js"
-      ],
+      "command": "mcp-chrome-stdio",
+      "args": [],
       "transport": "stdio",
       "lifecycle": "lazy"
     },
