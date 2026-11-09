@@ -91,3 +91,8 @@ fish_add_path $BUN_INSTALL/bin
 
 # Lucid Memory
 set -gx PATH $HOME/.lucid/bin $PATH
+
+# devbox (devbox-private): mosh must take the IP from the ssh session so the
+# ProxyCommand (wake-ssh) runs and a stopped box gets started. Default mosh
+# resolves the host itself and times out on a stopped box.
+alias mosh-devbox 'mosh --experimental-remote-ip=remote devbox'
