@@ -21,8 +21,11 @@ HOME_DIR="$DOTFILES_DIR/home"
 
 link() {
     echo "Linking $1 to $2"
-    ln -sfh "$1" "$2"
+    # -n (not macOS-only -h): replace an existing symlink instead of descending into it. Portable.
+    ln -sfn "$1" "$2"
 }
+
+macos() { [ "$(uname -s)" = Darwin ]; }
 
 mkdir -p "$HOME/.config/fish"
 link "$HOME_DIR/.config/fish/config.fish" "$HOME/.config/fish/config.fish"
@@ -48,12 +51,22 @@ link "$HOME_DIR/.config/opencode/opencode.json" "$HOME/.config/opencode/opencode
 mkdir -p "$HOME/.agents/skills" "$HOME/.config/opencode/skills" "$HOME/.claude/skills" "$HOME/.pi/agent/skills"
 for skill_dir in "$HOME_DIR"/.agents/skills/*/; do
     [ -d "$skill_dir" ] || continue
-    link "$skill_dir" "$HOME/.agents/skills/$(basename "$skill_dir")"
+    link "${skill_dir%/}" "$HOME/.agents/skills/$(basename "$skill_dir")"
 done
+
+# herdr ships its own skill; regenerate from the installed binary so it tracks the version.
+if command -v herdr >/dev/null 2>&1; then
+    mkdir -p "$HOME/.agents/skills/herdr"
+    herdr --skill > "$HOME/.agents/skills/herdr/SKILL.md"
+fi
 
 # Agent CLIs used by session hooks and MCP configuration.
 if command -v npm >/dev/null 2>&1; then
-    npm install --global gh-axi chrome-devtools-axi lavish-axi mcp-chrome-bridge
+    # One package at a time, non-fatal: a native build failure (e.g. better-sqlite3 in
+    # mcp-chrome-bridge on a new Node) must not abort the rest of the install.
+    for npm_pkg in gh-axi chrome-devtools-axi lavish-axi mcp-chrome-bridge; do
+        npm install --global "$npm_pkg" || echo "WARN: npm install -g $npm_pkg failed, continuing"
+    done
 else
     echo "npm not found; skipping agent CLI installs"
 fi
@@ -61,10 +74,11 @@ fi
 # Upstream skills: managed by the skills CLI (https://skills.sh), updatable
 # via `npx skills update`. Add more with: npx skills add <owner/repo> -g -a claude-code -a opencode -y
 if command -v npx >/dev/null 2>&1; then
-    npx -y skills add blader/humanizer -g -a claude-code -a opencode -y
-    npx -y skills add kunchenguid/gh-axi --skill gh-axi -g -a claude-code -a opencode -y
-    npx -y skills add kunchenguid/chrome-devtools-axi --skill chrome-devtools-axi -g -a claude-code -a opencode -y
-    npx -y skills add kunchenguid/lavish-axi --skill lavish -g -a claude-code -a opencode -y
+    skills_add() { npx -y skills add "$@" -g -a claude-code -a opencode -y || echo "WARN: skills add $1 failed, continuing"; }
+    skills_add blader/humanizer
+    skills_add kunchenguid/gh-axi --skill gh-axi
+    skills_add kunchenguid/chrome-devtools-axi --skill chrome-devtools-axi
+    skills_add kunchenguid/lavish-axi --skill lavish
 else
     echo "npx not found; skipping skills CLI installs (e.g. humanizer)"
 fi
@@ -80,7 +94,7 @@ for agent_skills_dir in "$HOME/.config/opencode/skills" "$HOME/.claude/skills" "
 
     for skill_dir in "$HOME"/.agents/skills/*/; do
         [ -e "$skill_dir" ] || continue
-        link "$skill_dir" "$agent_skills_dir/$(basename "$skill_dir")"
+        link "${skill_dir%/}" "$agent_skills_dir/$(basename "$skill_dir")"
     done
 done
 
@@ -91,12 +105,15 @@ link "$HOME_DIR/AGENTS.md" "$HOME/.codex/AGENTS.md"
 link "$HOME_DIR/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
 link "$HOME_DIR/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
 
-# pi (pi.dev) declarative config: MCP servers and custom models.
+# pi (pi.dev) declarative config: MCP servers (pi-mcp-adapter format) and custom models.
 # Secrets (auth.json), trust.json, and sessions stay local and untracked.
 mkdir -p "$HOME/.pi/agent"
-for pi_file in mcp.json models.json; do
-    link "$HOME_DIR/.pi/agent/$pi_file" "$HOME/.pi/agent/$pi_file"
-done
+link "$HOME_DIR/.pi/agent/models.json" "$HOME/.pi/agent/models.json"
+# mcp-adapter.json is macOS-only: on the Linux devbox it is a generated file (Mac-only
+# servers dropped, encrypted-file OAuth store) written by devbox-private/client/sync-devbox.
+if macos; then
+    link "$HOME_DIR/.pi/agent/mcp-adapter.json" "$HOME/.pi/agent/mcp-adapter.json"
+fi
 
 # pi-subagents roster mirroring oh-my-openagent. Discovery needs a real dir with
 # symlinked files (it does not follow a symlinked agents/ directory).
@@ -109,7 +126,8 @@ done
 # pi extensions: MCP client, subagents, plan mode. pi owns settings.json +
 # node_modules; re-running is idempotent.
 if command -v pi >/dev/null 2>&1; then
-    for pi_pkg in npm:pi-mcp-extension npm:pi-subagents npm:@narumitw/pi-plan-mode; do
+    for pi_pkg in npm:pi-subagents npm:@narumitw/pi-plan-mode npm:@juicesharp/rpiv-ask-user-question \
+                  npm:@juicesharp/rpiv-todo npm:pi-lens npm:pi-mcp-adapter; do
         pi install "$pi_pkg"
     done
 else

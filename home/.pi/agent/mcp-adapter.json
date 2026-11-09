@@ -27,25 +27,20 @@
     "linear": {
       "transport": "streamable-http",
       "url": "https://mcp.linear.app/mcp",
-      "auth": {
-        "type": "oauth"
-      },
+      "auth": "oauth",
       "lifecycle": "eager"
     },
     "protege": {
       "transport": "streamable-http",
       "url": "https://mcp-internal.withprotege.ai/mcp",
-      "auth": {
-        "type": "oauth"
-      },
+      "auth": "oauth",
       "lifecycle": "lazy"
     },
     "notion": {
       "transport": "streamable-http",
       "url": "https://mcp.notion.com/mcp",
-      "auth": {
-        "type": "oauth"
-      },
+      "auth": "oauth",
+      "protocolVersion": "auto",
       "lifecycle": "lazy"
     },
     "chrome": {
@@ -57,19 +52,14 @@
     "protege-local": {
       "transport": "streamable-http",
       "url": "http://localhost:3002/mcp",
-      "auth": {
-        "type": "oauth"
-      },
+      "auth": "oauth",
       "lifecycle": "lazy"
     },
-    "lucid-memory": {
-      "command": "/Users/pa/.lucid/bin/lucid-server",
-      "args": [],
-      "env": {
-        "LUCID_CLIENT": "pi"
-      },
-      "transport": "stdio",
-      "lifecycle": "lazy"
+    "cloudflare": {
+      "url": "https://mcp.cloudflare.com/mcp"
+    },
+    "Neon": {
+      "url": "https://mcp.neon.tech/mcp"
     }
   }
 }
