@@ -60,11 +60,14 @@ if test -f $HOME/.local.fish
     source $HOME/.local.fish
 end
 
-fish_add_path /opt/homebrew/bin
-/opt/homebrew/bin/brew shellenv | source
+# macOS only; the Linux devbox has none of these three paths/tools in these places.
+if test -x /opt/homebrew/bin/brew
+    fish_add_path /opt/homebrew/bin
+    /opt/homebrew/bin/brew shellenv | source
+end
 
-starship init fish | source
-zoxide init fish | source
+command -q starship; and starship init fish | source
+command -q zoxide; and zoxide init fish | source
 
 # ASDF configuration code
 if test -z $ASDF_DATA_DIR
